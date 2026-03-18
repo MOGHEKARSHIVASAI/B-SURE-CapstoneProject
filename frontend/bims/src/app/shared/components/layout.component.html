@@ -1,0 +1,228 @@
+<div class="layout">
+
+  <!-- ══════════════════ SIDEBAR ══════════════════ -->
+  <nav class="sidebar">
+    <!-- Brand -->
+    <div class="sidebar-logo">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+          style="background:linear-gradient(135deg,#B83B57,#3B0915);box-shadow:0 4px 14px rgba(90,18,39,0.5)">
+          <span class="material-symbols-outlined text-white" style="font-size:1.1rem">verified_user</span>
+        </div>
+        <div>
+          <div
+            style="font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:900;color:#FAF6F0;letter-spacing:-0.5px;line-height:1">
+            B-<span style="color:#CC6678">SURE</span>
+          </div>
+          <div
+            style="font-size:0.58rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(240,220,210,0.35);margin-top:2px">
+            Insurance Platform
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-section">Overview</div>
+    <a class="nav-item" routerLink="/dashboard" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">dashboard</span> Dashboard
+    </a>
+
+    @if (auth.isAdmin()) {
+    <div class="nav-section">Management</div>
+    <a class="nav-item" routerLink="/users" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">group</span> Staff Users
+    </a>
+    <a class="nav-item" routerLink="/customers" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">business</span> Businesses
+    </a>
+    <a class="nav-item" routerLink="/products" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">category</span> Products
+    </a>
+    <a class="nav-item" routerLink="/applications" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">description</span> Applications
+    </a>
+    <a class="nav-item" routerLink="/policies" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">policy</span> Policies
+    </a>
+    <a class="nav-item" routerLink="/claims" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">assignment_late</span> Claims
+    </a>
+    <a class="nav-item" routerLink="/payments" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">credit_card</span> Payments
+    </a>
+    }
+
+    @if (auth.isCustomer()) {
+    <div class="nav-section">My Account</div>
+    <a class="nav-item" routerLink="/profile" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">person</span> My Profile
+    </a>
+    <a class="nav-item" routerLink="/businesses" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">business_center</span> My Businesses
+    </a>
+    <a class="nav-item" routerLink="/products" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">category</span> Products
+    </a>
+    <a class="nav-item" routerLink="/applications" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">description</span> Applications
+    </a>
+    <a class="nav-item" routerLink="/policies" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">policy</span> My Policies
+    </a>
+    <a class="nav-item" routerLink="/claims" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">assignment_late</span> My Claims
+    </a>
+    <a class="nav-item" routerLink="/payments" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">credit_card</span> Payments
+    </a>
+    }
+
+    @if (auth.isUnderwriter()) {
+    <div class="nav-section">Underwriting</div>
+    <a class="nav-item" routerLink="/customers" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">business</span> Businesses
+    </a>
+    <a class="nav-item" routerLink="/applications" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">description</span> Applications
+    </a>
+    <a class="nav-item" routerLink="/underwriting" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">task_alt</span> My Queue
+    </a>
+    }
+
+    @if (auth.isOfficer()) {
+    <div class="nav-section">Claims</div>
+    <a class="nav-item" routerLink="/claims" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">assignment_late</span> My Claims
+    </a>
+    }
+
+    <div class="nav-section">Settings</div>
+    <a class="nav-item" routerLink="/notifications" routerLinkActive="active">
+      <span class="icon material-symbols-outlined">notifications</span> All Notifications
+      @if (unreadCount() > 0) {
+      <span class="nav-badge">{{ unreadCount() }}</span>
+      }
+    </a>
+
+    <!-- Footer -->
+    <div class="sidebar-footer">
+      <div class="flex items-center gap-2.5 mb-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0"
+          style="background:rgba(184,59,87,0.22);color:#E0A0AE;font-family:'Space Grotesk',sans-serif;">
+          {{ auth.user()?.firstName?.charAt(0) || '' }}{{ auth.user()?.lastName?.charAt(0) || '' }}
+        </div>
+        <div class="min-w-0">
+          <div class="text-[0.78rem] font-semibold truncate leading-tight" style="color:#FAF6F0">
+            {{ auth.user()?.firstName }} {{ auth.user()?.lastName }}
+          </div>
+          <div class="role-badge">{{ auth.user()?.role }}</div>
+        </div>
+      </div>
+      <button class="btn btn-sm w-full"
+        style="background:rgba(255,255,255,0.06);color:rgba(240,220,210,0.55);border:1px solid rgba(255,255,255,0.08)"
+        (click)="auth.logout()">
+        <span class="material-symbols-outlined text-base">logout</span>
+        Sign Out
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div>
+        <div class="topbar-title">
+          B-<span style="color:#7A1C35">SURE</span>
+        </div>
+        <div class="topbar-subtitle">Business Insurance Management Platform</div>
+      </div>
+
+      <div class="topbar-actions">
+        <span class="topbar-user hidden md:inline">{{ auth.user()?.email }}</span>
+
+        <!-- ── NOTIFICATION BELL WITH POPUP ── -->
+        <div class="notif-bell-wrap">
+          @if (showNotifPopup()) {
+          <div class="notif-backdrop" (click)="closePopup()"></div>
+          }
+
+          <button class="notif-bell-btn" (click)="togglePopup()" title="Notifications"
+            [class.active]="showNotifPopup()">
+            <span class="material-symbols-outlined"
+              [style.fontVariationSettings]="unreadCount()>0 ? '\'FILL\' 1' : '\'FILL\' 0'">
+              notifications
+            </span>
+            @if (unreadCount() > 0) {
+            <span class="notif-bell-dot">{{ unreadCount() > 9 ? '9+' : unreadCount() }}</span>
+            }
+          </button>
+
+          @if (showNotifPopup()) {
+          <div class="notif-popup">
+            <!-- Header -->
+            <div class="notif-popup-header">
+              <h3>Notifications</h3>
+              <div class="flex items-center gap-2">
+                @if (unreadCount() > 0) {
+                <span class="badge badge-ruby" style="font-size:0.6rem">{{ unreadCount() }} unread</span>
+                }
+                <button class="btn btn-ghost btn-sm py-1 px-2 text-[0.72rem]" (click)="goToNotifications()">
+                  View all
+                  <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Notification rows -->
+            @if (recentNotifs().length > 0) {
+            @for (n of recentNotifs(); track n.id) {
+            <div [class]="'notif-popup-row ' + (!n.isRead ? 'unread' : '')" (click)="markReadAndGo(n)">
+              <div [class]="'notif-popup-dot ' + (n.isRead ? 'read' : '')"></div>
+              <div class="flex-1 min-w-0">
+                <div class="notif-popup-title">{{ n.title }}</div>
+                <div class="notif-popup-msg line-clamp-2">{{ n.message }}</div>
+                <div class="notif-popup-time">{{ n.createdAt | date:'dd MMM, h:mm a' }}</div>
+              </div>
+              @if (!n.isRead) {
+              <span class="badge badge-ruby flex-shrink-0"
+                style="font-size:0.57rem;padding:1px 6px;margin-top:2px;align-self:flex-start">NEW</span>
+              }
+            </div>
+            }
+            } @else {
+            <div class="flex flex-col items-center justify-center py-8 gap-2">
+              <span class="material-symbols-outlined text-3xl"
+                style="color:var(--text-3);opacity:0.4">notifications_off</span>
+              <p class="text-xs" style="color:var(--text-3)">No notifications yet</p>
+            </div>
+            }
+
+            <!-- Footer -->
+            <div class="notif-popup-footer">
+              <a (click)="goToNotifications()">
+                <span class="material-symbols-outlined text-sm">open_in_new</span>
+                See all notifications
+              </a>
+            </div>
+          </div>
+          }
+        </div>
+        <!-- ── END BELL ── -->
+
+        <!-- Avatar -->
+        <div class="topbar-avatar">
+          {{ auth.user()?.firstName?.charAt(0) || '' }}{{ auth.user()?.lastName?.charAt(0) || '' }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="page-content">
+      <router-outlet />
+    </div>
+  </main>
+
+</div>

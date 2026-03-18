@@ -1,0 +1,43 @@
+  <div class="page-header mb-5 rounded-2xl border border-cream-dark bg-white/80 px-6 py-5 shadow-sm">
+    <div>
+      <div class="page-title">Business Customers</div>
+      <div class="page-subtitle">All registered business customers</div>
+    </div>
+  </div>
+
+  @if (loading()) { <div class="loading"><div class="spinner"></div>Loading...</div> }
+  @else {
+    <div class="card rounded-2xl border border-cream-dark bg-white/85 p-0 shadow-sm">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th><th>Contact</th><th>Industry</th>
+              <th>Employees</th><th>Revenue</th><th>City</th><th>Tax ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (c of customers(); track c.id) {
+              <tr>
+                <td>
+                  <div class="font-semibold text-stone-800">{{ c.companyName }}</div>
+                  <div class="text-muted text-sm mono">{{ c.companyRegNumber }}</div>
+                </td>
+                <td>
+                  <div>{{ c.firstName }} {{ c.lastName }}</div>
+                  <div class="text-muted text-sm">{{ c.email }}</div>
+                </td>
+                <td>{{ c.industryType || '—' }}</td>
+                <td>{{ c.numEmployees || '—' }}</td>
+                <td class="mono">{{ c.annualRevenue ? '₹' + (c.annualRevenue | number) : '—' }}</td>
+                <td>{{ c.city || '—' }}</td>
+                <td class="mono text-sm">{{ c.taxId || '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        @if (!customers().length) { <div class="empty"><div>No customers found.</div></div> }
+      </div>
+    </div>
+  }
+  

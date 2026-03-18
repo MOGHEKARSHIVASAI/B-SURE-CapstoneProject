@@ -1,0 +1,108 @@
+  <div class="page-header mb-5 rounded-2xl border border-cream-dark bg-white/80 px-6 py-5 shadow-sm">
+    <div>
+      <div class="page-title">Staff Users</div>
+      <div class="page-subtitle">Manage underwriters and claims officers</div>
+    </div>
+    <button class="btn btn-primary rounded-xl px-4 py-2.5 shadow-md shadow-burgundy/20" (click)="openCreate()">+ Add Staff</button>
+  </div>
+
+  @if (loading()) { <div class="loading"><div class="spinner"></div>Loading...</div> }
+  @else {
+    @if (actionError()) { <div class="alert alert-error mb-3">{{ actionError() }}</div> }
+    <div class="card rounded-2xl border border-cream-dark bg-white/85 p-0 shadow-sm">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Role</th><th>Phone</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            @for (u of users(); track u.id) {
+              <tr>
+                <td>{{ u.firstName }} {{ u.lastName }}</td>
+                <td>{{ u.email }}</td>
+                <td><span [class]="'badge ' + roleClass(u.role)">{{ u.role }}</span></td>
+                <td>{{ u.phone || '—' }}</td>
+                <td><span [class]="'badge ' + (isUserActive(u) ? 'badge-green' : 'badge-red')">{{ isUserActive(u) ? 'Active' : 'Inactive' }}</span></td>
+                <td>
+                  <div class="actions flex flex-wrap gap-2">
+                    @if (isUserActive(u)) {
+                      <button class="btn btn-danger btn-sm rounded-lg" (click)="deactivate(u.id)">Deactivate</button>
+                    } @else {
+                      <button class="btn btn-success btn-sm rounded-lg" (click)="activate(u.id)">Activate</button>
+                    }
+                    <button class="btn btn-secondary btn-sm rounded-lg" (click)="openReset(u)">Reset Pwd</button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+
+  @if (showCreate()) {
+    <div class="modal-overlay bg-black/40 backdrop-blur-sm" (click)="showCreate.set(false)">
+      <div class="modal rounded-2xl border border-cream-dark bg-white p-6 shadow-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <span class="modal-title">Add Staff User</span>
+          <button class="modal-close" (click)="showCreate.set(false)">×</button>
+        </div>
+        @if (createError()) { <div class="alert alert-error">{{ createError() }}</div> }
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input title="Input" class="form-control" [(ngModel)]="form.firstName" placeholder="Enter value">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input title="Input" class="form-control" [(ngModel)]="form.lastName" placeholder="Enter value">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input title="Input" class="form-control" type="email" [(ngModel)]="form.email" placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input title="Input" class="form-control" type="password" [(ngModel)]="form.password" placeholder="Enter password">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input title="Input" class="form-control" [(ngModel)]="form.phone" placeholder="Enter value">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Role</label>
+            <select title="Selection" class="form-control" [(ngModel)]="form.role">
+              <option value="UNDERWRITER">UNDERWRITER</option>
+              <option value="CLAIMS_OFFICER">CLAIMS_OFFICER</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary rounded-xl" (click)="showCreate.set(false)">Cancel</button>
+          <button class="btn btn-primary rounded-xl" [disabled]="saving()" (click)="create()">Create</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showReset()) {
+    <div class="modal-overlay bg-black/40 backdrop-blur-sm" (click)="showReset.set(false)">
+      <div class="modal rounded-2xl border border-cream-dark bg-white p-6 shadow-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+          <span class="modal-title">Reset Password — {{ resetUser()?.firstName }}</span>
+          <button class="modal-close" (click)="showReset.set(false)">×</button>
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Password</label>
+          <input title="Input" class="form-control" type="password" [(ngModel)]="newPassword" placeholder="Enter password">
+        </div>
+        @if (resetMsg()) { <div class="alert alert-success">{{ resetMsg() }}</div> }
+        <div class="modal-footer">
+          <button class="btn btn-secondary rounded-xl" (click)="showReset.set(false)">Close</button>
+          <button class="btn btn-primary rounded-xl" (click)="resetPassword()">Reset</button>
+        </div>
+      </div>
+    </div>
+  }
+  

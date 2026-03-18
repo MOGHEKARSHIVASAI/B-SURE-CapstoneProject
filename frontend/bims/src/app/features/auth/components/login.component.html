@@ -1,0 +1,72 @@
+<div class="auth-page">
+  <!-- bottom-left warm glow -->
+  <div
+    style="position:absolute;bottom:-200px;left:-200px;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(90,18,39,0.18) 0%,transparent 70%);pointer-events:none">
+  </div>
+
+  <div class="auth-card">
+    <!-- Brand -->
+    <div class="flex items-center gap-3 mb-7">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+        style="background:linear-gradient(135deg,#B83B57,#3B0915);box-shadow:0 6px 22px rgba(90,18,39,0.45)">
+        <span class="material-symbols-outlined text-xl" style="color:#FAF6F0">verified_user</span>
+      </div>
+      <div>
+        <div
+          style="font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:900;color:#1A120E;letter-spacing:-0.5px;line-height:1">
+          B-<span style="color:#7A1C35">SURE</span>
+        </div>
+        <div style="font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:#A8958A;margin-top:2px">
+          Insurance Platform
+        </div>
+      </div>
+    </div>
+
+    <h2
+      style="font-family:'Space Grotesk',sans-serif;font-size:1.22rem;font-weight:700;color:#1A120E;margin-bottom:3px">
+      Welcome back</h2>
+    <p style="font-size:0.875rem;color:#A8958A;margin-bottom:24px">Sign in to access your insurance dashboard</p>
+
+    @if (auth.error()) {
+    <div class="alert alert-error mb-4">
+      <span class="material-symbols-outlined text-sm">error_outline</span> {{ auth.error() }}
+    </div>
+    }
+    @if (auth.success()) {
+    <div class="alert alert-success mb-4">
+      <span class="material-symbols-outlined text-sm">check_circle</span> {{ auth.success() }}
+    </div>
+    }
+
+    <div class="form-group">
+      <label class="form-label">Email address</label>
+      <input class="form-control" type="email" [(ngModel)]="email" placeholder="you@company.com" id="login-email">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-control" type="password" [(ngModel)]="password" placeholder="••••••••" (keyup.enter)="login()"
+        id="login-password">
+    </div>
+
+    <button class="btn btn-primary" style="width:100%;justify-content:center" (click)="login()"
+      [disabled]="auth.loading()">
+
+      @if(auth.loading()) {
+      <span class="material-symbols-outlined text-base animate-spin">refresh</span> Signing in...
+      }
+      @else {
+      Sign In <span class="material-symbols-outlined text-base" style="margin-left:4px">arrow_forward</span>
+      }
+    </button>
+
+    <div class="flex items-center gap-3 my-5">
+      <div class="flex-1 h-px" style="background:#EAE0D8"></div>
+      <span style="font-size:0.75rem;color:#A8958A">Don't have an account?</span>
+      <div class="flex-1 h-px" style="background:#EAE0D8"></div>
+    </div>
+
+    <a routerLink="/register" class="btn btn-outline w-full" style="padding:10px;font-size:0.875rem">
+      <span class="material-symbols-outlined text-base">business</span> Register Your Business
+    </a>
+  </div>
+</div>

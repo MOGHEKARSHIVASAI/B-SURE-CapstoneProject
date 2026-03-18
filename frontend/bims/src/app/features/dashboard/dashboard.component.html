@@ -1,0 +1,116 @@
+@if (loading()) {
+<div class="loading">
+  <div class="spinner"></div> Loading dashboard...
+</div>
+} @else if (error()) {
+<div class="alert alert-error">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ error() }}
+</div>
+} @else {
+<!-- ── HERO WELCOME HEADER ─────────────────────── -->
+<div class="mb-5 rounded-xl overflow-hidden" style="box-shadow:var(--sh);border:1px solid var(--burg-200)">
+  <div class="flex items-center justify-between px-6 py-5"
+    style="background:linear-gradient(120deg,#7A1C35 0%,#3B0915 60%,#1A120E 100%)">
+    <div>
+      <div
+        style="font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:800;color:#FAF6F0;letter-spacing:-0.3px">
+        Good {{ greeting() }}, <span style="color:#E0A0AE">{{ auth.user()?.firstName }}</span>
+      </div>
+      <div style="font-size:0.78rem;color:rgba(240,213,219,0.55);margin-top:4px">
+        Your B-SURE insurance portfolio overview
+      </div>
+    </div>
+    <div class="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold"
+      style="background:rgba(255,255,255,0.08);color:rgba(240,220,210,0.75);border:1px solid rgba(255,255,255,0.12)">
+      <span class="w-1.5 h-1.5 rounded-full inline-block" style="background:#6EAF84"></span>
+      All Systems Online
+    </div>
+  </div>
+</div>
+
+<!-- ── STAT CARDS ─────────────────────────────── -->
+<div class="stats-grid">
+  @for (s of stats(); track s.label) {
+  <div class="stat-card">
+    <div class="label">{{ s.label }}</div>
+    <div class="value">{{ s.value }}</div>
+    <div class="sub">{{ s.sub }}</div>
+  </div>
+  }
+</div>
+
+<!-- ── BOTTOM GRID ────────────────────────────── -->
+<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+  <!-- Quick Actions -->
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="flex items-center gap-2.5 px-5 py-4" style="border-bottom:1px solid var(--border)">
+      <div class="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--burg-100)">
+        <span class="material-symbols-outlined text-sm" style="color:var(--burg-600)">bolt</span>
+      </div>
+      <span class="card-title">Quick Actions</span>
+    </div>
+    <div class="px-4 py-3 flex flex-col gap-1.5">
+      @for (a of quickActions(); track a.label) {
+      <a [routerLink]="a.link"
+        class="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
+        style="background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);text-decoration:none"
+        onmouseover="this.style.background='#7A1C35';this.style.color='#FAF6F0';this.style.borderColor='#7A1C35';this.style.transform='translateX(4px)'"
+        onmouseout="this.style.background='var(--surface-2)';this.style.color='var(--text-2)';this.style.borderColor='var(--border)';this.style.transform='translateX(0)'">
+        <!-- Material icon rendered correctly -->
+        <span class="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 material-symbols-outlined"
+          style="background:var(--burg-100);color:var(--burg-600);font-size:1.05rem">
+          {{ a.icon }}
+        </span>
+        <span class="flex-1">{{ a.label }}</span>
+        <span class="material-symbols-outlined text-xs" style="color:var(--text-3)">chevron_right</span>
+      </a>
+      }
+    </div>
+  </div>
+
+  <!-- Account Overview -->
+  <div class="card" style="padding:0;overflow:hidden">
+    <div class="flex items-center gap-2.5 px-5 py-4" style="border-bottom:1px solid var(--border)">
+      <div class="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--burg-100)">
+        <span class="material-symbols-outlined text-sm" style="color:var(--burg-600)">account_circle</span>
+      </div>
+      <span class="card-title">Account Overview</span>
+    </div>
+
+    <!-- User identity strip -->
+    <div class="flex items-center gap-3 px-5 py-3"
+      style="background:var(--burg-50);border-bottom:1px solid var(--border)">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0"
+        style="background:linear-gradient(135deg,var(--burg-500),var(--burg-800));color:var(--cream-50);font-family:'Space Grotesk',sans-serif;box-shadow:var(--burg-sh)">
+        {{ auth.user()?.firstName?.charAt(0) }}{{ auth.user()?.lastName?.charAt(0) }}
+      </div>
+      <div class="min-w-0">
+        <div class="font-semibold text-sm truncate" style="color:var(--text-1)">
+          {{ auth.user()?.firstName }} {{ auth.user()?.lastName }}
+        </div>
+        <div class="text-xs truncate" style="color:var(--text-3)">{{ auth.user()?.email }}</div>
+      </div>
+    </div>
+
+    <div class="px-5">
+      <div class="flex items-center justify-between py-2.5" style="border-bottom:1px solid var(--border)">
+        <span class="text-xs font-semibold uppercase tracking-wide" style="color:var(--text-3)">Role</span>
+        <span class="badge badge-ruby">{{ auth.user()?.role }}</span>
+      </div>
+      <div class="flex items-center justify-between py-2.5" style="border-bottom:1px solid var(--border)">
+        <span class="text-xs font-semibold uppercase tracking-wide" style="color:var(--text-3)">Status</span>
+        <span class="badge badge-green">
+          <span class="w-1.5 h-1.5 rounded-full inline-block mr-1.5" style="background:#4A7C5A"></span>
+          Active
+        </span>
+      </div>
+      <div class="flex items-center justify-between py-2.5">
+        <span class="text-xs font-semibold uppercase tracking-wide" style="color:var(--text-3)">Platform</span>
+        <span class="text-xs font-bold" style="color:var(--burg-600)">B-SURE Insurance</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+}

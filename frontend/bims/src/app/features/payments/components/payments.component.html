@@ -1,0 +1,84 @@
+<div class="page-header mb-5 rounded-2xl border border-cream-dark bg-white/80 px-6 py-5 shadow-sm">
+  <div>
+    <div class="page-title">Payments</div>
+    <div class="page-subtitle">Premium payment history</div>
+  </div>
+  @if (auth.isCustomer()) {
+  <button class="btn btn-primary rounded-xl px-4 py-2.5 shadow-md shadow-burgundy/20" (click)="openPay()">+ Make
+    Payment</button>
+  }
+</div>
+
+@if (loading()) { <div class="loading">
+  <div class="spinner"></div>Loading...
+</div> }
+@else {
+<div class="card rounded-2xl border border-cream-dark bg-white/85 p-0 shadow-sm">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Company</th>
+          <th>Application</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Paid At</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of payments(); track p.id) {
+        <tr>
+          <td class="mono text-sm">{{ p.paymentReference }}</td>
+          <td>
+            <div class="font-semibold text-stone-800">{{ p.companyName }}</div>
+          </td>
+          <td class="mono text-sm">#{{ p.applicationId }}</td>
+          <td class="mono font-semibold">₹{{ p.amount | number }}</td>
+          <td><span [class]="'badge ' + statusClass(p.status)">{{ p.status }}</span></td>
+          <td class="text-sm text-muted">{{ p.paidAt ? (p.paidAt | date:'short') : '—' }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    @if (!payments().length) { <div class="empty">
+      <div class="icon material-symbols-outlined text-4xl text-stone-400 mb-2">credit_card</div>
+      <div>No payments found.</div>
+    </div> }
+  </div>
+</div>
+}
+
+@if (showModal()) {
+<div class="modal-overlay bg-black/40 backdrop-blur-sm" (click)="showModal.set(false)">
+  <div class="modal rounded-2xl border border-cream-dark bg-white p-6 shadow-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">Make Payment</span>
+      <button class="modal-close" (click)="showModal.set(false)">×</button>
+    </div>
+    @if (error()) { <div class="alert alert-error">{{ error() }}</div> }
+    <div class="form-group">
+      <label class="form-label">Application (CUSTOMER_ACCEPTED)</label>
+      <select title="Selection" class="form-control" [(ngModel)]="form.applicationId"
+        (ngModelChange)="onAppSelect($event)">
+        <option value="">Select...</option>
+        @for (a of payableApps(); track a.id) {
+        <option [value]="a.id">#{{ a.id }} — {{ a.productName }} (₹{{ a.coverageAmount | number }})</option>
+        }
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Amount (₹)</label>
+      <input title="Input" class="form-control" type="number" [(ngModel)]="form.amount" placeholder="Enter value">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Remarks</label>
+      <input title="Input" class="form-control" [(ngModel)]="form.remarks" placeholder="e.g. Annual premium payment">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary rounded-xl" (click)="showModal.set(false)">Cancel</button>
+      <button class="btn btn-primary rounded-xl" [disabled]="saving()" (click)="pay()">Pay Now</button>
+    </div>
+  </div>
+</div>
+}

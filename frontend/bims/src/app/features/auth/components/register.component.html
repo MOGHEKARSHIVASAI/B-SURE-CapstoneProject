@@ -1,0 +1,134 @@
+<div class="auth-page">
+  <div class="auth-card" style="max-width:740px;padding:36px 38px">
+    <!-- Brand -->
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+        style="background:linear-gradient(135deg,#B83B57,#3B0915);box-shadow:0 6px 22px rgba(90,18,39,0.45)">
+        <span class="material-symbols-outlined text-xl" style="color:#FAF6F0">verified_user</span>
+      </div>
+      <div>
+        <div
+          style="font-family:'Space Grotesk',sans-serif;font-size:1.55rem;font-weight:900;color:#1A120E;letter-spacing:-0.5px;line-height:1">
+          B-<span style="color:#7A1C35">SURE</span>
+        </div>
+        <div style="font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;color:#A8958A;margin-top:2px">
+          Insurance Platform
+        </div>
+      </div>
+    </div>
+
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#1A120E;margin-bottom:3px">
+      Create your account
+    </h2>
+    <p style="font-size:0.875rem;color:#A8958A;margin-bottom:20px">
+      Fill in the details to register and access business insurance coverage
+    </p>
+
+    @if (auth.error()) {
+    <div class="alert alert-error mb-4">
+      <span class="material-symbols-outlined text-sm">error_outline</span> {{ auth.error() }}
+    </div>
+    }
+    @if (auth.success()) {
+    <div class="alert alert-success mb-4">
+      <span class="material-symbols-outlined text-sm">check_circle</span> {{ auth.success() }}
+    </div>
+    }
+
+    <div class="section-label">Personal Information</div>
+    <div class="form-grid gap-3 mb-2">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input title="First Name" class="form-control" [(ngModel)]="form.firstName" placeholder="John"
+          id="reg-firstname">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input title="Last Name" class="form-control" [(ngModel)]="form.lastName" placeholder="Doe" id="reg-lastname">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input title="Email" class="form-control" type="email" [(ngModel)]="form.email" placeholder="john@company.com"
+          id="reg-email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input title="Password" class="form-control" type="password" [(ngModel)]="form.password" placeholder="••••••••"
+          id="reg-password">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone</label>
+        <input title="Phone" class="form-control" [(ngModel)]="form.phone" placeholder="9876543210" id="reg-phone">
+      </div>
+    </div>
+
+    <div class="section-label mt-1">Business Information</div>
+    <div class="form-grid gap-3 mb-2">
+      <div class="form-group">
+        <label class="form-label">Company Name</label>
+        <input title="Company Name" class="form-control" [(ngModel)]="form.companyName" placeholder="ABC Pvt Ltd"
+          id="reg-company">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Registration Number</label>
+        <input title="Reg Number" class="form-control" [(ngModel)]="form.companyRegNumber" placeholder="CIN/REG12345"
+          id="reg-regnumber">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Industry Type</label>
+        <input title="Industry" class="form-control" [(ngModel)]="form.industryType"
+          placeholder="IT, Retail, Manufacturing..." id="reg-industry">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Annual Revenue (₹)</label>
+        <input title="Revenue" class="form-control" type="number" [(ngModel)]="form.annualRevenue" placeholder="5000000"
+          id="reg-revenue">
+      </div>
+      <div class="form-group">
+        <label class="form-label">No. of Employees</label>
+        <input title="Employees" class="form-control" type="number" [(ngModel)]="form.numEmployees" placeholder="50"
+          id="reg-employees">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tax ID / GST</label>
+        <input title="Tax ID" class="form-control" [(ngModel)]="form.taxId" placeholder="27AXXXX0000A1Z5"
+          id="reg-taxid">
+      </div>
+    </div>
+
+    <div class="section-label mt-1">Business Address</div>
+    <div class="form-grid gap-3">
+      <div class="form-group full-col">
+        <label class="form-label">Address</label>
+        <input title="Address" class="form-control" [(ngModel)]="form.addressLine1"
+          placeholder="123 Business Park, MG Road" id="reg-address">
+      </div>
+      <div class="form-group">
+        <label class="form-label">City</label>
+        <input title="City" class="form-control" [(ngModel)]="form.city" placeholder="Mumbai" id="reg-city">
+      </div>
+      <div class="form-group">
+        <label class="form-label">State</label>
+        <input title="State" class="form-control" [(ngModel)]="form.state" placeholder="Maharashtra" id="reg-state">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Postal Code</label>
+        <input title="Postal Code" class="form-control" [(ngModel)]="form.postalCode" placeholder="400001"
+          id="reg-postal">
+      </div>
+    </div>
+
+    <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px" (click)="register()"
+      [disabled]="auth.loading()" id="reg-submit">
+      @if (auth.loading()) { <span class="material-symbols-outlined text-base animate-spin">refresh</span> Creating
+      account... }
+      @else { Create Your Account <span class="material-symbols-outlined text-base"
+        style="margin-left:4px">arrow_forward</span> }
+    </button>
+
+    <p class="mt-4 text-center" style="font-size:0.875rem;color:#A8958A">
+      Already registered?
+      <a routerLink="/login" style="color:#7A1C35;font-weight:600">Sign in →</a>
+    </p>
+  </div>
+</div>

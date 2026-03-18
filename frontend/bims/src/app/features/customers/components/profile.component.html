@@ -1,0 +1,126 @@
+<div class="page-header">
+  <div>
+    <div class="page-title">My Profile</div>
+    <div class="page-subtitle">Manage your business information</div>
+  </div>
+</div>
+
+@if (loading()) {
+<div class="loading">
+  <div class="spinner"></div>Loading...
+</div>
+}
+@else {
+@if (success()) { <div class="alert alert-success">Profile updated successfully!</div> }
+@if (error()) { <div class="alert alert-error">{{ error() }}</div> }
+
+@if (noProfile()) {
+<div class="card bg-burgundy/5 border-burgundy/20">
+  <div class="card-header">
+    <div class="card-title text-burgundy">Create Your Business Profile</div>
+  </div>
+  <div class="p-6">
+    <p class="mb-6 text-stone-600">You haven't set up your business profile yet. Please provide your business details to
+      start applying for insurance.</p>
+
+    <div class="form-grid cols-3">
+      <div class="form-group">
+        <label class="form-label">Company Name</label>
+        <input class="form-control" [(ngModel)]="form.companyName" placeholder="Enter company name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Industry</label>
+        <input class="form-control" [(ngModel)]="form.industryType" placeholder="e.g. Technology, Retail">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Annual Revenue (₹)</label>
+        <input class="form-control" type="number" [(ngModel)]="form.annualRevenue">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Employees</label>
+        <input class="form-control" type="number" [(ngModel)]="form.numEmployees">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tax ID (PAN/GST)</label>
+        <input class="form-control" [(ngModel)]="form.taxId">
+      </div>
+      <div class="form-group full-col">
+        <label class="form-label">Office Address</label>
+        <input class="form-control" [(ngModel)]="form.addressLine1" placeholder="Street address, building name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">City</label>
+        <input class="form-control" [(ngModel)]="form.city">
+      </div>
+      <div class="form-group">
+        <label class="form-label">State</label>
+        <input class="form-control" [(ngModel)]="form.state">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Postal Code</label>
+        <input class="form-control" [(ngModel)]="form.postalCode">
+      </div>
+    </div>
+
+    <button class="btn btn-primary mt-6" [disabled]="saving()" (click)="create()">
+      {{ saving() ? 'Creating Profile...' : 'Create Business Profile' }}
+    </button>
+  </div>
+</div>
+} @else if (business()) {
+<div class="card">
+  <div class="card-header flex justify-between items-center">
+    <div class="card-title">Business Details</div>
+    <a routerLink="/businesses" class="btn btn-text btn-sm text-burgundy flex items-center gap-1">
+      <span class="material-symbols-outlined text-sm">business_center</span>
+      Manage All Businesses
+    </a>
+  </div>
+  <div class="form-grid cols-3">
+    <div class="form-group">
+      <label class="form-label">Company Name</label>
+      <input class="form-control" [(ngModel)]="form.companyName">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Industry</label>
+      <input class="form-control" [(ngModel)]="form.industryType">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Annual Revenue (₹)</label>
+      <input class="form-control" type="number" [(ngModel)]="form.annualRevenue">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Employees</label>
+      <input class="form-control" type="number" [(ngModel)]="form.numEmployees">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Phone</label>
+      <input class="form-control" [(ngModel)]="form.phone">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tax ID</label>
+      <input class="form-control" [(ngModel)]="form.taxId">
+    </div>
+    <div class="form-group full-col">
+      <label class="form-label">Address</label>
+      <input class="form-control" [(ngModel)]="form.addressLine1">
+    </div>
+    <div class="form-group">
+      <label class="form-label">City</label>
+      <input class="form-control" [(ngModel)]="form.city">
+    </div>
+    <div class="form-group">
+      <label class="form-label">State</label>
+      <input class="form-control" [(ngModel)]="form.state">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Postal Code</label>
+      <input class="form-control" [(ngModel)]="form.postalCode">
+    </div>
+  </div>
+  <button class="btn btn-primary" [disabled]="saving()" (click)="save()">
+    {{ saving() ? 'Saving...' : 'Save Changes' }}
+  </button>
+</div>
+}
+}

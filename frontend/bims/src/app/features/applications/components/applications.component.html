@@ -1,0 +1,211 @@
+<!-- Page Header -->
+<div class="page-header mb-5">
+  <div>
+    <div class="page-title">Policy Applications</div>
+    <div class="page-subtitle">{{ auth.isCustomer() ? 'Manage your insurance applications' : 'All policy applications in the system' }}</div>
+  </div>
+  @if (auth.isCustomer()) {
+  <button class="btn btn-primary" (click)="openWizard()" id="new-app-btn">
+    <span class="material-symbols-outlined text-base">add</span> New Application
+  </button>
+  }
+</div>
+
+@if (svc.error()) {
+<div class="alert alert-error mb-4">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+</div>
+}
+@if (svc.success()) {
+<div class="alert alert-success mb-4">
+  <span class="material-symbols-outlined text-sm">check_circle</span> {{ svc.success() }}
+</div>
+}
+
+<!-- Customer Journey Guide -->
+@if (auth.isCustomer()) {
+<div class="application-journey mb-5 px-5 py-4">
+  <div class="journey-title">Application Journey</div>
+  <div class="journey-steps">
+    <span class="journey-step"><span class="material-symbols-outlined text-xs mr-1">edit_note</span> 1. Create & Submit</span>
+    <span class="journey-step"><span class="material-symbols-outlined text-xs mr-1">manage_search</span> 2. Underwriter Review</span>
+    <span class="journey-step" [class.journey-step-active]="customerAcceptedPendingPayment()">
+      <span class="material-symbols-outlined text-xs mr-1">payment</span> 3. Pay & Issue Policy
+    </span>
+  </div>
+  @if (customerAcceptedPendingPayment()) {
+  <div class="premium-reminder mt-3">
+    <span class="material-symbols-outlined text-sm text-green-600">check_circle</span>
+    Offer accepted. Complete payment to issue your policy.
+    <button class="btn btn-success btn-sm ml-3" (click)="openPayments()">
+      <span class="material-symbols-outlined text-sm">credit_card</span> Pay Now
+    </button>
+  </div>
+  }
+</div>
+}
+
+<!-- Table Card -->
+@if (svc.loading()) {
+<div class="loading">
+  <div class="spinner"></div> Loading applications...
+</div>
+} @else {
+<div class="card p-0">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Business</th>
+          <th>Product</th>
+          <th>Coverage</th>
+          <th>Status</th>
+          <th>Period</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (a of svc.items(); track a.id) {
+        <tr>
+          <td class="mono text-xs text-stone-400 font-medium">#{{ a.id }}</td>
+          <td><div class="font-semibold text-stone-800 text-sm">{{ a.companyName }}</div></td>
+          <td class="text-sm text-stone-600">{{ a.productName }}</td>
+          <td class="mono text-sm font-semibold">₹{{ a.coverageAmount | number }}</td>
+          <td><span [class]="'badge ' + statusClass(a.status)">{{ a.status | titlecase }}</span></td>
+          <td class="text-xs text-stone-400">{{ a.coverageStartDate }} → {{ a.coverageEndDate }}</td>
+          <td>
+            <div class="actions">
+              @if (auth.isCustomer() && a.status === 'DRAFT') {
+                <button class="btn btn-ghost btn-sm" (click)="openWizard(a)" title="Edit">
+                  <span class="material-symbols-outlined text-xs">edit</span> Edit
+                </button>
+                <button class="btn btn-ghost btn-sm text-red-500" (click)="deleteDraft(a.id)">
+                  <span class="material-symbols-outlined text-xs">delete</span>
+                </button>
+                <button class="btn btn-primary btn-sm" (click)="submit(a.id)" [disabled]="a.documentCount === 0" [title]="a.documentCount === 0 ? 'Upload documents first' : 'Submit'">Submit</button>
+              }
+
+              @if (auth.isCustomer() && a.status === 'APPROVED') {
+                <button class="btn btn-success btn-sm" (click)="handleVerdict('accept', a)">Accept</button>
+                <button class="btn btn-danger btn-sm" (click)="handleVerdict('reject', a)">Decline</button>
+              }
+
+              @if (auth.isCustomer() && a.status === 'REJECTED') {
+                <button class="btn btn-danger btn-sm" (click)="openReason(a)">
+                  <span class="material-symbols-outlined text-xs">info</span> View Reason
+                </button>
+              }
+
+              @if (auth.isCustomer() && a.status === 'CUSTOMER_ACCEPTED') {
+                <button class="btn btn-primary btn-sm" (click)="openPayments(a.id)">Pay Now</button>
+              }
+
+              @if (auth.isAdmin() && a.status === 'SUBMITTED') {
+                <button class="btn btn-primary btn-sm" (click)="openAssign(a)">Assign UW</button>
+              }
+
+              <button class="btn btn-ghost btn-sm" (click)="openDocs(a)">
+                <span class="material-symbols-outlined text-xs">attach_file</span> Docs
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    @if (!svc.items().length) {
+      <div class="empty py-10">No applications found.</div>
+    }
+  </div>
+</div>
+}
+
+<!-- Wizards & Modals -->
+@if (showWizard()) {
+  <app-application-wizard 
+    [products]="products()" 
+    [businesses]="myBusinesses()" 
+    [editingApp]="editingApp()"
+    (closed)="showWizard.set(false)"
+    (saved)="onWizardClose()">
+  </app-application-wizard>
+}
+
+@if (showAssign()) {
+<div class="modal-overlay" (click)="showAssign.set(false)">
+  <div class="modal" style="max-width:420px" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">Assign Underwriter</span>
+      <button class="modal-close" (click)="showAssign.set(false)">×</button>
+    </div>
+    <div class="p-4">
+      <p class="text-sm text-stone-500 mb-4">Assign UW for #{{ selectedApp()?.id }}</p>
+      <select title="Underwriter" class="form-control" [(ngModel)]="selectedUW">
+        <option value="">Select...</option>
+        @for (u of underwriters(); track u.id) {
+          <option [value]="u.underwriterId || u.id">{{ u.firstName }} {{ u.lastName }}</option>
+        }
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="showAssign.set(false)">Cancel</button>
+      <button class="btn btn-primary" (click)="assign()">Assign</button>
+    </div>
+  </div>
+</div>
+}
+
+@if (showDocs()) {
+<div class="modal-overlay" (click)="closeDocs()">
+  <div class="modal" style="max-width:640px; width: 100%" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">Documents — #{{ selectedApp()?.id }}</span>
+      <button class="modal-close" (click)="closeDocs()">×</button>
+    </div>
+    <div class="p-4">
+      <app-document-list [applicationId]="selectedApp()?.id" 
+        [canUpload]="auth.isCustomer()" 
+        [uploadTypes]="[]">
+      </app-document-list>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="closeDocs()">Close</button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Rejection Reason Modal -->
+@if (showReason()) {
+<div class="modal-overlay" (click)="showReason.set(false)">
+  <div class="modal" style="max-width:480px" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div style="display:flex; align-items:center; gap:8px">
+        <span class="material-symbols-outlined text-red-500">cancel</span>
+        <span class="modal-title">Application Rejected</span>
+      </div>
+      <button class="modal-close" (click)="showReason.set(false)">×</button>
+    </div>
+    <div class="p-5">
+      <div class="text-xs text-stone-400 uppercase tracking-widest font-bold mb-2">Rejection Reason</div>
+      <div class="bg-red-50 border border-red-100 rounded-lg p-4 text-red-800 text-sm leading-relaxed">
+        {{ getDecision(selectedApp()?.id || 0)?.comments || 'No specific reason provided by the underwriter.' }}
+      </div>
+      
+      <div class="mt-6 pt-6 border-t border-stone-100 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-400">
+          <span class="material-symbols-outlined">person</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-stone-800">{{ getDecision(selectedApp()?.id || 0)?.underwriterName || 'Underwriter' }}</div>
+          <div class="text-[10px] text-stone-400">Policy Underwriter</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary w-full" (click)="showReason.set(false)">I Understand</button>
+    </div>
+  </div>
+</div>
+}

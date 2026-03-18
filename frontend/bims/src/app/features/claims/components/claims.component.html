@@ -1,0 +1,450 @@
+<!-- Page Header -->
+<div class="page-header mb-5">
+  <div>
+    <div class="page-title">Insurance Claims</div>
+    <div class="page-subtitle">{{ auth.isCustomer() ? 'Track your filed claims and settlements' : 'Manage incoming claims
+      and investigations' }}</div>
+  </div>
+  @if (auth.isCustomer()) {
+  <button class="btn btn-primary" (click)="openFileWizard()" id="new-claim-btn">
+    <span class="material-symbols-outlined text-base">add_box</span> File New Claim
+  </button>
+  }
+</div>
+
+@if (svc.error()) {
+<div class="alert alert-error mb-4">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+</div>
+}
+
+<!-- Stats Overview (For Officers/Admins) -->
+@if (!auth.isCustomer()) {
+<div class="stats-grid mb-5">
+  <div class="stat-card" [class.stat-active]="activeTab() === 'ALL'" (click)="setTab('ALL')">
+    <div class="stat-label">Total Claims</div>
+    <div class="stat-value">{{ statusCounts().ALL }}</div>
+  </div>
+  <div class="stat-card" [class.stat-active]="activeTab() === 'SUBMITTED'" (click)="setTab('SUBMITTED')">
+    <div class="stat-label">New Submissions</div>
+    <div class="stat-value text-blue-600">{{ statusCounts().SUBMITTED }}</div>
+  </div>
+  <div class="stat-card" [class.stat-active]="activeTab() === 'UNDER_INVESTIGATION'"
+    (click)="setTab('UNDER_INVESTIGATION')">
+    <div class="stat-label">Investigating</div>
+    <div class="stat-value text-orange-600">{{ statusCounts().UNDER_INVESTIGATION }}</div>
+  </div>
+  <div class="stat-card" [class.stat-active]="activeTab() === 'APPROVED'" (click)="setTab('APPROVED')">
+    <div class="stat-label">Approved</div>
+    <div class="stat-value text-green-600">{{ statusCounts().APPROVED }}</div>
+  </div>
+</div>
+}
+
+<!-- Claims List -->
+<div class="claims-stack">
+  @for (c of filteredClaims(); track c.id) {
+  <div class="claim-card" [class.claim-card-expanded]="expandedClaim() === c.id">
+    <div class="claim-card-main" (click)="expandClaimCard(c)">
+      <div class="claim-main-info">
+        <div class="claim-header-top">
+          <span class="claim-id-badge">#{{ c.id }}</span>
+          <span [class]="'badge ' + statusClass(c.status)">
+            <span class="material-symbols-outlined text-xs">{{ statusIcon(c.status) }}</span>
+            {{ c.status | titlecase }}
+          </span>
+        </div>
+        <div class="claim-title">{{ c.claimNumber }}</div>
+        <div class="claim-subtitle">{{ c.companyName }} • {{ c.productName || 'General Policy' }}</div>
+      </div>
+
+      <div class="claim-meta-grid">
+        <div class="claim-meta-item">
+          <div class="claim-meta-label">Claimed Amount</div>
+          <div class="claim-meta-value font-semibold">₹{{ c.claimedAmount | number }}</div>
+        </div>
+        <div class="claim-meta-item">
+          <div class="claim-meta-label">Incident Date</div>
+          <div class="claim-meta-value">{{ c.incidentDate }}</div>
+        </div>
+        @if (c.settledAmount) {
+        <div class="claim-meta-item">
+          <div class="claim-meta-label">Settled Amount</div>
+          <div class="claim-meta-value text-purple-700 font-bold">₹{{ c.settledAmount | number }}</div>
+        </div>
+        }
+      </div>
+
+      <div class="claim-expand-icon">
+        <span class="material-symbols-outlined">{{ expandedClaim() === c.id ? 'expand_less' : 'expand_more' }}</span>
+      </div>
+    </div>
+
+    @if (expandedClaim() === c.id) {
+    <div class="claim-card-details">
+      <div class="claim-details-grid">
+        <!-- Details Column -->
+        <div class="claim-col">
+          <div class="uw-section-header">
+            <span class="material-symbols-outlined">info</span>
+            <span>Incident Description</span>
+          </div>
+          <div class="claim-description-box">{{ c.incidentDescription }}</div>
+
+          <div class="uw-section-header mt-4">
+            <span class="material-symbols-outlined">folder_open</span>
+            <span>Documentation</span>
+            <span class="uw-section-badge">{{ c.documentCount }} file(s)</span>
+          </div>
+          <div class="flex gap-2">
+            <button class="btn btn-outline btn-sm" (click)="openDocs(c)">
+              <span class="material-symbols-outlined text-sm">attach_file</span> View Documents
+            </button>
+          </div>
+        </div>
+
+        <!-- Action/Status Column -->
+        <div class="claim-col">
+          <!-- Officer/Admin Actions -->
+          @if (!auth.isCustomer()) {
+          <div class="claim-action-panel">
+            <div class="uw-section-header">
+              <span class="material-symbols-outlined">bolt</span>
+              <span>Claim Investigation</span>
+            </div>
+
+            @if (c.status === 'SUBMITTED' && auth.isAdmin()) {
+            <div class="alert alert-info">Assign an officer to start the investigation.</div>
+            <button class="btn btn-primary w-full" (click)="openAssign(c)">Assign Officer</button>
+            }
+
+            @if (c.status === 'ASSIGNED') {
+            <button class="btn btn-primary w-full" (click)="investigate(c.id)">Start Investigation</button>
+            }
+
+            @if (c.status === 'UNDER_INVESTIGATION') {
+            <div class="form-group mb-3">
+              <label class="form-label">Investigation Notes</label>
+              <textarea class="form-control" [(ngModel)]="investigationNotes"
+                placeholder="Internal notes..."></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <button class="btn btn-success" (click)="openApprove(c)">Approve</button>
+              <button class="btn btn-danger" (click)="openReject(c)">Reject</button>
+            </div>
+            }
+
+            @if (c.status === 'APPROVED') {
+            <div class="alert alert-success">Claim approved for ₹{{ c.approvedAmount | number }}.</div>
+            <button class="btn btn-primary w-full" (click)="openSettle(c)">Process Settlement</button>
+            }
+          </div>
+          }
+
+          <!-- Customer View -->
+          @if (auth.isCustomer()) {
+          <div class="claim-customer-panel">
+            @if (c.status === 'DRAFT') {
+            <div class="alert alert-warn">Draft claim. Please upload documents and submit.</div>
+            <div class="flex gap-2">
+              <button class="btn btn-primary btn-sm flex-1" (click)="submit(c.id)">Submit Claim</button>
+              <button class="btn btn-danger btn-sm" (click)="delete(c.id)">Delete</button>
+            </div>
+            }
+
+            @if (c.status === 'REJECTED') {
+            <div class="alert alert-error">
+              <strong>Rejected:</strong> {{ c.rejectionReason }}
+            </div>
+            <button class="btn btn-outline w-full" (click)="appeal(c.id)">Appeal Rejection</button>
+            }
+
+            @if (c.status === 'SETTLED') {
+              <div class="alert alert-success">
+                <strong>Settled:</strong> Your payout of ₹{{ c.settledAmount | number }} was processed on {{ c.settlementDate }}.
+              </div>
+            }
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
+
+<!-- ==================== CLAIM WIZARD MODAL ==================== -->
+@if (showFile()) {
+<div class="modal-overlay" (click)="closeWizard()">
+  <div class="modal app-wizard-modal" (click)="$event.stopPropagation()">
+    <!-- Wizard Header -->
+    <div class="modal-header" style="flex-direction: column; align-items: stretch; gap: 14px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span class="modal-title">File Insurance Claim</span>
+        <button class="modal-close" (click)="closeWizard()">×</button>
+      </div>
+
+      <!-- Progress Steps -->
+      <div class="wizard-steps">
+        <div class="wizard-step" [class.wizard-step-active]="formStep() === 1" [class.wizard-step-done]="formStep() > 1">
+          <div class="wizard-step-num">@if (formStep() > 1) { <span class="material-symbols-outlined text-xs">check</span> } @else { 1 }</div>
+          <span class="wizard-step-label">Occurrence Details</span>
+        </div>
+        <div class="wizard-step-line" [class.wizard-step-line-done]="formStep() > 1"></div>
+        <div class="wizard-step" [class.wizard-step-active]="formStep() === 2" [class.wizard-step-done]="formStep() > 2">
+          <div class="wizard-step-num">@if (formStep() > 2) { <span class="material-symbols-outlined text-xs">check</span> } @else { 2 }</div>
+          <span class="wizard-step-label">Evidence Upload</span>
+        </div>
+        <div class="wizard-step-line" [class.wizard-step-line-done]="formStep() > 2"></div>
+        <div class="wizard-step" [class.wizard-step-active]="formStep() === 3">
+          <div class="wizard-step-num">3</div>
+          <span class="wizard-step-label">Review & File</span>
+        </div>
+      </div>
+    </div>
+
+    @if (fileError()) {
+    <div class="alert alert-error" style="margin: 16px 24px 0">{{ fileError() }}</div>
+    }
+
+    <!-- STEP 1: Details -->
+    @if (formStep() === 1) {
+    <div class="wizard-body">
+      <div class="form-group">
+        <label class="form-label">Select Policy</label>
+        <select title="Policy" class="form-control" [(ngModel)]="fileForm.policyId">
+          @for (p of myPolicies(); track p.id) {
+          <option [value]="p.id">{{ p.policyNumber }} - {{ p.productName }} (Exp: {{ p.endDate }})</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Incident Date</label>
+          <input title="Incident Date" class="form-control" type="date" [(ngModel)]="fileForm.incidentDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Estimated Loss Amount (₹)</label>
+          <input title="Loss Amount" class="form-control" type="number" [(ngModel)]="fileForm.claimedAmount" placeholder="0">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Detailed Description of Incident</label>
+        <textarea title="Description" class="form-control" [(ngModel)]="fileForm.incidentDescription" rows="4"
+          placeholder="What happened? When? Where? How? List damages..."></textarea>
+      </div>
+    </div>
+
+    <div class="modal-footer" style="justify-content: space-between">
+      <button class="btn btn-outline" (click)="closeWizard()">Cancel</button>
+      <button class="btn btn-primary" [disabled]="svc.loading()" (click)="saveDraftAndNext()">
+        @if (svc.loading()) { <span class="spinner w-4 h-4 border-white/40 border-t-white"></span> }
+        Next: Upload Documents →
+      </button>
+    </div>
+    }
+
+    <!-- STEP 2: Documents -->
+    @if (formStep() === 2) {
+    <div class="wizard-body">
+      <div class="wizard-step-intro">
+        <span class="material-symbols-outlined" style="color: var(--burg-500)">photo_camera</span>
+        <div>
+          <div style="font-weight: 700; font-size: 0.92rem; color: var(--text-1)">Upload Evidence & Proof</div>
+          <div style="font-size: 0.78rem; color: var(--text-3)">
+            Provide photos of damage, repair estimates, and police reports (if applicable).
+          </div>
+        </div>
+      </div>
+
+      <app-document-list
+        [applicationId]="undefined"
+        [claimId]="savedClaimId() || undefined"
+        [canUpload]="true"
+        [uploadTypes]="claimUploadTypes"
+        (countChanged)="onDocCountChanged($event)">
+      </app-document-list>
+    </div>
+
+    <div class="modal-footer" style="justify-content: space-between">
+      <button class="btn btn-outline" (click)="formStep.set(1)">← Back to Details</button>
+      <button class="btn btn-primary" (click)="goToReview()">Next: Review & File →</button>
+    </div>
+    }
+
+    <!-- STEP 3: Review -->
+    @if (formStep() === 3) {
+    <div class="wizard-body">
+      <div class="wizard-review-card">
+        <div class="uw-section-header">
+          <span class="material-symbols-outlined">description</span>
+          <span>Claim Summary</span>
+        </div>
+        <div class="uw-detail-grid">
+          <div class="uw-detail-item">
+            <div class="uw-detail-label">Policy</div>
+            <div class="uw-detail-value">{{ getSelectedPolicyNumber() }}</div>
+          </div>
+          <div class="uw-detail-item">
+            <div class="uw-detail-label">Incident Date</div>
+            <div class="uw-detail-value">{{ fileForm.incidentDate }}</div>
+          </div>
+          <div class="uw-detail-item">
+            <div class="uw-detail-label">Claimed Amount</div>
+            <div class="uw-detail-value mono font-bold text-burg-700">₹{{ fileForm.claimedAmount | number }}</div>
+          </div>
+          <div class="uw-detail-item uw-detail-full">
+            <div class="uw-detail-label">Description</div>
+            <div class="uw-detail-value" style="font-style: italic">{{ fileForm.incidentDescription }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-review-card" [style.borderColor]="docCountForDraft() > 0 ? 'var(--ok-bd)' : 'var(--burg-200)'">
+        <div class="uw-section-header">
+          <span class="material-symbols-outlined">folder_open</span>
+          <span>Verification Documents</span>
+          <span class="uw-section-badge">{{ docCountForDraft() }} file(s)</span>
+        </div>
+        @if (docCountForDraft() === 0) {
+        <div class="alert alert-error" style="margin: 0">
+          <span class="material-symbols-outlined text-sm">warning</span>
+          No documents uploaded. Claims without photos or bills are often rejected.
+        </div>
+        } @else {
+        <div class="alert alert-success" style="margin: 0">
+          <span class="material-symbols-outlined text-sm">check_circle</span>
+          {{ docCountForDraft() }} document(s) attached to this claim.
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="modal-footer" style="justify-content: space-between">
+      <button class="btn btn-outline" (click)="formStep.set(2)">← Back to Evidence</button>
+      <button class="btn btn-primary" style="padding: 10px 28px" [disabled]="svc.loading() || docCountForDraft() === 0" (click)="submitFromWizard()">
+        @if (svc.loading()) { <span class="spinner w-4 h-4 border-white/40 border-t-white"></span> }
+        Finalize & Submit Claim
+      </button>
+    </div>
+    }
+  </div>
+</div>
+}
+
+<!-- Action Modals (Assign, Approve, Reject, Settle) -->
+@if (showAssignModal()) {
+<div class="modal-overlay" (click)="showAssignModal.set(false)">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">Assign Claims Officer</span>
+      <button class="modal-close" (click)="showAssignModal.set(false)">×</button>
+    </div>
+    <div class="p-1">
+      <div class="form-group">
+        <label class="form-label">Select Officer</label>
+        <select title="Officer" class="form-control" [(ngModel)]="selectedOfficer">
+          <option value="">Select...</option>
+          @for (o of officers(); track o.id) {
+          <option [value]="o.id">{{ o.firstName }} {{ o.lastName }}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="showAssignModal.set(false)">Cancel</button>
+      <button class="btn btn-primary" [disabled]="svc.loading() || !selectedOfficer" (click)="assignOfficer()">Assign</button>
+    </div>
+  </div>
+</div>
+}
+
+@if (showApprove()) {
+  <div class="modal-overlay" (click)="showApprove.set(false)">
+    <div class="modal" style="max-width: 400px" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title">Approve Claim</span>
+        <button class="modal-close" (click)="showApprove.set(false)">×</button>
+      </div>
+      <div class="p-1">
+        <div class="form-group">
+          <label class="form-label">Approved Amount (₹)</label>
+          <input title="Approved Amount" type="number" class="form-control" [(ngModel)]="approvedAmount">
+          <p class="text-xs text-stone-400 mt-1">Requested: ₹{{ actionTarget()?.claimedAmount | number }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" (click)="showApprove.set(false)">Cancel</button>
+        <button class="btn btn-success" [disabled]="svc.loading()" (click)="approveClaim()">Confirm Approval</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (showReject()) {
+  <div class="modal-overlay" (click)="showReject.set(false)">
+    <div class="modal" style="max-width: 400px" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title text-red-700">Reject Claim</span>
+        <button class="modal-close" (click)="showReject.set(false)">×</button>
+      </div>
+      <div class="p-1">
+        <div class="form-group">
+          <label class="form-label">Rejection Reason</label>
+          <textarea title="Rejection Reason" class="form-control" [(ngModel)]="rejectionReason" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" (click)="showReject.set(false)">Cancel</button>
+        <button class="btn btn-danger" [disabled]="svc.loading() || !rejectionReason.trim()" (click)="rejectClaim()">Reject Claim</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (showSettle()) {
+  <div class="modal-overlay" (click)="showSettle.set(false)">
+    <div class="modal" style="max-width: 400px" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title text-purple-700">Process Settlement</span>
+        <button class="modal-close" (click)="showSettle.set(false)">×</button>
+      </div>
+      <div class="p-1">
+        <div class="form-group">
+          <label class="form-label">Settlement Amount (₹)</label>
+          <input title="Settled Amount" type="number" class="form-control" [(ngModel)]="settledAmount">
+          <p class="text-xs text-stone-400 mt-1">Approved: ₹{{ actionTarget()?.approvedAmount | number }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" (click)="showSettle.set(false)">Cancel</button>
+        <button class="btn btn-primary" [disabled]="svc.loading()" (click)="settleClaim()">Confirm Settlement</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Documents View Modal -->
+@if (showDocs()) {
+  <div class="modal-overlay" (click)="closeDocs()">
+    <div class="modal" style="max-width: 640px; width:100%" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title">Evidence & Documents</span>
+        <button class="modal-close" (click)="closeDocs()">×</button>
+      </div>
+      <div class="p-1">
+        <app-document-list 
+          [claimId]="actionTarget()?.id" 
+          [canUpload]="auth.isCustomer() && (actionTarget()?.status === 'DRAFT' || actionTarget()?.status === 'SUBMITTED')"
+          [uploadTypes]="claimUploadTypes">
+        </app-document-list>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" (click)="closeDocs()">Close</button>
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,380 @@
+<!-- Page Header -->
+<div class="uw-page-header">
+  <div class="uw-page-header-left">
+    <div class="uw-page-icon">
+      <span class="material-symbols-outlined">verified_user</span>
+    </div>
+    <div>
+      <div class="page-title">Underwriting Queue</div>
+      <div class="page-subtitle">Review applications assigned to you · Risk evaluation & premium decisions</div>
+    </div>
+  </div>
+  <div class="uw-queue-badge">
+    <span class="material-symbols-outlined text-sm">pending_actions</span>
+    {{ queue().length }} Pending
+  </div>
+</div>
+
+@if (loading()) {
+<div class="loading">
+  <div class="spinner"></div>Loading your queue...
+</div>
+}
+@else {
+@if (loadError()) { <div class="alert alert-error">{{ loadError() }}</div> }
+@if (!queue().length) {
+<div class="uw-empty-state">
+  <div class="uw-empty-icon">
+    <span class="material-symbols-outlined">task_alt</span>
+  </div>
+  <h3>All Caught Up!</h3>
+  <p>Your underwriting queue is empty. No applications pending review.</p>
+</div>
+} @else {
+@for (a of queue(); track a.id) {
+<!-- Application Card -->
+<div class="uw-app-card" [class.uw-app-card-expanded]="expandedApp() === a.id">
+
+  <!-- Card Header (always visible) -->
+  <div class="uw-app-header" (click)="expandApplication(a)">
+    <div class="uw-app-header-left">
+      <div class="uw-app-company-icon">
+        <span class="material-symbols-outlined">domain</span>
+      </div>
+      <div>
+        <div class="uw-app-company">{{ a.companyName }}</div>
+        <div class="uw-app-meta">
+          <span class="uw-app-id">Application #{{ a.id }}</span>
+          <span class="uw-app-separator">·</span>
+          <span>{{ a.productName }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="uw-app-header-right">
+      <div class="uw-coverage-pill">
+        <span class="material-symbols-outlined text-xs">shield</span>
+        ₹{{ a.coverageAmount | number }}
+      </div>
+      <span class="badge badge-yellow">{{ a.status }}</span>
+      <span class="material-symbols-outlined uw-expand-icon" [class.uw-expanded]="expandedApp() === a.id">
+        expand_more
+      </span>
+    </div>
+  </div>
+
+  <!-- Quick Info Row (always visible) -->
+  <div class="uw-quick-row">
+    <div class="uw-quick-item">
+      <span class="material-symbols-outlined text-xs">calendar_month</span>
+      <span class="uw-quick-label">Period</span>
+      <span class="uw-quick-value">{{ a.coverageStartDate }} → {{ a.coverageEndDate }}</span>
+    </div>
+    <div class="uw-quick-item">
+      <span class="material-symbols-outlined text-xs">assessment</span>
+      <span class="uw-quick-label">Risk Score</span>
+      <span class="uw-quick-value">
+        @if (riskScores()[a.id] !== undefined) {
+        <span [style.color]="getRiskColor(riskScores()[a.id])" class="uw-risk-value">
+          {{ riskScores()[a.id] }}/100
+        </span>
+        } @else {
+        <span class="uw-risk-pending">Pending</span>
+        }
+      </span>
+    </div>
+    <div class="uw-quick-item">
+      <span class="material-symbols-outlined text-xs">description</span>
+      <span class="uw-quick-label">Risk Notes</span>
+      <span class="uw-quick-value">{{ a.riskNotes || '—' }}</span>
+    </div>
+    <div class="uw-quick-item uw-quick-actions">
+      <button class="btn btn-ghost btn-sm" (click)="openDocs(a); $event.stopPropagation()">
+        <span class="material-symbols-outlined text-xs">attach_file</span> Docs
+        @if (a.documentCount) {
+        <span class="uw-doc-count">{{ a.documentCount }}</span>
+        }
+      </button>
+      <button class="btn btn-secondary btn-sm" (click)="fetchRisk(a.id); $event.stopPropagation()">
+        <span class="material-symbols-outlined text-xs">calculate</span>
+        {{ riskScores()[a.id] !== undefined ? 'Recalculate' : 'Get Risk Score' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Expanded Review Panel -->
+  @if (expandedApp() === a.id) {
+  <div class="uw-review-panel">
+
+    @if (modalError()) {
+    <div class="alert alert-error" style="margin: 0 0 20px 0">
+      <span class="material-symbols-outlined text-sm">error</span> {{ modalError() }}
+    </div>
+    }
+
+    <div class="uw-panel-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="uw-panel-col">
+
+        <!-- Business Details Section -->
+        <div class="uw-section">
+          <div class="uw-section-header">
+            <span class="material-symbols-outlined">business</span>
+            <span>Business Details</span>
+          </div>
+          @if (businessLoading()) {
+          <div class="uw-section-loading">
+            <div class="spinner"></div>Loading...
+          </div>
+          } @else if (selectedBusiness()) {
+          <div class="uw-detail-grid">
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Business Name</div>
+              <div class="uw-detail-value">{{ selectedBusiness()!.companyName }}</div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Industry Type</div>
+              <div class="uw-detail-value">
+                <span class="material-symbols-outlined text-xs" style="margin-right:4px">{{
+                  getIndustryIcon(selectedBusiness()!.industryType || '') }}</span>
+                {{ selectedBusiness()!.industryType || '—' }}
+              </div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Annual Revenue</div>
+              <div class="uw-detail-value mono">₹{{ (selectedBusiness()!.annualRevenue || 0) | number }}</div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Location</div>
+              <div class="uw-detail-value">
+                {{ selectedBusiness()!.city || '—' }}{{ selectedBusiness()!.state ? ', ' + selectedBusiness()!.state :
+                '' }}
+              </div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Employees</div>
+              <div class="uw-detail-value">{{ selectedBusiness()!.numEmployees || '—' }}</div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Registration</div>
+              <div class="uw-detail-value mono">{{ selectedBusiness()!.companyRegNumber || '—' }}</div>
+            </div>
+          </div>
+          } @else {
+          <div class="uw-section-empty">Business details unavailable</div>
+          }
+        </div>
+
+        <!-- Policy Details Section -->
+        <div class="uw-section">
+          <div class="uw-section-header">
+            <span class="material-symbols-outlined">policy</span>
+            <span>Policy Details</span>
+          </div>
+          <div class="uw-detail-grid">
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Product</div>
+              <div class="uw-detail-value">{{ a.productName }}</div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Coverage Amount</div>
+              <div class="uw-detail-value mono" style="font-weight:700; color: var(--burg-700)">₹{{ a.coverageAmount |
+                number }}</div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Coverage Period</div>
+              <div class="uw-detail-value">{{ a.coverageStartDate }} → {{ a.coverageEndDate }}</div>
+            </div>
+            <div class="uw-detail-item">
+              <div class="uw-detail-label">Application Date</div>
+              <div class="uw-detail-value">{{ a.submittedAt || a.createdAt }}</div>
+            </div>
+            @if (a.riskNotes) {
+            <div class="uw-detail-item uw-detail-full">
+              <div class="uw-detail-label">Risk Notes from Applicant</div>
+              <div class="uw-detail-value uw-risk-note-text">{{ a.riskNotes }}</div>
+            </div>
+            }
+          </div>
+        </div>
+
+        <!-- Documents Section -->
+        <div class="uw-section">
+          <div class="uw-section-header">
+            <span class="material-symbols-outlined">folder_open</span>
+            <span>Uploaded Documents</span>
+            <span class="uw-section-badge">{{ a.documentCount }} files</span>
+          </div>
+          <div class="uw-docs-inline">
+            <app-document-list [applicationId]="a.id"></app-document-list>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="uw-panel-col">
+
+        <!-- Risk Evaluation Section -->
+        <div class="uw-section uw-section-highlight">
+          <div class="uw-section-header">
+            <span class="material-symbols-outlined">analytics</span>
+            <span>Risk Evaluation</span>
+          </div>
+          <div class="uw-form-grid">
+            <div class="form-group">
+              <label class="form-label">Risk Score (0–100)</label>
+              <div class="uw-risk-input-row">
+                <input class="form-control" type="number" min="0" max="100" [(ngModel)]="form.riskScore"
+                  (ngModelChange)="form.riskCategory = getRiskCategoryFromScore($event)">
+                <button class="btn btn-ghost btn-sm" (click)="fetchRisk(a.id)" title="Auto Calculate">
+                  <span class="material-symbols-outlined text-xs">auto_fix_high</span>
+                </button>
+              </div>
+              <!-- Risk Bar -->
+              <div class="uw-risk-bar-wrap">
+                <div class="uw-risk-bar-track">
+                  <div class="uw-risk-bar-fill" [style.width.%]="form.riskScore"
+                    [style.background]="getRiskColor(form.riskScore)">
+                  </div>
+                </div>
+                <div class="uw-risk-bar-labels">
+                  <span>Low</span>
+                  <span>Moderate</span>
+                  <span>High</span>
+                  <span>Very High</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Risk Category</label>
+              <select class="form-control" [(ngModel)]="form.riskCategory">
+                @for (cat of riskCategories; track cat) {
+                <option [value]="cat">{{ cat }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1">
+              <label class="form-label">Risk Notes</label>
+              <textarea class="form-control" [(ngModel)]="form.riskNotes" rows="2"
+                placeholder="Additional risk observations..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Adjustment Section -->
+        <div class="uw-section">
+          <div class="uw-section-header">
+            <span class="material-symbols-outlined">payments</span>
+            <span>Premium Adjustment</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Premium Adjustment %</label>
+            <input class="form-control" type="number" step="0.5" [(ngModel)]="form.premiumAdjustmentPct"
+              placeholder="e.g. 10 for +10%">
+          </div>
+
+          <div class="uw-premium-calc">
+            <div class="uw-premium-row">
+              <span>Base Premium</span>
+              <span class="mono">₹{{ basePremium() | number:'1.0-0' }}</span>
+            </div>
+            <div class="uw-premium-row uw-premium-adj" [class.uw-premium-positive]="form.premiumAdjustmentPct > 0"
+              [class.uw-premium-negative]="form.premiumAdjustmentPct < 0">
+              <span>{{ form.premiumAdjustmentPct >= 0 ? '+' : '' }} Risk Adjustment ({{ form.premiumAdjustmentPct || 0
+                }}%)</span>
+              <span class="mono">{{ form.premiumAdjustmentPct >= 0 ? '+' : '' }}₹{{ riskAdjustmentAmount() |
+                number:'1.0-0' }}</span>
+            </div>
+            <div class="uw-premium-row uw-premium-total">
+              <span>Final Premium</span>
+              <span class="mono">₹{{ finalPremium() | number:'1.0-0' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decision Section -->
+        <div class="uw-section uw-section-decision">
+          <div class="uw-section-header">
+            <span class="material-symbols-outlined">gavel</span>
+            <span>Decision</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Decision</label>
+            <select class="form-control" [(ngModel)]="form.decision">
+              <option value="APPROVED">✅ APPROVE</option>
+              <option value="REJECTED">❌ REJECT</option>
+              <option value="REFER_TO_SENIOR">🔄 REFER TO SENIOR</option>
+            </select>
+          </div>
+
+          @if (form.decision === 'REJECTED') {
+          <div class="uw-rejection-notice">
+            <span class="material-symbols-outlined text-sm">warning</span>
+            Rejection reason is mandatory and will be visible to the customer.
+          </div>
+          }
+
+          <div class="form-group">
+            <label class="form-label">
+              {{ form.decision === 'REJECTED' ? 'Rejection Reason *' : 'Comments' }}
+            </label>
+            <textarea class="form-control" [(ngModel)]="form.comments" rows="3"
+              [class.uw-required-field]="form.decision === 'REJECTED' && !form.comments?.trim()"
+              [placeholder]="form.decision === 'REJECTED' ? 'Provide a clear rejection reason (mandatory)...' : 'Additional comments or observations...'"></textarea>
+          </div>
+
+          <div class="uw-decision-actions">
+            <button class="btn btn-outline" (click)="expandedApp.set(null)">Cancel</button>
+            @if (form.decision === 'APPROVED') {
+            <button class="btn btn-success uw-decision-btn" [disabled]="saving()" (click)="submitDecision()">
+              <span class="material-symbols-outlined text-sm">check_circle</span>
+              {{ saving() ? 'Processing...' : 'Approve Application' }}
+            </button>
+            } @else if (form.decision === 'REJECTED') {
+            <button class="btn btn-danger uw-decision-btn" [disabled]="saving() || !form.comments?.trim()"
+              (click)="submitDecision()">
+              <span class="material-symbols-outlined text-sm">cancel</span>
+              {{ saving() ? 'Processing...' : 'Reject Application' }}
+            </button>
+            } @else {
+            <button class="btn btn-secondary uw-decision-btn" [disabled]="saving()" (click)="submitDecision()">
+              <span class="material-symbols-outlined text-sm">forward</span>
+              {{ saving() ? 'Processing...' : 'Refer to Senior' }}
+            </button>
+            }
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  }
+</div>
+}
+}
+}
+
+<!-- Documents Modal -->
+@if (showDocs()) {
+<div class="modal-overlay" (click)="showDocs.set(false)">
+  <div class="modal" style="max-width:640px; width: 100%" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div style="display:flex; align-items:center; gap:8px">
+        <span class="material-symbols-outlined text-stone-400">attach_file</span>
+        <span class="modal-title">Application Documents — #{{ selectedApp()?.id }}</span>
+      </div>
+      <button class="modal-close" (click)="showDocs.set(false)">×</button>
+    </div>
+    <div class="p-1">
+      <app-document-list [applicationId]="selectedApp()?.id"></app-document-list>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="showDocs.set(false)">Close</button>
+    </div>
+  </div>
+</div>
+}

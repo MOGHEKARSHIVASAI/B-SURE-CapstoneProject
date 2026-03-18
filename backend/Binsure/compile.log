@@ -1,0 +1,639 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< org.hartford:Binsure >------------------------
+[INFO] Building Binsure 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ Binsure ---
+[INFO] Deleting C:\Users\avina\Desktop\FullStack\Binsure\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ Binsure ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ Binsure ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 79 source files with javac [debug parameters release 17] to target\classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[4,35] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: package org.hartford.binsure.entity
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[10,39] cannot find symbol
+  symbol:   class BusinessCustomerRepository
+  location: package org.hartford.binsure.repository
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/mapper/EntityMapper.java:[10,43] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: class org.hartford.binsure.mapper.EntityMapper
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/PremiumPayment.java:[34,13] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: class org.hartford.binsure.entity.PremiumPayment
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[23,13] cannot find symbol
+  symbol:   class BusinessCustomerRepository
+  location: class org.hartford.binsure.service.ClaimService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/PolicyApplicationService.java:[23,13] cannot find symbol
+  symbol:   class BusinessCustomerRepository
+  location: class org.hartford.binsure.service.PolicyApplicationService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/PolicyApplicationService.java:[34,32] variable businessRepository is already defined in class org.hartford.binsure.service.PolicyApplicationService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/PremiumPaymentService.java:[27,13] cannot find symbol
+  symbol:   class BusinessCustomerRepository
+  location: class org.hartford.binsure.service.PremiumPaymentService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/UserService.java:[10,39] cannot find symbol
+  symbol:   class BusinessCustomerRepository
+  location: package org.hartford.binsure.repository
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/UserService.java:[25,24] cannot find symbol
+  symbol:   class BusinessCustomerRepository
+  location: class org.hartford.binsure.service.UserService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/BusinessService.java:[5,35] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: package org.hartford.binsure.entity
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/BusinessService.java:[30,40] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: class org.hartford.binsure.service.BusinessService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/BusinessService.java:[31,37] cannot find symbol
+  symbol:   class CreateBusinessRequest
+  location: package org.hartford.binsure.dto
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/Claim.java:[37,6] cannot find symbol
+  symbol:   class JsonIgnore
+  location: class org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/Policy.java:[37,6] cannot find symbol
+  symbol:   class JsonIgnore
+  location: class org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/PolicyApplication.java:[30,6] cannot find symbol
+  symbol:   class JsonIgnore
+  location: class org.hartford.binsure.entity.PolicyApplication
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[41,64] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[41,84] cannot find symbol
+  symbol:   method getPassword()
+  location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[43,55] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[44,90] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[46,18] cannot find symbol
+  symbol:   method isActive()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[51,56] cannot find symbol
+  symbol:   method getEmail()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[51,73] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[53,28] cannot find symbol
+  symbol:   method builder()
+  location: class org.hartford.binsure.dto.AuthResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[62,47] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[63,74] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[66,20] cannot find symbol
+  symbol:   method getCompanyName()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[66,56] cannot find symbol
+  symbol:   method getCompanyName()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[71,30] cannot find symbol
+  symbol:   method getEmail()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[72,34] cannot find symbol
+  symbol:   method getFirstName()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[73,33] cannot find symbol
+  symbol:   method getLastName()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[74,60] cannot find symbol
+  symbol:   method getPassword()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[75,30] cannot find symbol
+  symbol:   method getPhone()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[76,13] cannot find symbol
+  symbol:   method setRole(org.hartford.binsure.enums.UserRole)
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[77,13] cannot find symbol
+  symbol:   method setActive(boolean)
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[80,9] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[80,41] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[82,20] cannot find symbol
+  symbol:   variable businessCustomerRepository
+  location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[86,40] cannot find symbol
+  symbol:   method getCompanyName()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[87,45] cannot find symbol
+  symbol:   method getCompanyRegNumber()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[88,41] cannot find symbol
+  symbol:   method getIndustryType()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[89,17] cannot find symbol
+  symbol:   method setAnnualRevenue(request.ge[...] null)
+  location: variable business of type org.hartford.binsure.entity.Business
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[89,42] cannot find symbol
+  symbol:   method getAnnualRevenue()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[90,41] cannot find symbol
+  symbol:   method getAnnualRevenue()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[92,41] cannot find symbol
+  symbol:   method getNumEmployees()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[93,41] cannot find symbol
+  symbol:   method getAddressLine1()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[94,41] cannot find symbol
+  symbol:   method getAddressLine2()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[95,33] cannot find symbol
+  symbol:   method getCity()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[96,34] cannot find symbol
+  symbol:   method getState()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[97,39] cannot find symbol
+  symbol:   method getPostalCode()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[98,17] cannot find symbol
+  symbol:   method setCountry(request.ge[...]ndia")
+  location: variable business of type org.hartford.binsure.entity.Business
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[98,36] cannot find symbol
+  symbol:   method getCountry()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[98,67] cannot find symbol
+  symbol:   method getCountry()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[99,34] cannot find symbol
+  symbol:   method getTaxId()
+  location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[102,56] cannot find symbol
+  symbol:   method getEmail()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[102,73] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[104,28] cannot find symbol
+  symbol:   method builder()
+  location: class org.hartford.binsure.dto.AuthResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[113,17] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[114,26] cannot find symbol
+  symbol:   variable businessCustomerRepository
+  location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[114,71] cannot find symbol
+  symbol:   method getId()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[115,26] cannot find symbol
+  symbol:   variable BusinessCustomer
+  location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[118,23] cannot find symbol
+  symbol:   method builder()
+  location: class org.hartford.binsure.dto.UserDTO
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[119,25] cannot find symbol
+  symbol:   method getId()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[121,28] cannot find symbol
+  symbol:   method getEmail()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[122,32] cannot find symbol
+  symbol:   method getFirstName()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[123,31] cannot find symbol
+  symbol:   method getLastName()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[124,28] cannot find symbol
+  symbol:   method getPhone()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[125,27] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[126,31] cannot find symbol
+  symbol:   method isActive()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[127,32] cannot find symbol
+  symbol:   method getCreatedAt()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[128,32] cannot find symbol
+  symbol:   method getUpdatedAt()
+  location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[58,33] incompatible types: inference variable T has incompatible bounds
+    equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+    lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[90,33] incompatible types: inference variable T has incompatible bounds
+    equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+    lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[100,33] incompatible types: inference variable T has incompatible bounds
+    equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+    lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[145,33] incompatible types: inference variable T has incompatible bounds
+    equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+    lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[32,9] cannot find symbol
+  symbol:   class BusinessCustomer
+  location: class org.hartford.binsure.service.ClaimService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[34,58] cannot find symbol
+  symbol:   method getPolicyId()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[35,89] cannot find symbol
+  symbol:   method getPolicyId()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[36,20] cannot find symbol
+  symbol:   method getBusiness()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[38,40] cannot find symbol
+  symbol:   method getPolicyId()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[39,19] cannot find symbol
+  symbol:   method getStatus()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[39,68] cannot find symbol
+  symbol:   method getStatus()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[40,93] cannot find symbol
+  symbol:   method getStatus()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[41,20] cannot find symbol
+  symbol:   method getIncidentDate()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[43,20] cannot find symbol
+  symbol:   method getIncidentDate()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[43,54] cannot find symbol
+  symbol:   method getStartDate()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[45,86] cannot find symbol
+  symbol:   method getStartDate()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[46,20] cannot find symbol
+  symbol:   method getIncidentDate()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[46,53] cannot find symbol
+  symbol:   method getEndDate()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[48,83] cannot find symbol
+  symbol:   method getEndDate()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[51,14] cannot find symbol
+  symbol:   method setClaimNumber(java.lang.String)
+  location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[52,14] cannot find symbol
+  symbol:   method setPolicy(org.hartford.binsure.entity.Policy)
+  location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[53,33] cannot find symbol
+  symbol:   method getBusiness()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[54,38] cannot find symbol
+  symbol:   method getIncidentDate()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[55,14] cannot find symbol
+  symbol:   method setClaimDate(java.time.LocalDate)
+  location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[56,39] cannot find symbol
+  symbol:   method getClaimedAmount()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[57,45] cannot find symbol
+  symbol:   method getIncidentDescription()
+  location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[58,14] cannot find symbol
+  symbol:   method setStatus(org.hartford.binsure.enums.ClaimStatus)
+  location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[61,56] cannot find symbol
+  symbol:   method getBusiness()
+  location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[61,101] cannot find symbol
+  symbol:   method getId()
+  location: variable claim of type org.hartford.binsure.entity.Claim
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.467 s
+[INFO] Finished at: 2026-03-10T21:24:57+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project Binsure: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[4,35] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: package org.hartford.binsure.entity
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[10,39] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomerRepository
+[ERROR]   location: package org.hartford.binsure.repository
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/mapper/EntityMapper.java:[10,43] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: class org.hartford.binsure.mapper.EntityMapper
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/PremiumPayment.java:[34,13] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: class org.hartford.binsure.entity.PremiumPayment
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[23,13] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomerRepository
+[ERROR]   location: class org.hartford.binsure.service.ClaimService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/PolicyApplicationService.java:[23,13] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomerRepository
+[ERROR]   location: class org.hartford.binsure.service.PolicyApplicationService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/PolicyApplicationService.java:[34,32] variable businessRepository is already defined in class org.hartford.binsure.service.PolicyApplicationService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/PremiumPaymentService.java:[27,13] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomerRepository
+[ERROR]   location: class org.hartford.binsure.service.PremiumPaymentService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/UserService.java:[10,39] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomerRepository
+[ERROR]   location: package org.hartford.binsure.repository
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/UserService.java:[25,24] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomerRepository
+[ERROR]   location: class org.hartford.binsure.service.UserService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/BusinessService.java:[5,35] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: package org.hartford.binsure.entity
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/BusinessService.java:[30,40] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: class org.hartford.binsure.service.BusinessService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/BusinessService.java:[31,37] cannot find symbol
+[ERROR]   symbol:   class CreateBusinessRequest
+[ERROR]   location: package org.hartford.binsure.dto
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/Claim.java:[37,6] cannot find symbol
+[ERROR]   symbol:   class JsonIgnore
+[ERROR]   location: class org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/Policy.java:[37,6] cannot find symbol
+[ERROR]   symbol:   class JsonIgnore
+[ERROR]   location: class org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/entity/PolicyApplication.java:[30,6] cannot find symbol
+[ERROR]   symbol:   class JsonIgnore
+[ERROR]   location: class org.hartford.binsure.entity.PolicyApplication
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[41,64] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[41,84] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[43,55] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[44,90] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.AuthLoginRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[46,18] cannot find symbol
+[ERROR]   symbol:   method isActive()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[51,56] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[51,73] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[53,28] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class org.hartford.binsure.dto.AuthResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[62,47] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[63,74] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[66,20] cannot find symbol
+[ERROR]   symbol:   method getCompanyName()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[66,56] cannot find symbol
+[ERROR]   symbol:   method getCompanyName()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[71,30] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[72,34] cannot find symbol
+[ERROR]   symbol:   method getFirstName()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[73,33] cannot find symbol
+[ERROR]   symbol:   method getLastName()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[74,60] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[75,30] cannot find symbol
+[ERROR]   symbol:   method getPhone()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[76,13] cannot find symbol
+[ERROR]   symbol:   method setRole(org.hartford.binsure.enums.UserRole)
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[77,13] cannot find symbol
+[ERROR]   symbol:   method setActive(boolean)
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[80,9] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[80,41] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[82,20] cannot find symbol
+[ERROR]   symbol:   variable businessCustomerRepository
+[ERROR]   location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[86,40] cannot find symbol
+[ERROR]   symbol:   method getCompanyName()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[87,45] cannot find symbol
+[ERROR]   symbol:   method getCompanyRegNumber()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[88,41] cannot find symbol
+[ERROR]   symbol:   method getIndustryType()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[89,17] cannot find symbol
+[ERROR]   symbol:   method setAnnualRevenue(request.ge[...] null)
+[ERROR]   location: variable business of type org.hartford.binsure.entity.Business
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[89,42] cannot find symbol
+[ERROR]   symbol:   method getAnnualRevenue()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[90,41] cannot find symbol
+[ERROR]   symbol:   method getAnnualRevenue()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[92,41] cannot find symbol
+[ERROR]   symbol:   method getNumEmployees()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[93,41] cannot find symbol
+[ERROR]   symbol:   method getAddressLine1()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[94,41] cannot find symbol
+[ERROR]   symbol:   method getAddressLine2()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[95,33] cannot find symbol
+[ERROR]   symbol:   method getCity()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[96,34] cannot find symbol
+[ERROR]   symbol:   method getState()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[97,39] cannot find symbol
+[ERROR]   symbol:   method getPostalCode()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[98,17] cannot find symbol
+[ERROR]   symbol:   method setCountry(request.ge[...]ndia")
+[ERROR]   location: variable business of type org.hartford.binsure.entity.Business
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[98,36] cannot find symbol
+[ERROR]   symbol:   method getCountry()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[98,67] cannot find symbol
+[ERROR]   symbol:   method getCountry()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[99,34] cannot find symbol
+[ERROR]   symbol:   method getTaxId()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.RegisterRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[102,56] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[102,73] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[104,28] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class org.hartford.binsure.dto.AuthResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[113,17] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[114,26] cannot find symbol
+[ERROR]   symbol:   variable businessCustomerRepository
+[ERROR]   location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[114,71] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[115,26] cannot find symbol
+[ERROR]   symbol:   variable BusinessCustomer
+[ERROR]   location: class org.hartford.binsure.service.AuthService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[118,23] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class org.hartford.binsure.dto.UserDTO
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[119,25] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[121,28] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[122,32] cannot find symbol
+[ERROR]   symbol:   method getFirstName()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[123,31] cannot find symbol
+[ERROR]   symbol:   method getLastName()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[124,28] cannot find symbol
+[ERROR]   symbol:   method getPhone()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[125,27] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[126,31] cannot find symbol
+[ERROR]   symbol:   method isActive()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[127,32] cannot find symbol
+[ERROR]   symbol:   method getCreatedAt()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/AuthService.java:[128,32] cannot find symbol
+[ERROR]   symbol:   method getUpdatedAt()
+[ERROR]   location: variable user of type org.hartford.binsure.entity.User
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[58,33] incompatible types: inference variable T has incompatible bounds
+[ERROR]     equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+[ERROR]     lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[90,33] incompatible types: inference variable T has incompatible bounds
+[ERROR]     equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+[ERROR]     lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[100,33] incompatible types: inference variable T has incompatible bounds
+[ERROR]     equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+[ERROR]     lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/controller/ClaimController.java:[145,33] incompatible types: inference variable T has incompatible bounds
+[ERROR]     equality constraints: org.hartford.binsure.dto.response.ClaimResponse
+[ERROR]     lower bounds: org.hartford.binsure.dto.response.BusinessCustomerResponse
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[32,9] cannot find symbol
+[ERROR]   symbol:   class BusinessCustomer
+[ERROR]   location: class org.hartford.binsure.service.ClaimService
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[34,58] cannot find symbol
+[ERROR]   symbol:   method getPolicyId()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[35,89] cannot find symbol
+[ERROR]   symbol:   method getPolicyId()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[36,20] cannot find symbol
+[ERROR]   symbol:   method getBusiness()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[38,40] cannot find symbol
+[ERROR]   symbol:   method getPolicyId()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[39,19] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[39,68] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[40,93] cannot find symbol
+[ERROR]   symbol:   method getStatus()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[41,20] cannot find symbol
+[ERROR]   symbol:   method getIncidentDate()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[43,20] cannot find symbol
+[ERROR]   symbol:   method getIncidentDate()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[43,54] cannot find symbol
+[ERROR]   symbol:   method getStartDate()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[45,86] cannot find symbol
+[ERROR]   symbol:   method getStartDate()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[46,20] cannot find symbol
+[ERROR]   symbol:   method getIncidentDate()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[46,53] cannot find symbol
+[ERROR]   symbol:   method getEndDate()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[48,83] cannot find symbol
+[ERROR]   symbol:   method getEndDate()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[51,14] cannot find symbol
+[ERROR]   symbol:   method setClaimNumber(java.lang.String)
+[ERROR]   location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[52,14] cannot find symbol
+[ERROR]   symbol:   method setPolicy(org.hartford.binsure.entity.Policy)
+[ERROR]   location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[53,33] cannot find symbol
+[ERROR]   symbol:   method getBusiness()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[54,38] cannot find symbol
+[ERROR]   symbol:   method getIncidentDate()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[55,14] cannot find symbol
+[ERROR]   symbol:   method setClaimDate(java.time.LocalDate)
+[ERROR]   location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[56,39] cannot find symbol
+[ERROR]   symbol:   method getClaimedAmount()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[57,45] cannot find symbol
+[ERROR]   symbol:   method getIncidentDescription()
+[ERROR]   location: variable request of type org.hartford.binsure.dto.ClaimRequest
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[58,14] cannot find symbol
+[ERROR]   symbol:   method setStatus(org.hartford.binsure.enums.ClaimStatus)
+[ERROR]   location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[61,56] cannot find symbol
+[ERROR]   symbol:   method getBusiness()
+[ERROR]   location: variable policy of type org.hartford.binsure.entity.Policy
+[ERROR] /C:/Users/avina/Desktop/FullStack/Binsure/src/main/java/org/hartford/binsure/service/ClaimService.java:[61,101] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable claim of type org.hartford.binsure.entity.Claim
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

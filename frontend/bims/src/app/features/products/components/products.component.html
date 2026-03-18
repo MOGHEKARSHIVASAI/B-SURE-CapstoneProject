@@ -1,0 +1,125 @@
+<div class="page-header mb-5 rounded-2xl border border-cream-dark bg-white/80 px-6 py-5 shadow-sm">
+  <div>
+    <div class="page-title">Insurance Products</div>
+    <div class="page-subtitle">Available coverage options</div>
+  </div>
+  @if (auth.isAdmin()) {
+  <button class="btn btn-primary rounded-xl px-4 py-2.5 shadow-md shadow-burgundy/20" (click)="openModal()">+ New
+    Product</button>
+  }
+</div>
+
+@if (svc.error()) {
+<div class="alert alert-error mb-4">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+</div>
+}
+@if (svc.success()) {
+<div class="alert alert-success mb-4">
+  <span class="material-symbols-outlined text-sm">check_circle</span> {{ svc.success() }}
+</div>
+}
+
+@if (svc.loading()) { <div class="loading">
+  <div class="spinner"></div>Loading products...
+</div> }
+@else {
+<div class="products-cards-grid">
+  @for (p of svc.items(); track p.id) {
+  <div
+    class="card flex h-full flex-col rounded-2xl border border-cream-dark bg-white/90 p-5 shadow-sm ring-1 ring-burgundy/5 transition-all duration-200 hover:-translate-y-1 hover:shadow-card">
+    <div class="mb-3 flex items-start justify-between gap-3">
+      <div>
+        <span class="badge badge-blue">{{ p.category }}</span>
+        <div class="mt-2 text-base font-semibold text-stone-900">{{ p.productName }}</div>
+        <div class="mono text-sm text-muted">{{ p.productCode }}</div>
+      </div>
+      <span [class]="'badge ' + (p.isActive ? 'badge-green' : 'badge-gray')">
+        {{ p.isActive ? 'Active' : 'Inactive' }}
+      </span>
+    </div>
+    <div class="mb-3 min-h-16 text-sm text-stone-500">{{ p.description }}</div>
+    <div class="grid grid-cols-2 gap-2 text-xs">
+      <div><span class="text-muted">Base Rate</span>
+        <div class="mono">{{ (p.basePremiumRate * 100).toFixed(2) }}%</div>
+      </div>
+      <div><span class="text-muted">Min Coverage</span>
+        <div class="mono">₹{{ p.minCoverageAmount | number }}</div>
+      </div>
+      <div><span class="text-muted">Max Coverage</span>
+        <div class="mono">₹{{ p.maxCoverageAmount | number }}</div>
+      </div>
+    </div>
+    @if (auth.isCustomer()) {
+    <button class="btn btn-primary mt-4 rounded-lg px-3 py-1.5" [disabled]="!p.isActive" (click)="openApply(p)">Apply
+      Now</button>
+    }
+    @if (auth.isAdmin()) {
+    <div class="actions mt-auto pt-4 flex flex-wrap gap-2">
+      <button class="btn btn-secondary btn-sm rounded-lg" (click)="editProduct(p)">Edit</button>
+      <button class="btn btn-danger btn-sm rounded-lg" (click)="deactivate(p.id)">Deactivate</button>
+    </div>
+    }
+  </div>
+  }
+</div>
+}
+
+@if (showModal()) {
+<div class="modal-overlay bg-black/40 backdrop-blur-sm" (click)="closeModal()">
+  <div class="modal rounded-2xl border border-cream-dark bg-white p-6 shadow-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">{{ editId() ? 'Edit Product' : 'New Product' }}</span>
+      <button class="modal-close" (click)="closeModal()">×</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Product Name</label>
+      <input title="Input" class="form-control" [(ngModel)]="form.productName" placeholder="Enter value">
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Code</label>
+        <input title="Input" class="form-control" [(ngModel)]="form.productCode" placeholder="Enter value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select title="Selection" class="form-control" [(ngModel)]="form.category">
+          <option value="">Select category...</option>
+          <option value="LIABILITY">LIABILITY</option>
+          <option value="PROPERTY">PROPERTY</option>
+          <option value="CYBER">CYBER</option>
+          <option value="HEALTH">HEALTH</option>
+          <option value="VEHICLE">VEHICLE</option>
+          <option value="MARINE">MARINE</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Base Premium Rate (e.g. 0.025)</label>
+        <input title="Input" class="form-control" type="number" step="0.001" [(ngModel)]="form.basePremiumRate"
+          placeholder="Enter value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Min Coverage</label>
+        <input title="Input" class="form-control" type="number" [(ngModel)]="form.minCoverageAmount"
+          placeholder="Enter value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Max Coverage</label>
+        <input title="Input" class="form-control" type="number" [(ngModel)]="form.maxCoverageAmount"
+          placeholder="Enter value">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea title="Input" class="form-control" [(ngModel)]="form.description"
+        placeholder="Enter details"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary rounded-xl" (click)="closeModal()">Cancel</button>
+      <button class="btn btn-primary rounded-xl" [disabled]="svc.loading()" (click)="save()">
+        {{ svc.loading() ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+  </div>
+</div>
+}
