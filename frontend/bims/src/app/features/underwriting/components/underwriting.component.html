@@ -1,0 +1,348 @@
+<!-- Page Header -->
+<div class="page-header glass mb-8">
+  <div class="flex items-center gap-6">
+    <div class="w-16 h-16 rounded-2xl grad-burgundy flex items-center justify-center shadow-xl shadow-burg-200/40 border border-white/20">
+      <span class="material-symbols-outlined text-white text-3xl font-bold">verified_user</span>
+    </div>
+    <div>
+      <h1 class="page-title text-gradient">Underwriting Desk</h1>
+      <p class="page-subtitle">Precision risk evaluation & strategic adjudications for pending portfolios</p>
+    </div>
+  </div>
+  <div class="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white border border-stone-100 shadow-sm">
+    <span class="material-symbols-outlined text-burg-500 animate-pulse">pending_actions</span>
+    <span class="text-sm font-black text-stone-800 tracking-tight">{{ queue().length }} ADJUDICATIONS PENDING</span>
+  </div>
+</div>
+
+@if (loading()) {
+<div class="py-32 flex flex-col items-center justify-center">
+  <div class="w-16 h-16 rounded-full border-4 border-burg-50 border-t-burg-600 animate-spin mb-6"></div>
+  <div class="text-stone-400 font-bold uppercase tracking-widest text-xs">Synchronizing Queue...</div>
+</div>
+} @else {
+  @if (loadError()) { <div class="alert alert-error mb-8">{{ loadError() }}</div> }
+  @if (success()) { <div class="alert alert-success mb-8">{{ success() }}</div> }
+  @if (!queue().length) {
+  <div class="py-40 flex flex-col items-center justify-center bg-stone-50/50 rounded-[3rem] border border-dashed border-stone-200">
+    <div class="w-24 h-24 rounded-3xl bg-white flex items-center justify-center shadow-xl border border-stone-100 mb-8">
+      <span class="material-symbols-outlined text-5xl text-burg-500">task_alt</span>
+    </div>
+    <h3 class="text-2xl font-black text-stone-800 tracking-tight">Zero Backlog</h3>
+    <p class="text-stone-500 font-medium mt-2">All applications have been successfully reviewed.</p>
+  </div>
+  } @else {
+    <div class="flex flex-col gap-6 mb-12">
+      @for (a of queue(); track a.id) {
+      <div class="card-premium group overflow-hidden transition-all duration-500" 
+           [class.ring-2]="expandedApp() === a.id" 
+           [class.ring-burg-200]="expandedApp() === a.id"
+           [class.shadow-2xl]="expandedApp() === a.id">
+        
+        <!-- Quick View Header -->
+        <div class="flex flex-wrap items-center gap-8 px-10 py-8 cursor-pointer bg-white" (click)="expandApplication(a)">
+          <!-- Company Info -->
+          <div class="flex items-center gap-6 flex-1 min-w-[300px]">
+            <div class="w-14 h-14 rounded-2xl bg-stone-50 flex items-center justify-center text-stone-400 group-hover:bg-burg-50 group-hover:text-burg-600 transition-colors">
+              <span class="material-symbols-outlined text-3xl">domain</span>
+            </div>
+            <div>
+              <div class="text-[0.65rem] font-bold text-stone-400 uppercase tracking-widest mb-1">REQ #{{ a.id }} · {{ a.productName }}</div>
+              <div class="text-xl font-black text-stone-800 tracking-tight group-hover:text-burg-800 transition-colors truncate max-w-sm">{{ a.companyName }}</div>
+            </div>
+          </div>
+
+          <!-- Mid: Key Metrics -->
+          <div class="flex items-center gap-10">
+            <div class="text-center">
+              <div class="text-[0.62rem] font-bold text-stone-400 uppercase tracking-widest mb-1">Coverage Limit</div>
+              <div class="text-lg font-black text-stone-800">₹{{ a.coverageAmount | number }}</div>
+            </div>
+            
+            <div class="text-center px-10 border-x border-stone-100">
+               <div class="text-[0.62rem] font-bold text-stone-400 uppercase tracking-widest mb-1">System Risk</div>
+               @if (riskScores()[a.id] !== undefined) {
+               <div class="flex items-center justify-center gap-2">
+                 <div class="w-2 h-2 rounded-full animate-pulse" [style.background]="getRiskColor(riskScores()[a.id])"></div>
+                 <span class="text-lg font-black" [style.color]="getRiskColor(riskScores()[a.id])">{{ riskScores()[a.id] }}%</span>
+               </div>
+               } @else {
+               <span class="text-xs font-bold text-stone-300 uppercase italic">Awaiting calc</span>
+               }
+            </div>
+          </div>
+
+          <!-- Status & Actions -->
+          <div class="flex items-center gap-6">
+            <span [class]="'badge ' + statusClass(a.status) + ' text-[10px] py-1.5 px-3 font-bold'">{{ a.status }}</span>
+            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-stone-50 text-stone-400 transition-transform group-hover:bg-stone-100"
+                 [class.rotate-180]="expandedApp() === a.id">
+              <span class="material-symbols-outlined">expand_more</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Detail Strip -->
+        <div class="px-10 py-4 bg-stone-50/50 border-t border-stone-100 flex flex-wrap items-center gap-8">
+           <div class="flex items-center gap-2 text-xs font-medium text-stone-500">
+             <span class="material-symbols-outlined text-sm">event_repeat</span>
+             {{ a.coverageStartDate }} → {{ a.coverageEndDate }}
+           </div>
+           <div class="flex items-center gap-2 text-xs font-medium text-stone-500 flex-1 truncate">
+             <span class="material-symbols-outlined text-sm">sticky_note_2</span>
+             <span class="truncate">{{ a.riskNotes || 'No specific hazard notes provided by applicant.' }}</span>
+           </div>
+           <div class="flex items-center gap-2">
+              <button class="btn border-stone-200 bg-white text-stone-600 px-4 py-2 rounded-xl text-xs font-bold hover:shadow-md" (click)="fetchRisk(a.id); $event.stopPropagation()">
+                <span class="material-symbols-outlined text-xs mr-2">calculate</span> Score
+              </button>
+              <button class="btn grad-burgundy text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg" (click)="openDocs(a); $event.stopPropagation()">
+                <span class="material-symbols-outlined text-xs mr-2">quick_reference_all</span> Dossier ({{ a.documentCount }})
+              </button>
+           </div>
+        </div>
+
+    <!-- Expanded Review Panel -->
+    @if (expandedApp() === a.id) {
+    <div class="px-10 pb-10 pt-4 border-t border-stone-100 bg-stone-50/20">
+      
+      @if (modalError()) {
+      <div class="flex items-center gap-3 p-5 bg-red-50 border border-red-100 rounded-2xl text-red-700 text-sm mb-8 animate-in fade-in">
+        <span class="material-symbols-outlined text-lg">error_outline</span>
+        <span class="font-medium underline decoration-red-200">{{ modalError() }}</span>
+      </div>
+      }
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <!-- LEFT COLUMN: Dossier -->
+        <div class="flex flex-col gap-8">
+          <!-- Business Context -->
+          <div class="card-premium bg-white p-6 shadow-sm border-stone-100">
+            <div class="flex items-center gap-2 mb-5">
+              <span class="material-symbols-outlined text-burg-500">corporate_fare</span>
+              <span class="text-xs font-black text-stone-800 uppercase tracking-widest">Business Intelligence</span>
+              @if (businessLoading()) {
+                <span class="material-symbols-outlined animate-spin text-xs text-stone-300 ml-auto">sync</span>
+              }
+            </div>
+            
+            @if (selectedBusiness()) {
+            <div class="grid grid-cols-2 gap-6">
+               <div>
+                  <div class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Entity Name</div>
+                  <div class="text-sm font-bold text-stone-800">{{ selectedBusiness()!.companyName }}</div>
+               </div>
+               <div>
+                  <div class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Industry vertical</div>
+                  <div class="flex items-center gap-2 text-sm font-bold text-stone-800">
+                    <span class="material-symbols-outlined text-xs text-stone-400">{{ getIndustryIcon(selectedBusiness()!.industryType || '') }}</span>
+                    {{ selectedBusiness()!.industryType || 'Unspecified' }}
+                  </div>
+               </div>
+               <div>
+                  <div class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Fiscal Scale</div>
+                  <div class="text-sm font-bold text-burg-700 mono">₹{{ (selectedBusiness()!.annualRevenue || 0) | number }}</div>
+               </div>
+               <div>
+                  <div class="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-1">Operational Locale</div>
+                  <div class="text-sm font-bold text-stone-800">{{ selectedBusiness()!.city }}, {{ selectedBusiness()!.state }}</div>
+               </div>
+            </div>
+            } @else {
+               <div class="py-4 text-center text-xs text-stone-300 italic">No supplemental business data retrieved</div>
+            }
+          </div>
+
+          <!-- Documentation Locker -->
+          <div class="card-premium bg-white p-6 shadow-sm border-stone-100">
+            <div class="flex items-center gap-2 mb-5">
+              <span class="material-symbols-outlined text-burg-500">inventory_2</span>
+              <span class="text-xs font-black text-stone-800 uppercase tracking-widest">Evidence Locker</span>
+              <span class="badge badge-stone ml-auto text-[10px]">{{ a.documentCount }} ITEMS</span>
+            </div>
+            <div class="bg-stone-50/50 rounded-2xl p-4 border border-stone-100">
+              <app-document-list [applicationId]="a.id"></app-document-list>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Adjudication -->
+        <div class="flex flex-col gap-8">
+           <!-- AI Underwriting Intelligence -->
+           @if (a.aiRiskScore !== undefined) {
+           <div class="card-premium bg-gradient-to-br from-burg-50 to-white border-burg-100 p-6 shadow-sm relative overflow-hidden">
+              <div class="absolute top-0 right-0 p-3 opacity-5">
+                 <span class="material-symbols-outlined text-5xl text-burg-900">verified_user</span>
+              </div>
+              <div class="flex items-center gap-2 mb-4">
+                 <span class="material-symbols-outlined text-burg-600 text-sm">psychology</span>
+                 <span class="text-[10px] font-bold text-burg-900 uppercase tracking-widest">AI Underwriting Insights</span>
+              </div>
+              
+              <div class="flex gap-4 mb-4">
+                 <div class="flex-1 bg-white/50 p-3 rounded-xl border border-burg-50">
+                    <div class="text-[9px] font-black text-burg-400 uppercase mb-1">AI Risk Score</div>
+                    <div class="text-xl font-black text-burg-900">{{ a.aiRiskScore }}%</div>
+                 </div>
+                 @if (a.recommendedPremium) {
+                 <div class="flex-1 bg-white/50 p-3 rounded-xl border border-burg-50">
+                    <div class="text-[9px] font-black text-burg-400 uppercase mb-1">Rec. Premium</div>
+                    <div class="text-xl font-black text-burg-900">₹{{ a.recommendedPremium | number }}</div>
+                 </div>
+                 }
+              </div>
+
+              <div class="bg-burg-900/5 rounded-xl p-4 border border-burg-100/30">
+                 <div class="text-[11px] font-medium text-burg-950 leading-relaxed">
+                    <span class="font-black text-burg-700 uppercase text-[9px] block mb-1">Gemini Assessment:</span>
+                    "{{ a.aiUnderwritingAnalysis }}"
+                 </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-between">
+                 <div class="text-[8px] font-black text-burg-300 uppercase flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[12px]">security</span>
+                    Automated Risk Analysis Engine
+                 </div>
+                 <button class="btn btn-ghost p-0 text-burg-600 text-[10px] font-bold hover:underline" (click)="applyAiRecommendation(a)">
+                    Apply Analysis
+                 </button>
+              </div>
+           </div>
+           }
+
+           <!-- Risk Meter -->
+           <div class="card-premium bg-white p-6 shadow-sm border-stone-100 grad-burg-subtle">
+             <div class="flex items-center gap-2 mb-6">
+                <span class="material-symbols-outlined text-burg-500">analytics</span>
+                <span class="text-xs font-black text-stone-800 uppercase tracking-widest">Systematic Risk Index</span>
+             </div>
+             
+             <div class="flex items-end justify-between mb-2">
+                <div class="text-4xl font-black tracking-tighter" [style.color]="getRiskColor(form.riskScore)">{{ form.riskScore }}%</div>
+                <div class="badge text-[10px] py-1 px-3" [style.background]="getRiskColor(form.riskScore) + '20'" [style.color]="getRiskColor(form.riskScore)">
+                  {{ form.riskCategory }}
+                </div>
+             </div>
+             
+             <div class="h-3 w-full bg-stone-100 rounded-full overflow-hidden mb-6 flex">
+                <div class="h-full transition-all duration-700 ease-out" [style.width.%]="form.riskScore" [style.background]="getRiskColor(form.riskScore)"></div>
+             </div>
+
+             <div class="grid grid-cols-3 gap-4">
+                <div class="form-group">
+                   <label class="text-[10px] font-black text-stone-400 uppercase mb-2 block">Manual Risk Index</label>
+                   <input title="Manual Risk Score" class="form-control text-sm font-black text-stone-800" type="number" min="0" max="100" [(ngModel)]="form.riskScore"
+                        (ngModelChange)="form.riskCategory = getRiskCategoryFromScore($event)">
+                </div>
+                <div class="form-group">
+                   <label class="text-[10px] font-black text-stone-400 uppercase mb-2 block">Premium Offset %</label>
+                   <input title="Premium Offset Percentage" class="form-control text-sm font-black text-stone-800" type="number" step="0.5" [(ngModel)]="form.premiumAdjustmentPct"
+                        placeholder="+15.5">
+                   <div class="flex gap-1.5 mt-2.5">
+                     <button type="button" (click)="form.premiumAdjustmentPct = 0" class="flex-1 bg-stone-100 hover:bg-stone-200 text-[8px] font-black text-stone-500 py-1.5 rounded-lg transition-colors">BASE</button>
+                     <button type="button" (click)="form.premiumAdjustmentPct = 10" class="flex-1 bg-burg-50 hover:bg-burg-100 text-[8px] font-black text-burg-600 py-1.5 rounded-lg transition-colors">+10%</button>
+                     <button type="button" (click)="form.premiumAdjustmentPct = 25" class="flex-1 bg-burg-100 hover:bg-burg-200 text-[8px] font-black text-burg-700 py-1.5 rounded-lg transition-colors">+25%</button>
+                   </div>
+                </div>
+                <div class="form-group">
+                   <label class="text-[10px] font-black text-stone-400 uppercase mb-2 block">Adjusted Premium</label>
+                   <div class="text-sm font-black text-burg-700 pt-2.5">₹{{ finalPremium() | number }}</div>
+                </div>
+             </div>
+           </div>
+
+           <!-- Final Decision -->
+           <div class="card-premium bg-[#110205] p-8 shadow-2xl border-transparent">
+              <div class="flex items-center gap-2 mb-8">
+                 <span class="material-symbols-outlined text-burg-400">gavel</span>
+                 <span class="text-xs font-black text-white uppercase tracking-widest">Adjudication Decision</span>
+              </div>
+
+              <div class="form-group mb-6">
+                <label class="text-[10px] font-black text-burg-200 uppercase mb-3 block opacity-60">Status Verdict</label>
+                <div class="grid grid-cols-3 gap-2">
+                   <button type="button" class="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl border transition-all"
+                           [class.bg-green-600]="form.decision === 'APPROVED'" 
+                           [class.border-green-600]="form.decision === 'APPROVED'" 
+                           [class.text-white]="form.decision === 'APPROVED'"
+                           [class.bg-stone-800]="form.decision !== 'APPROVED'" 
+                           [class.border-white-10]="form.decision !== 'APPROVED'" 
+                           [class.text-stone-500]="form.decision !== 'APPROVED'"
+                           (click)="form.decision = 'APPROVED'">
+                      <span class="material-symbols-outlined">done_all</span>
+                      <span class="text-[10px] font-black tracking-widest">APPROVE</span>
+                   </button>
+                   <button type="button" class="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl border transition-all"
+                           [class.bg-red-600]="form.decision === 'REJECTED'" 
+                           [class.border-red-600]="form.decision === 'REJECTED'" 
+                           [class.text-white]="form.decision === 'REJECTED'"
+                           [class.bg-stone-800]="form.decision !== 'REJECTED'" 
+                           [class.border-white-10]="form.decision !== 'REJECTED'" 
+                           [class.text-stone-500]="form.decision !== 'REJECTED'"
+                           (click)="form.decision = 'REJECTED'">
+                      <span class="material-symbols-outlined">block</span>
+                      <span class="text-[10px] font-black tracking-widest">REJECT</span>
+                   </button>
+                   <button type="button" class="flex flex-col items-center justify-center gap-2 p-4 rounded-2xl border transition-all"
+                           [class.bg-burg-600]="form.decision === 'REFER_TO_SENIOR'" 
+                           [class.border-burg-600]="form.decision === 'REFER_TO_SENIOR'" 
+                           [class.text-white]="form.decision === 'REFER_TO_SENIOR'"
+                           [class.bg-stone-800]="form.decision !== 'REFER_TO_SENIOR'" 
+                           [class.border-white-10]="form.decision !== 'REFER_TO_SENIOR'" 
+                           [class.text-stone-500]="form.decision !== 'REFER_TO_SENIOR'"
+                           (click)="form.decision = 'REFER_TO_SENIOR'">
+                      <span class="material-symbols-outlined">upgrade</span>
+                      <span class="text-[10px] font-black tracking-widest">REFER</span>
+                   </button>
+                </div>
+              </div>
+
+              <div class="form-group mb-8">
+                 <label class="text-[10px] font-black text-burg-200 uppercase mb-3 block opacity-60">Adjudication Synopsis</label>
+                 <textarea class="form-control bg-white/5 border-white/10 text-white placeholder-white/20 text-sm focus:ring-burg-500/30" rows="3" [(ngModel)]="form.comments"
+                           [placeholder]="form.decision === 'REJECTED' ? 'Mandatory reason for rejection...' : 'Technical findings or risk observations...'"></textarea>
+              </div>
+
+              <button class="w-full py-4 rounded-2xl grad-burgundy text-white font-black text-sm tracking-widest shadow-xl shadow-burg-900 shadow-animate hover:scale-[1.02] flex items-center justify-center gap-3"
+                      [disabled]="saving() || (form.decision === 'REJECTED' && !form.comments?.trim())"
+                      (click)="submitDecision()">
+                @if (saving()) {
+                   <span class="material-symbols-outlined animate-spin">refresh</span>
+                   PROCESSING...
+                } @else {
+                   EXECUTE VERDICT
+                   <span class="material-symbols-outlined text-lg">bolt</span>
+                }
+              </button>
+           </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>
+}
+}
+
+<!-- Documents Modal -->
+@if (showDocs()) {
+<div class="modal-overlay" (click)="showDocs.set(false)">
+  <div class="modal" style="max-width:640px; width: 100%" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div style="display:flex; align-items:center; gap:8px">
+        <span class="material-symbols-outlined text-stone-400">attach_file</span>
+        <span class="modal-title">Application Documents — #{{ selectedApp()?.id }}</span>
+      </div>
+      <button class="modal-close" (click)="showDocs.set(false)">×</button>
+    </div>
+    <div class="p-1">
+      <app-document-list [applicationId]="selectedApp()?.id"></app-document-list>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="showDocs.set(false)">Close</button>
+    </div>
+  </div>
+</div>
+}

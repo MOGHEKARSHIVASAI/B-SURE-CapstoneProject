@@ -1,0 +1,205 @@
+﻿node.exe : - Building...
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (- Build  
+  ing...:String) [], Remot   
+ eException
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+
+Application bundle generation failed. [8.473 seconds]
+
+X [ERROR] NG5002: Opening 
+tag "button" not terminated. 
+[plugin angular-compiler]
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.html:212:19:
+      212 Γöé ...          
+<button class="flex flex-col 
+items-center justify-ce...
+          Γò╡              ~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the 
+template of component 
+UnderwritingComponent.
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.ts:13:15:
+      13 Γöé   templateUrl: '
+./underwriting.component.html
+'
+         Γò╡                ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "button". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.html:218:19:
+      218 Γöé                
+    </button>
+          Γò╡                
+    ~~~~~~~~~
+
+  Error occurs in the 
+template of component 
+UnderwritingComponent.
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.ts:13:15:
+      13 Γöé   templateUrl: '
+./underwriting.component.html
+'
+         Γò╡                ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+
+
+X [ERROR] NG5002: Opening 
+tag "button" not terminated. 
+[plugin angular-compiler]
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.html:219:19:
+      219 Γöé ...          
+<button class="flex flex-col 
+items-center justify-ce...
+          Γò╡              ~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the 
+template of component 
+UnderwritingComponent.
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.ts:13:15:
+      13 Γöé   templateUrl: '
+./underwriting.component.html
+'
+         Γò╡                ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "button". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.html:225:19:
+      225 Γöé                
+    </button>
+          Γò╡                
+    ~~~~~~~~~
+
+  Error occurs in the 
+template of component 
+UnderwritingComponent.
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.ts:13:15:
+      13 Γöé   templateUrl: '
+./underwriting.component.html
+'
+         Γò╡                ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+
+
+X [ERROR] NG5002: Opening 
+tag "button" not terminated. 
+[plugin angular-compiler]
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.html:226:19:
+      226 Γöé ...          
+<button class="flex flex-col 
+items-center justify-ce...
+          Γò╡              ~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the 
+template of component 
+UnderwritingComponent.
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.ts:13:15:
+      13 Γöé   templateUrl: '
+./underwriting.component.html
+'
+         Γò╡                ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "button". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.html:232:19:
+      232 Γöé                
+    </button>
+          Γò╡                
+    ~~~~~~~~~
+
+  Error occurs in the 
+template of component 
+UnderwritingComponent.
+
+    src/app/features/underwri
+ting/components/underwriting.
+component.ts:13:15:
+      13 Γöé   templateUrl: '
+./underwriting.component.html
+'
+         Γò╡                ~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~
+
+

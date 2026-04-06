@@ -1,0 +1,50 @@
+﻿10:19:49.064 [restartedMain] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4003, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@28e3e23a) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@3d5a11e4)
+10:19:49.064 [restartedMain] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4001, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4885959f) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@404e0586)
+10:19:49.064 [restartedMain] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(4002, org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@778bdd87) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@1a3327a3)
+10:19:49.065 [restartedMain] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2004, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@7efe7017) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@4e2c287b)
+10:19:49.065 [restartedMain] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2005, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@67e2b3dc) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@64ef8ebc)
+10:19:49.065 [restartedMain] DEBUG o.h.t.d.sql.spi.DdlTypeRegistry - addDescriptor(2011, org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType@691c34fe) replaced previous registration(org.hibernate.type.descriptor.sql.internal.DdlTypeImpl@46dcb656)
+10:19:53.177 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+10:19:53.528 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table businesses 
+       modify column country VARCHAR(100) DEFAULT 'India' not null
+10:19:53.934 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table claims 
+       modify column status enum ('APPEALED','APPROVED','ASSIGNED','DRAFT','REJECTED','SETTLED','SUBMITTED','UNDER_INVESTIGATION') not null
+10:19:54.013 [restartedMain] DEBUG org.hibernate.SQL - 
+    alter table policy_applications 
+       modify column status enum ('APPROVED','CUSTOMER_ACCEPTED','CUSTOMER_REJECTED','DRAFT','POLICY_ISSUED','REJECTED','SUBMITTED','UNDER_REVIEW') not null
+10:19:54.391 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+10:19:55.579 [restartedMain] DEBUG o.h.b.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+10:19:56.077 [restartedMain] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+10:19:56.862 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+10:19:59.107 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+10:20:00.367 [restartedMain] DEBUG o.s.s.web.DefaultSecurityFilterChain - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+10:20:01.597 [restartedMain] WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+10:20:01.669 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+10:20:03.812 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+10:20:03.822 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+10:20:03.851 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+10:20:03.902 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+10:20:03.960 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8050 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8050 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  34.041 s
+[INFO] Finished at: 2026-03-26T10:20:04+05:30
+[INFO] ------------------------------------------------------------------------

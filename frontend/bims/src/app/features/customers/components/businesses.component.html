@@ -1,0 +1,277 @@
+<!-- ── PAGE HEADER ─────────────────────────────────────── -->
+<div class="page-header mb-5">
+    <div>
+        <div class="page-title">My Businesses</div>
+        <div class="page-subtitle">Manage your registered companies and their insurance policies </div>
+
+    </div>
+
+    @if (svc.error()) {
+    <div class="alert alert-error mb-4">
+        <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+    </div>
+    }
+    @if (svc.success()) {
+    <div class="alert alert-success mb-4">
+        <span class="material-symbols-outlined text-sm">check_circle</span> {{ svc.success() }}
+    </div>
+    }
+    @if (auth.isCustomer()) {
+    <button class="btn btn-primary shadow-md shadow-burgundy/20" (click)="openCreate()">
+        <span class="material-symbols-outlined text-base">add</span> Add Business
+    </button>
+    }
+
+
+</div>
+<!-- === MAIN CARDS GRID === -->
+@if (svc.loading()) {
+<div class="loading">
+    <div class="spinner"></div> Loading businesses...
+</div>
+}
+
+@if (!svc.loading()) {
+
+<!-- ── EMPTY STATE ───────────────────────────────────── -->
+@if (svc.items().length === 0) {
+<div class="flex flex-col items-center justify-center py-16 px-8 rounded-xl border-2 border-dashed text-center"
+    style="border-color:var(--burg-200);background:var(--burg-50)">
+    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style="background:var(--burg-100)">
+        <span class="material-symbols-outlined text-3xl" style="color:var(--burg-400)">business_center</span>
+    </div>
+    <h3 class="font-bold text-base mb-1" style="font-family:'Space Grotesk',sans-serif;color:var(--text-1)">
+        No businesses registered yet
+    </h3>
+    <p class="text-sm mb-5" style="color:var(--text-3)">Register your company to apply for insurance products</p>
+    <button class="btn btn-primary" (click)="openCreate()">
+        <span class="material-symbols-outlined text-base">add_business</span>
+        Register Your First Business
+    </button>
+</div>
+}
+
+<!-- ── BUSINESS CARDS ────────────────────────────────── -->
+@if (svc.items().length > 0) {
+<div class="flex flex-col gap-4">
+    @for (b of svc.items(); track b.id) {
+    <div class="rounded-xl overflow-hidden border transition-all duration-200 hover:shadow-md"
+        style="border-color:var(--border);background:var(--surface);box-shadow:var(--sh-sm)">
+
+        <!-- Card Header Strip -->
+        <div class="flex items-center justify-between px-5 py-3"
+            style="background:linear-gradient(90deg,var(--burg-50) 0%,var(--surface) 100%);border-bottom:1px solid var(--border)">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0"
+                    style="background:linear-gradient(135deg,var(--burg-500),var(--burg-800));color:var(--cream-50);font-family:'Space Grotesk',sans-serif;box-shadow:var(--burg-sh)">
+                    {{ b.companyName.charAt(0).toUpperCase() }}
+                </div>
+                <div>
+                    <div class="font-bold"
+                        style="font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--text-1)">
+                        {{ b.companyName }}
+                    </div>
+                    <div class="text-xs mono" style="color:var(--text-3)">
+                        {{ b.companyRegNumber || 'No Registration Number' }}
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="btn btn-secondary btn-sm" (click)="openEdit(b)">
+                    <span class="material-symbols-outlined text-xs">edit</span> Edit
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="delete(b.id)">
+                    <span class="material-symbols-outlined text-xs">delete</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Business Details Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x" style="border-bottom:1px solid var(--border)">
+            <div class="px-5 py-3">
+                <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:var(--text-3)">
+                    Industry
+                </div>
+                <div class="font-semibold text-sm" style="color:var(--text-1)">{{ b.industryType || '—' }}</div>
+            </div>
+            <div class="px-5 py-3">
+                <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:var(--text-3)">
+                    Employees
+                </div>
+                <div class="font-semibold text-sm flex items-center gap-1" style="color:var(--text-1)">
+                    <span class="material-symbols-outlined text-sm" style="color:var(--burg-400)">group</span>
+                    {{ b.numEmployees | number }}
+                </div>
+            </div>
+            <div class="px-5 py-3">
+                <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:var(--text-3)">Annual
+                    Revenue</div>
+                <div class="font-bold text-sm mono" style="color:var(--burg-700)">₹{{ b.annualRevenue | number }}
+                </div>
+            </div>
+            <div class="px-5 py-3">
+                <div class="text-xs font-semibold uppercase tracking-wider mb-1" style="color:var(--text-3)">
+                    Location
+                </div>
+                <div class="font-semibold text-sm flex items-center gap-1" style="color:var(--text-1)">
+                    <span class="material-symbols-outlined text-sm" style="color:var(--burg-400)">location_on</span>
+                    {{ b.city }}{{ b.state ? ', ' + b.state : '' }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Tax / GST row -->
+        @if (b.taxId) {
+        <div class="px-5 py-2.5 flex items-center gap-2"
+            style="border-bottom:1px solid var(--border);background:var(--cream-50)">
+            <span class="material-symbols-outlined text-sm" style="color:var(--text-3)">receipt_long</span>
+            <span class="text-xs" style="color:var(--text-3)">GST / Tax ID</span>
+            <span class="text-xs font-semibold mono ml-1" style="color:var(--text-1)">{{ b.taxId }}</span>
+        </div>
+        }
+
+        <!-- Policies accordion -->
+        <div class="px-5 py-3">
+            <button class="flex items-center gap-2 text-sm font-semibold transition-colors"
+                style="color:var(--burg-600)" (click)="togglePolicies(b.id)">
+                <span class="material-symbols-outlined text-sm">
+                    {{ expandedBusinessId() === b.id ? 'expand_less' : 'expand_more' }}
+                </span>
+                {{ expandedBusinessId() === b.id ? 'Hide Policies' : 'View Policies' }}
+                @if (getPolicies(b.id).length > 0) {
+                <span class="ml-1 badge badge-ruby" style="font-size:0.6rem">{{ getPolicies(b.id).length }}</span>
+                }
+            </button>
+
+            @if (expandedBusinessId() === b.id) {
+            <div class="mt-3">
+                @if (getPolicies(b.id).length === 0) {
+                <div class="flex items-center gap-2 px-4 py-3 rounded-lg text-sm italic"
+                    style="background:var(--burg-50);color:var(--text-3);border:1px dashed var(--burg-200)">
+                    <span class="material-symbols-outlined text-sm" style="color:var(--burg-300)">info</span>
+                    No active policies for this business yet.
+                </div>
+                } @else {
+                <div class="flex flex-col gap-2">
+                    @for (pol of getPolicies(b.id); track pol.id) {
+                    <div class="flex items-center justify-between px-4 py-3 rounded-lg border transition-colors"
+                        style="background:var(--cream-50);border-color:var(--border)"
+                        onmouseover="this.style.background='#FBF0F2';this.style.borderColor='#E0A0AE'"
+                        onmouseout="this.style.background='var(--cream-50)';this.style.borderColor='var(--border)'">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                                style="background:var(--burg-100)">
+                                <span class="material-symbols-outlined text-sm"
+                                    style="color:var(--burg-600)">policy</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-sm" style="color:var(--text-1)">{{ pol.productName }}
+                                </div>
+                                <div class="text-xs mono" style="color:var(--text-3)">{{ pol.policyNumber }}</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-bold text-sm mono" style="color:var(--burg-700)">₹{{ pol.coverageAmount
+                                |
+                                number }}</div>
+                            <span
+                                [class]="'badge ' + (pol.status === 'ACTIVE' ? 'badge-green' : pol.status === 'SUSPENDED' ? 'badge-yellow' : 'badge-red')">
+                                {{ pol.status }}
+                            </span>
+                        </div>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+            }
+        </div>
+
+    </div>
+    }
+</div>
+}
+}
+
+<!-- ── BUSINESS FORM MODAL ──────────────────────────────── -->
+@if (showForm()) {
+<div class="modal-overlay" (click)="showForm.set(false)">
+    <div class="modal" style="max-width:600px" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--burg-100)">
+                    <span class="material-symbols-outlined text-sm" style="color:var(--burg-600)">business</span>
+                </div>
+                <span class="modal-title">{{ editingId() ? 'Edit Business Profile' : 'Register New Business'
+                    }}</span>
+            </div>
+            <button class="modal-close" (click)="showForm.set(false)">×</button>
+        </div>
+
+        @if (svc.error()) {
+        <div class="alert alert-error">
+            <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+        </div>
+        }
+
+        <div class="section-label">Business Details</div>
+        <div class="form-grid gap-3">
+            <div class="form-group">
+                <label class="form-label">Company Name *</label>
+                <input class="form-control" [(ngModel)]="formData.companyName" placeholder="e.g. Acme Corp Pvt Ltd">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Industry Type</label>
+                <input class="form-control" [(ngModel)]="formData.industryType" placeholder="e.g. Manufacturing, IT...">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Annual Revenue (₹)</label>
+                <input type="number" class="form-control" [(ngModel)]="formData.annualRevenue" placeholder="5000000">
+            </div>
+            <div class="form-group">
+                <label class="form-label">No. of Employees</label>
+                <input type="number" class="form-control" [(ngModel)]="formData.numEmployees" placeholder="50">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Registration Number</label>
+                <input class="form-control" [(ngModel)]="formData.companyRegNumber" placeholder="CIN/REG12345">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Tax ID / GST</label>
+                <input class="form-control" [(ngModel)]="formData.taxId" placeholder="27AXXXX0000A1Z5">
+            </div>
+        </div>
+
+        <div class="section-label mt-2">Contact Address</div>
+        <div class="form-grid gap-3">
+            <div class="form-group full-col">
+                <label class="form-label">Address Line 1</label>
+                <input class="form-control" [(ngModel)]="formData.addressLine1" placeholder="Plot no., Street, Area">
+            </div>
+            <div class="form-group">
+                <label class="form-label">City</label>
+                <input class="form-control" [(ngModel)]="formData.city" placeholder="Mumbai">
+            </div>
+            <div class="form-group">
+                <label class="form-label">State</label>
+                <input class="form-control" [(ngModel)]="formData.state" placeholder="Maharashtra">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Postal Code</label>
+                <input class="form-control" [(ngModel)]="formData.postalCode" placeholder="400001">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-outline" (click)="showForm.set(false)">Cancel</button>
+            <button class="btn btn-primary" [disabled]="svc.loading()" (click)="save()">
+                @if (svc.loading()) {
+                <span class="spinner"
+                    style="border-top-color:var(--cream-50);border-color:rgba(250,246,240,0.25)"></span>
+                }
+                {{ svc.loading() ? 'Saving...' : (editingId() ? 'Update Business' : 'Register Business') }}
+            </button>
+        </div>
+    </div>
+</div>
+}

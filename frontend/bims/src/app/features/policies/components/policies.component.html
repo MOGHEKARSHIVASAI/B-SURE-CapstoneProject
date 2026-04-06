@@ -1,0 +1,299 @@
+<!-- ── PAGE HEADER ───────────────────────────────── -->
+<div class="page-header mb-5">
+  <div>
+    <div class="page-title">Policies</div>
+    <div class="page-subtitle">{{ auth.isCustomer() ? 'Your active insurance policies' : 'All issued policies in the
+      system' }}</div>
+  </div>
+  @if (auth.isAdmin() || auth.isUnderwriter()) {
+  <button class="btn btn-primary shadow-md shadow-burgundy/20" (click)="openIssue()">
+    Issue New Policy
+  </button>
+  }
+</div>
+
+@if (svc.error()) {
+<div class="alert alert-error mb-4">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+</div>
+}
+@if (svc.success()) {
+<div class="alert alert-success mb-4">
+  <span class="material-symbols-outlined text-sm">check_circle</span> {{ svc.success() }}
+</div>
+}
+
+<!-- ── LOADING ───────────────────────────────────── -->
+@if (svc.loading()) {
+<div class="loading">
+  <div class="spinner"></div> Loading policies...
+</div>
+} @else {
+
+<!-- ── SUMMARY STRIPS (customer) ─────────────────  -->
+@if (auth.isCustomer() && svc.items().length > 0) {
+<div class="grid grid-cols-3 gap-4 mb-5">
+  <div class="rounded-xl border px-5 py-4 flex items-center gap-3"
+    style="background:var(--surface);border-color:var(--border);box-shadow:var(--sh-sm)">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:var(--burg-100)">
+      <span class="material-symbols-outlined text-lg" style="color:var(--burg-600)">policy</span>
+    </div>
+    <div>
+      <div class="text-xs font-semibold uppercase tracking-wide" style="color:var(--text-3)">Total Policies</div>
+      <div class="font-bold text-lg" style="font-family:'Space Grotesk',sans-serif;color:var(--burg-700)">
+        {{ svc.items().length }}
+      </div>
+    </div>
+  </div>
+  <div class="rounded-xl border px-5 py-4 flex items-center gap-3"
+    style="background:var(--surface);border-color:var(--border);box-shadow:var(--sh-sm)">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#EDF5EF">
+      <span class="material-symbols-outlined text-lg" style="color:#4A7C5A">check_circle</span>
+    </div>
+    <div>
+      <div class="text-xs font-semibold uppercase tracking-wide" style="color:var(--text-3)">Active</div>
+      <div class="font-bold text-lg" style="font-family:'Space Grotesk',sans-serif;color:#4A7C5A">
+        {{ activeCount() }}
+      </div>
+    </div>
+  </div>
+  <div class="rounded-xl border px-5 py-4 flex items-center gap-3"
+    style="background:var(--surface);border-color:var(--border);box-shadow:var(--sh-sm)">
+    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:var(--burg-50)">
+      <span class="material-symbols-outlined text-lg" style="color:var(--burg-500)">attach_money</span>
+    </div>
+    <div>
+      <div class="text-xs font-semibold uppercase tracking-wide" style="color:var(--text-3)">Total Coverage</div>
+      <div class="font-bold text-base mono" style="color:var(--burg-700)">
+        ₹{{ totalCoverage() | number }}
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ── TABLE or CARDS VIEW ──────────────────────── -->
+@if (!svc.items().length) {
+<div class="flex flex-col items-center justify-center py-16 px-8 rounded-xl border-2 border-dashed text-center"
+  style="border-color:var(--burg-200);background:var(--burg-50)">
+  <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style="background:var(--burg-100)">
+    <span class="material-symbols-outlined text-3xl" style="color:var(--burg-400)">policy</span>
+  </div>
+  <h3 class="font-bold text-base mb-1" style="font-family:'Space Grotesk',sans-serif;color:var(--text-1)">
+    No policies found
+  </h3>
+  <p class="text-sm" style="color:var(--text-3)">
+    {{ auth.isCustomer() ? 'Apply for an insurance product to get your first policy.' : 'No policies have been issued
+    yet.' }}
+  </p>
+</div>
+} @else {
+<div class="card" style="padding:0;overflow:hidden">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Policy Number</th>
+          <th>Business</th>
+          <th>Product</th>
+          <th>Coverage</th>
+          <th>Premium / yr</th>
+          <th>Period</th>
+          <th>Status</th>
+          @if (auth.isAdmin()) { <th>Actions</th> }
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of svc.items(); track p.id) {
+        <tr>
+          <!-- Policy number with icon -->
+          <td>
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
+                style="background:var(--burg-100)">
+                <span class="material-symbols-outlined text-xs" style="color:var(--burg-600)">policy</span>
+              </div>
+              <span class="mono text-xs font-semibold" style="color:var(--text-1)">{{ p.policyNumber }}</span>
+            </div>
+          </td>
+
+          <!-- Business -->
+          <td>
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0"
+                style="background:var(--cream-200);color:var(--burg-700);font-family:'Space Grotesk',sans-serif">
+                {{ p.companyName.charAt(0) }}
+              </div>
+              <span class="font-semibold text-sm" style="color:var(--text-1)">{{ p.companyName }}</span>
+            </div>
+          </td>
+
+          <!-- Product -->
+          <td class="text-sm" style="color:var(--text-2)">{{ p.productName }}</td>
+
+          <!-- Coverage -->
+          <td>
+            <span class="font-bold mono text-sm" style="color:var(--burg-700)">₹{{ p.coverageAmount | number }}</span>
+          </td>
+
+          <!-- Premium -->
+          <td>
+            <span class="mono text-sm" style="color:var(--text-2)">₹{{ p.annualPremium | number }}</span>
+          </td>
+
+          <!-- Period -->
+          <td>
+            <div class="text-xs" style="color:var(--text-3)">
+              <div class="flex items-center gap-1 mb-0.5">
+                <span class="material-symbols-outlined" style="font-size:0.75rem">calendar_today</span>
+                {{ p.startDate }}
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined" style="font-size:0.75rem">event</span>
+                {{ p.endDate }}
+              </div>
+            </div>
+          </td>
+
+          <!-- Status -->
+          <td>
+            <span [class]="'badge ' + statusClass(p.status)">
+              <span class="w-1.5 h-1.5 rounded-full inline-block mr-1"
+                [style.background]="p.status==='ACTIVE'?'#4A7C5A':p.status==='SUSPENDED'?'#7A5A1A':'#7A1C35'"></span>
+              {{ p.status }}
+            </span>
+          </td>
+
+          <!-- Admin Actions -->
+          @if (auth.isAdmin()) {
+          <td>
+            <div class="actions">
+              @if (p.status === 'ACTIVE') {
+              <button class="btn btn-secondary btn-sm" (click)="suspend(p.id)">
+                <span class="material-symbols-outlined text-xs">pause_circle</span> Suspend
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="openCancel(p)">
+                <span class="material-symbols-outlined text-xs">cancel</span> Cancel
+              </button>
+              }
+              @if (p.status === 'SUSPENDED') {
+              <button class="btn btn-success btn-sm" (click)="reactivate(p.id)">
+                <span class="material-symbols-outlined text-xs">play_circle</span> Reactivate
+              </button>
+              }
+            </div>
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+}
+}
+
+<!-- ── ISSUE POLICY MODAL ──────────────────────────── -->
+@if (showIssue()) {
+<div class="modal-overlay" (click)="showIssue.set(false)">
+  <div class="modal" style="max-width:480px" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--burg-100)">
+          <span class="material-symbols-outlined text-sm" style="color:var(--burg-600)">policy</span>
+        </div>
+        <span class="modal-title">Issue Policy</span>
+      </div>
+      <button class="modal-close" (click)="showIssue.set(false)">×</button>
+    </div>
+
+    <div class="alert alert-info mb-3">
+      <span class="material-symbols-outlined text-sm">info</span>
+      Only applications with <strong>CUSTOMER_ACCEPTED</strong> status can be converted to a policy.
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Select Application</label>
+      <select title="Application" class="form-control" [(ngModel)]="issueAppId">
+        <option value="">Select application...</option>
+        @for (a of acceptedApps(); track a.id) {
+        <option [value]="a.id">#{{ a.id }} — {{ a.companyName }} ({{ a.productName }})</option>
+        }
+      </select>
+    </div>
+
+    @if (selectedIssueApp()?.assignedUnderwriterId) {
+    <div class="alert alert-success">
+      <span class="material-symbols-outlined text-sm">check_circle</span>
+      Using assigned underwriter ID: <strong>{{ selectedIssueApp()!.assignedUnderwriterId }}</strong>
+    </div>
+    }
+
+    <div class="form-group">
+      <label class="form-label">Underwriter <span class="normal-case font-normal" style="color:var(--text-3)">(fallback
+          if no assignment)</span></label>
+      <select title="Underwriter" class="form-control" [(ngModel)]="issueUwId">
+        <option value="">Select underwriter...</option>
+        @for (u of underwriters(); track u.id) {
+        <option [value]="u.underwriterId || u.id">{{ u.firstName }} {{ u.lastName }}</option>
+        }
+      </select>
+    </div>
+
+    @if (issueError()) {
+    <div class="alert alert-error">
+      <span class="material-symbols-outlined text-sm">error_outline</span> {{ issueError() }}
+    </div>
+    }
+
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="showIssue.set(false)">Cancel</button>
+      <button class="btn btn-primary" [disabled]="svc.loading()" (click)="issue()">
+        @if (svc.loading()) {
+        <span class="spinner" style="border-top-color:var(--cream-50);border-color:rgba(250,246,240,0.25)"></span>
+        }
+        {{ svc.loading() ? 'Issuing...' : 'Issue Policy' }}
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- ── CANCEL POLICY MODAL ──────────────────────────── -->
+@if (showCancel()) {
+<div class="modal-overlay" (click)="showCancel.set(false)">
+  <div class="modal" style="max-width:440px" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--burg-50)">
+          <span class="material-symbols-outlined text-sm" style="color:var(--burg-600)">cancel</span>
+        </div>
+        <span class="modal-title">Cancel Policy</span>
+      </div>
+      <button class="modal-close" (click)="showCancel.set(false)">×</button>
+    </div>
+
+    <!-- Policy number highlight -->
+    <div class="flex items-center gap-2 px-4 py-3 rounded-lg mb-4"
+      style="background:var(--burg-50);border:1px solid var(--burg-200)">
+      <span class="material-symbols-outlined text-sm" style="color:var(--burg-500)">policy</span>
+      <span class="font-semibold text-sm mono" style="color:var(--burg-700)">{{ cancelTarget()?.policyNumber }}</span>
+      <span class="text-sm ml-1" style="color:var(--text-2)">— {{ cancelTarget()?.companyName }}</span>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Cancellation Reason</label>
+      <textarea title="Reason" class="form-control" [(ngModel)]="cancelReason"
+        placeholder="Describe the reason for cancelling this policy..."></textarea>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="showCancel.set(false)">Go Back</button>
+      <button class="btn btn-danger" (click)="cancel()">
+        <span class="material-symbols-outlined text-base">cancel</span>
+        Cancel Policy
+      </button>
+    </div>
+  </div>
+</div>
+}

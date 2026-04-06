@@ -1,0 +1,47 @@
+2026-04-02T01:22:23.484+05:30  WARN 40268 --- [Binsure] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10h13m15s409ms718µs900ns).
+2026-04-02T10:44:22.989+05:30  WARN 40268 --- [Binsure] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9h22m2s938ms723µs100ns).
+2026-04-02T10:44:50.366+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/underwriting/assigned
+2026-04-02T10:44:50.364+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications/user/count
+2026-04-02T10:44:50.366+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications/user
+2026-04-02T10:44:50.636+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/underwriting/assigned
+2026-04-02T10:44:50.653+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications/user
+2026-04-02T10:44:50.655+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications/user/count
+2026-04-02T10:44:51.041+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:51.041+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:51.041+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:51.221+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:51.221+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:51.221+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:51.880+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-04-02T10:44:51.882+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-04-02T10:44:51.882+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-04-02T10:44:51.884+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:51.884+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:51.884+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:51.885+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:51.887+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-2] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:51.884+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:57.123+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications/user/count
+2026-04-02T10:44:57.126+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications/user
+2026-04-02T10:44:57.127+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/underwriting/queue
+2026-04-02T10:44:57.151+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:57.166+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:57.164+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:57.170+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/underwriting/queue
+2026-04-02T10:44:57.172+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:57.172+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-04-02T10:44:57.173+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:57.178+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-04-02T10:44:57.179+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:57.181+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:57.183+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-3] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:57.186+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:57.193+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:44:57.209+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-04-02T10:44:57.214+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-04-02T10:44:57.217+05:30 DEBUG 40268 --- [Binsure] [http-nio-8050-exec-10] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-04-02T10:49:51.334+05:30  INFO 40268 --- [Binsure] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-02T10:49:51.530+05:30  INFO 40268 --- [Binsure] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-04-02T10:49:52.536+05:30  INFO 40268 --- [Binsure] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-02T10:49:52.715+05:30  INFO 40268 --- [Binsure] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-02T10:49:52.812+05:30  INFO 40268 --- [Binsure] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

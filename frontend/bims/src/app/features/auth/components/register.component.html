@@ -1,0 +1,204 @@
+<div class="min-h-screen bg-[#FAF6F0] flex flex-col items-center py-12 px-4 relative overflow-hidden">
+  <!-- Decorative background elements -->
+  <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#98234008] blur-[120px]"></div>
+  <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#98234005] blur-[120px]"></div>
+
+  <!-- Back Link -->
+  <div class="w-full max-w-4xl mb-8 flex justify-between items-center z-10">
+    <a routerLink="/" class="flex items-center gap-2 text-[#A8958A] hover:text-[#7A1C35] font-semibold transition-colors text-sm group">
+      <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform">arrow_back</span>
+      Back to Home
+    </a>
+    <div class="text-sm font-medium text-[#A8958A]">
+      Already have an account? <a routerLink="/login" class="text-[#7A1C35] font-bold hover:underline">Sign in</a>
+    </div>
+  </div>
+
+  <div class="w-full max-w-4xl bg-white rounded-[2rem] shadow-2xl shadow-[#1A120E15] border border-[#EAE0D8] overflow-hidden z-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <!-- Card Header / Banner -->
+    <div class="bg-[#1A120E] p-10 relative overflow-hidden">
+      <img src="/assets/auth-bg.png" alt="B-SURE Hero" class="absolute inset-0 w-full h-full object-cover opacity-20">
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <img src="/assets/bsure-logo.png" alt="B-SURE" class="h-10 w-auto mb-6">
+          <h2 style="font-family:'Space Grotesk',sans-serif" class="text-3xl font-extrabold text-white tracking-tight">
+            Register Your Business
+          </h2>
+          <p class="text-[#D8CAC0] text-sm mt-2 max-w-md">
+            Join B-SURE to access premium insurance coverage and smart risk management tailored for your business needs.
+          </p>
+        </div>
+        <div class="hidden md:flex flex-col items-end">
+          <div class="text-[#E0A0AE] text-3xl font-black opacity-40">B-SURE</div>
+          <div class="text-white text-xs font-bold tracking-widest uppercase opacity-60">Verified Enrollment</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="p-8 md:p-12">
+      
+      @if (auth.error()) {
+      <div class="flex items-center gap-3 p-4 bg-[#FBF0F2] border border-[#F2D5DB] rounded-xl text-[#7A1C35] text-sm mb-8 animate-in fade-in duration-300">
+        <span class="material-symbols-outlined text-base">error_outline</span>
+        {{ auth.error() }}
+      </div>
+      }
+      @if (auth.success()) {
+      <div class="flex items-center gap-3 p-4 bg-[#EDF5EF] border border-[rgba(74,124,90,0.25)] rounded-xl text-[#4A7C5A] text-sm mb-8 animate-in fade-in duration-300">
+        <span class="material-symbols-outlined text-base">check_circle</span>
+        {{ auth.success() }}
+      </div>
+      }
+
+      <!-- Step 1: Personal -->
+      <div class="mb-10">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-[#FBF0F2] flex items-center justify-center">
+            <span class="material-symbols-outlined text-[#7A1C35] text-xl">person</span>
+          </div>
+          <h3 style="font-family:'Space Grotesk',sans-serif" class="text-xl font-bold text-[#1A120E]">Personal Information</h3>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">First Name</label>
+            <input [(ngModel)]="form.firstName" placeholder="John" class="bs-input" id="reg-firstname">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Last Name</label>
+            <input [(ngModel)]="form.lastName" placeholder="Doe" class="bs-input" id="reg-lastname">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Work Email</label>
+            <input type="email" [(ngModel)]="form.email" placeholder="john@company.com" class="bs-input" id="reg-email">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Secure Password</label>
+            <input type="password" [(ngModel)]="form.password" placeholder="••••••••" class="bs-input" id="reg-password">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Phone Number</label>
+            <input [(ngModel)]="form.phone" placeholder="+91 98765 43210" class="bs-input" id="reg-phone">
+          </div>
+        </div>
+      </div>
+
+      <div class="h-px bg-gradient-to-r from-transparent via-[#EAE0D8] to-transparent my-10"></div>
+
+      <!-- Step 2: Business -->
+      <div class="mb-10">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-[#FAF6F0] flex items-center justify-center">
+            <span class="material-symbols-outlined text-[#7A1C35] text-xl">business_center</span>
+          </div>
+          <h3 style="font-family:'Space Grotesk',sans-serif" class="text-xl font-bold text-[#1A120E]">Business Details</h3>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2 md:col-span-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Company Name</label>
+            <input [(ngModel)]="form.companyName" placeholder="Acme Corporation Pvt Ltd" class="bs-input" id="reg-company">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Registration Number</label>
+            <input [(ngModel)]="form.companyRegNumber" placeholder="CIN/REG12345" class="bs-input" id="reg-regnumber">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Industry Type</label>
+            <input [(ngModel)]="form.industryType" placeholder="Technology, Healthcare, etc." class="bs-input" id="reg-industry">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Annual Revenue (₹)</label>
+            <input type="number" [(ngModel)]="form.annualRevenue" placeholder="5,000,000" class="bs-input font-mono" id="reg-revenue">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">No. of Employees</label>
+            <input type="number" [(ngModel)]="form.numEmployees" placeholder="50" class="bs-input" id="reg-employees">
+          </div>
+          <div class="space-y-2 md:col-span-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Tax ID / GST Information</label>
+            <input [(ngModel)]="form.taxId" placeholder="27AXXXX0000A1Z5" class="bs-input font-mono" id="reg-taxid">
+          </div>
+        </div>
+      </div>
+
+      <div class="h-px bg-gradient-to-r from-transparent via-[#EAE0D8] to-transparent my-10"></div>
+
+      <!-- Step 3: Address -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-[#F3EDE5] flex items-center justify-center">
+            <span class="material-symbols-outlined text-[#7A1C35] text-xl">location_on</span>
+          </div>
+          <h3 style="font-family:'Space Grotesk',sans-serif" class="text-xl font-bold text-[#1A120E]">Registered Address</h3>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2 md:col-span-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Street Address</label>
+            <input [(ngModel)]="form.addressLine1" placeholder="123 Business Park, MG Road" class="bs-input" id="reg-address">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">City</label>
+            <input [(ngModel)]="form.city" placeholder="Mumbai" class="bs-input" id="reg-city">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">State</label>
+            <input [(ngModel)]="form.state" placeholder="Maharashtra" class="bs-input" id="reg-state">
+          </div>
+          <div class="space-y-2">
+            <label class="block text-xs font-bold text-[#A8958A] uppercase tracking-widest ml-1">Postal Code</label>
+            <input [(ngModel)]="form.postalCode" placeholder="400001" class="bs-input" id="reg-postal">
+          </div>
+        </div>
+      </div>
+
+      <!-- Submission -->
+      <div class="flex flex-col md:flex-row items-center gap-6 pt-6">
+        <button (click)="register()" [disabled]="auth.loading()" id="reg-submit"
+          class="flex-1 md:w-auto flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-[#7A1C35] to-[#3B0915] text-[#FAF6F0] rounded-2xl font-bold text-lg shadow-xl shadow-[#98234025] hover:shadow-2xl hover:shadow-[#98234035] hover:-translate-y-0.5 transition-all active:scale-[0.98] disabled:opacity-70">
+          
+          @if (auth.loading()) {
+            <span class="material-symbols-outlined animate-spin text-2xl">refresh</span>
+            Creating Account...
+          }
+          @else {
+            Complete Registration
+            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+          }
+        </button>
+        <div class="text-[#A8958A] text-xs font-medium max-w-[240px] text-center md:text-left">
+          By registering, you agree to B-SURE's <a href="#" class="text-[#7A1C35] hover:underline">Terms of Service</a> and <a href="#" class="text-[#7A1C35] hover:underline">Privacy Policy</a>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-12 text-[#A8958A] text-xs font-bold tracking-[0.2em] uppercase">
+    B-SURE • Modern Insurance Redefined
+  </div>
+</div>
+
+<style>
+  .bs-input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background-color: #FAF6F0;
+    border: 1.5px solid #EAE0D8;
+    border-radius: 1rem;
+    color: #1A120E;
+    font-size: 0.9375rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .bs-input:focus {
+    outline: none;
+    border-color: #7A1C35;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(152, 35, 64, 0.08);
+  }
+  .bs-input::placeholder {
+    color: #C4B0A5;
+    font-weight: 400;
+  }
+</style>

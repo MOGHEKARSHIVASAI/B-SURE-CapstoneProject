@@ -1,0 +1,652 @@
+﻿[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< org.hartford:Binsure >------------------------
+[INFO] Building Binsure 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.3:run (default-cli) > test-compile @ Binsure >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ Binsure ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ Binsure ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ Binsure ---
+[INFO] skip non existing resourceDirectory C:\Users\avina\Desktop\B-SURE FullStack\backend\Binsure\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ Binsure ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 23 source files with javac [debug parameters release 17] to target\test-classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/InsuranceProductServiceTest.java:[29,1] duplicate class: org.hartford.binsure.service.InsuranceProductServiceTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/AuthControllerTest.java:[12,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[14,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[14,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/DocumentControllerTest.java:[10,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[14,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[13,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[15,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UserControllerTest.java:[13,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/AuthControllerTest.java:[32,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.AuthControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[40,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.BusinessControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[43,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.BusinessControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[46,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.BusinessControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[41,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.ClaimControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[44,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.ClaimControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[47,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.ClaimControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/DocumentControllerTest.java:[30,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.DocumentControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/DocumentControllerTest.java:[33,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.DocumentControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[36,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[39,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[42,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[45,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[33,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.PolicyControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[36,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.PolicyControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[39,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.PolicyControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[36,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.UnderwriterControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[39,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.UnderwriterControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[42,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.UnderwriterControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UserControllerTest.java:[39,6] cannot find symbol
+  symbol:   class MockBean
+  location: class org.hartford.binsure.controller.UserControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[93,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[93,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[111,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[111,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[128,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[128,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[147,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[147,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[186,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[186,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[206,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[206,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[82,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[82,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[115,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[115,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[133,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[133,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[150,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[150,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[171,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[171,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[206,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[206,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[227,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[227,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[248,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[248,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[269,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[269,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[65,39] incompatible types: java.lang.String cannot be converted to org.hartford.binsure.enums.ApplicationStatus
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[74,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[74,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[93,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[93,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[108,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[108,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[62,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[62,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[77,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[77,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[92,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[92,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[107,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[107,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[122,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[122,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[137,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[137,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[62,31] incompatible types: java.lang.String cannot be converted to org.hartford.binsure.enums.ApplicationStatus
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[75,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[75,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+    method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+      (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[104,26] reference to toDto is ambiguous
+  both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/AuthServiceTest.java:[79,42] incompatible types: java.lang.String cannot be converted to java.lang.Double
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/DocumentServiceTest.java:[81,46] cannot find symbol
+  symbol:   variable POLICY_DOCUMENT
+  location: class org.hartford.binsure.enums.DocumentType
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/DocumentServiceTest.java:[103,34] cannot find symbol
+  symbol:   variable POLICY_DOCUMENT
+  location: class org.hartford.binsure.enums.DocumentType
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/PolicyApplicationServiceTest.java:[267,46] cannot find symbol
+  symbol:   method notifyAdminNewApplication(java.lang.Object,long)
+  location: class org.hartford.binsure.service.NotificationService
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/PolicyServiceTest.java:[64,16] cannot find symbol
+  symbol:   method setName(java.lang.String)
+  location: variable product of type org.hartford.binsure.entity.InsuranceProduct
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/PremiumPaymentServiceTest.java:[88,16] cannot find symbol
+  symbol:   method setName(java.lang.String)
+  location: variable product of type org.hartford.binsure.entity.InsuranceProduct
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/UnderwriterServiceTest.java:[242,20] cannot find symbol
+  symbol:   method getCusiness()
+  location: variable application of type org.hartford.binsure.entity.PolicyApplication
+[INFO] 89 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.201 s
+[INFO] Finished at: 2026-03-26T10:12:59+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project Binsure: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/InsuranceProductServiceTest.java:[29,1] duplicate class: org.hartford.binsure.service.InsuranceProductServiceTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/AuthControllerTest.java:[12,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[14,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[14,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/DocumentControllerTest.java:[10,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[14,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[13,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[15,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UserControllerTest.java:[13,42] package org.springframework.boot.test.mock does not exist
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/AuthControllerTest.java:[32,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.AuthControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[40,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.BusinessControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[43,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.BusinessControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[46,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.BusinessControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[41,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.ClaimControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[44,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.ClaimControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[47,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.ClaimControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/DocumentControllerTest.java:[30,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.DocumentControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/DocumentControllerTest.java:[33,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.DocumentControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[36,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[39,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[42,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[45,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.PolicyApplicationControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[33,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.PolicyControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[36,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.PolicyControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[39,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.PolicyControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[36,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.UnderwriterControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[39,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.UnderwriterControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[42,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.UnderwriterControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UserControllerTest.java:[39,6] cannot find symbol
+[ERROR]   symbol:   class MockBean
+[ERROR]   location: class org.hartford.binsure.controller.UserControllerTest
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[93,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[93,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[111,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[111,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[128,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[128,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[147,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[147,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[186,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[186,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[206,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/BusinessControllerTest.java:[206,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.BusinessResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.BusinessResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[82,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[82,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[115,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[115,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[133,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[133,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[150,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[150,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[171,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[171,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[206,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[206,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[227,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[227,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[248,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[248,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[269,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/ClaimControllerTest.java:[269,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.ClaimResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.ClaimResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[65,39] incompatible types: java.lang.String cannot be converted to org.hartford.binsure.enums.ApplicationStatus
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[74,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[74,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[93,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[93,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[108,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyApplicationControllerTest.java:[108,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[62,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[62,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[77,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[77,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[92,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[92,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[107,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[107,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[122,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[122,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[137,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/PolicyControllerTest.java:[137,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[62,31] incompatible types: java.lang.String cannot be converted to org.hartford.binsure.enums.ApplicationStatus
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[75,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[75,40] no suitable method found for thenReturn(org.hartford.binsure.dto.response.PolicyApplicationResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR]     method org.mockito.stubbing.OngoingStubbing.thenReturn(org.hartford.binsure.dto.response.UnderwriterDecisionResponse,org.hartford.binsure.dto.response.UnderwriterDecisionResponse...) is not applicable
+[ERROR]       (argument mismatch; org.hartford.binsure.dto.response.PolicyApplicationResponse cannot be converted to org.hartford.binsure.dto.response.UnderwriterDecisionResponse)
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/controller/UnderwriterControllerTest.java:[104,26] reference to toDto is ambiguous
+[ERROR]   both method toDto(org.hartford.binsure.entity.UnderwriterDecision) in org.hartford.binsure.mapper.EntityMapper and method toDto(org.hartford.binsure.entity.Business) in org.hartford.binsure.mapper.EntityMapper match
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/AuthServiceTest.java:[79,42] incompatible types: java.lang.String cannot be converted to java.lang.Double
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/DocumentServiceTest.java:[81,46] cannot find symbol
+[ERROR]   symbol:   variable POLICY_DOCUMENT
+[ERROR]   location: class org.hartford.binsure.enums.DocumentType
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/DocumentServiceTest.java:[103,34] cannot find symbol
+[ERROR]   symbol:   variable POLICY_DOCUMENT
+[ERROR]   location: class org.hartford.binsure.enums.DocumentType
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/PolicyApplicationServiceTest.java:[267,46] cannot find symbol
+[ERROR]   symbol:   method notifyAdminNewApplication(java.lang.Object,long)
+[ERROR]   location: class org.hartford.binsure.service.NotificationService
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/PolicyServiceTest.java:[64,16] cannot find symbol
+[ERROR]   symbol:   method setName(java.lang.String)
+[ERROR]   location: variable product of type org.hartford.binsure.entity.InsuranceProduct
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/PremiumPaymentServiceTest.java:[88,16] cannot find symbol
+[ERROR]   symbol:   method setName(java.lang.String)
+[ERROR]   location: variable product of type org.hartford.binsure.entity.InsuranceProduct
+[ERROR] /C:/Users/avina/Desktop/B-SURE FullStack/backend/Binsure/src/test/java/org/hartford/binsure/service/UnderwriterServiceTest.java:[242,20] cannot find symbol
+[ERROR]   symbol:   method getCusiness()
+[ERROR]   location: variable application of type org.hartford.binsure.entity.PolicyApplication
+[ERROR] -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project Binsure: Compilation failure
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:333)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.executeForkedExecutions (MojoExecutor.java:448)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:311)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:103)
+    at java.lang.reflect.Method.invoke (Method.java:580)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+Caused by: org.apache.maven.plugin.compiler.CompilationFailureException: Compilation failure
+    at org.apache.maven.plugin.compiler.AbstractCompilerMojo.execute (AbstractCompilerMojo.java:1309)
+    at org.apache.maven.plugin.compiler.TestCompilerMojo.execute (TestCompilerMojo.java:208)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:328)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.executeForkedExecutions (MojoExecutor.java:448)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:311)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+    at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+    at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
+    at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:103)
+    at java.lang.reflect.Method.invoke (Method.java:580)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:361)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

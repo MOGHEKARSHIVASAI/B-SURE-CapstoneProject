@@ -1,0 +1,275 @@
+<!-- Page Header -->
+<div class="page-header mb-8 rounded-2xl glass border border-cream-200 px-8 py-6 shadow-sm">
+  <div>
+    <div class="page-title text-gradient">Application Tracking</div>
+    <div class="page-subtitle">{{ auth.isCustomer() ? 'Monitor your active and historical submissions' : 'Centralized underwriting queue' }}</div>
+  </div>
+  @if (auth.isCustomer()) {
+  <button class="btn btn-primary rounded-xl px-5 py-3 shadow-lg hover-lift" (click)="openWizard()" id="new-app-btn">
+    <span class="material-symbols-outlined text-sm mr-2">add_circle</span> New Application
+  </button>
+  }
+</div>
+
+@if (svc.error()) {
+<div class="alert alert-error mb-6">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+</div>
+}
+
+<!-- Customer Journey Guide -->
+@if (auth.isCustomer()) {
+<div class="card-premium mb-8 px-8 py-6" style="border-left: 4px solid var(--burg-500);">
+  <div class="flex items-center gap-3 mb-5">
+    <span class="material-symbols-outlined text-burg-600">route</span>
+    <div class="journey-title" style="margin-bottom: 0; font-size: 1.1rem;">Your Insurance Journey</div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="flex flex-col gap-2 p-4 rounded-xl bg-stone-50 border border-stone-100">
+      <div class="flex items-center gap-2">
+         <span class="w-6 h-6 rounded-full bg-burg-600 text-white flex items-center justify-center text-[10px] font-bold">1</span>
+         <span class="text-xs font-bold text-stone-700 uppercase tracking-wider">Submission</span>
+      </div>
+      <div class="text-[0.7rem] text-stone-500">Create your profile and business details to start.</div>
+    </div>
+    <div class="flex flex-col gap-2 p-4 rounded-xl bg-stone-50 border border-stone-100">
+      <div class="flex items-center gap-2">
+         <span class="w-6 h-6 rounded-full bg-burg-600 text-white flex items-center justify-center text-[10px] font-bold">2</span>
+         <span class="text-xs font-bold text-stone-700 uppercase tracking-wider">Verification</span>
+      </div>
+      <div class="text-[0.7rem] text-stone-500">Underwriters review your risk profile and documents.</div>
+    </div>
+    <div class="flex flex-col gap-2 p-4 rounded-xl relative overflow-hidden" 
+         [class.bg-green-50]="customerAcceptedPendingPayment()" 
+         [class.border-green-100]="customerAcceptedPendingPayment()"
+         [class.bg-stone-50]="!customerAcceptedPendingPayment()"
+         [class.border-stone-100]="!customerAcceptedPendingPayment()">
+      <div class="flex items-center gap-2">
+         <span class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold"
+               [class.bg-green-500]="customerAcceptedPendingPayment()"
+               [class.text-white]="customerAcceptedPendingPayment()"
+               [class.bg-stone-300]="!customerAcceptedPendingPayment()">3</span>
+         <span class="text-xs font-bold text-stone-700 uppercase tracking-wider">Activation</span>
+      </div>
+      <div class="text-[0.7rem] text-stone-500">Secure payment to issue your digital policy.</div>
+      @if (customerAcceptedPendingPayment()) {
+        <div class="absolute -right-2 -bottom-2 opacity-10">
+          <span class="material-symbols-outlined text-6xl text-green-600">verified</span>
+        </div>
+      }
+    </div>
+  </div>
+  
+  @if (customerAcceptedPendingPayment()) {
+  <div class="mt-6 flex items-center justify-between p-4 bg-green-50 rounded-xl border border-green-100 animate-pulse">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-green-600">check_circle</span>
+      <span class="text-sm font-bold text-green-800">Application Approved! Complete payment to activate your coverage.</span>
+    </div>
+    <button class="btn btn-primary px-6 shadow-md" (click)="openPayments()">
+      <span class="material-symbols-outlined text-sm mr-2">credit_card</span> Pay Now
+    </button>
+  </div>
+  }
+</div>
+}
+
+<!-- Table Card -->
+@if (svc.loading()) {
+<div class="loading py-20">
+  <div class="spinner"></div>
+  <div class="mt-4 text-stone-400 font-medium">Retrieving records...</div>
+</div>
+} @else {
+<div class="card-premium p-0 overflow-hidden shadow-lg border-stone-100">
+  <div class="table-wrap">
+    <table class="w-full">
+      <thead>
+        <tr class="bg-stone-50/50">
+          <th class="px-6 py-4">Reference</th>
+          <th class="px-6 py-4">Corporate Entity</th>
+          <th class="px-6 py-4">Selected Plan</th>
+          <th class="px-6 py-4">Sum Insured</th>
+          <th class="px-6 py-4">Status</th>
+          <th class="px-6 py-4">Validity</th>
+          <th class="px-6 py-4 text-center">Management</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (a of svc.items(); track a.id) {
+        <tr class="hover:bg-burg-50/30 transition-colors border-b border-stone-50 last:border-0">
+          <td class="px-6 py-4">
+            <span class="px-2 py-1 rounded bg-stone-100 text-[10px] font-bold text-stone-500 mono">#{{ a.id }}</span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="font-bold text-stone-800 text-sm">{{ a.companyName }}</div>
+            <div class="text-[10px] text-stone-400 uppercase tracking-tighter">Enterprise Entity</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-sm font-medium text-stone-700">{{ a.productName }}</div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="text-xs text-stone-400 mb-0.5">Sum Insured: <span class="text-stone-700 font-bold">₹{{ a.coverageAmount | number }}</span></div>
+            @if (a.annualPremium) {
+              <div class="text-[10px] text-burg-600 font-bold uppercase tracking-wider flex items-center gap-1">
+                <span class="material-symbols-outlined text-[10px]">sell</span>
+                Premium: ₹{{ a.annualPremium | number }}
+              </div>
+            } @else {
+              <div class="text-[0.6rem] text-stone-400 italic">Premium pending...</div>
+            }
+          </td>
+          <td class="px-6 py-4">
+            <span [class]="'badge ' + statusClass(a.status) + ' text-[0.65rem] border-transparent'">{{ a.status | titlecase }}</span>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[10px] font-bold text-stone-600">{{ a.coverageStartDate }}</span>
+              <span class="material-symbols-outlined text-[10px] text-stone-300 leading-none">south</span>
+              <span class="text-[10px] font-bold text-stone-400">{{ a.coverageEndDate }}</span>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <div class="flex items-center justify-center gap-2">
+              @if (auth.isCustomer() && a.status === 'DRAFT') {
+                <button class="w-8 h-8 rounded-lg flex items-center justify-center bg-stone-100 text-stone-600 hover:bg-burg-600 hover:text-white transition-colors" (click)="openWizard(a)" title="Edit">
+                  <span class="material-symbols-outlined text-sm">edit</span>
+                </button>
+                <button class="w-8 h-8 rounded-lg flex items-center justify-center bg-stone-100 text-red-500 hover:bg-red-500 hover:text-white transition-colors" (click)="deleteDraft(a.id)" title="Delete">
+                  <span class="material-symbols-outlined text-sm">delete</span>
+                </button>
+                <button class="btn btn-primary btn-sm rounded-lg" (click)="submit(a.id)" [disabled]="a.documentCount === 0">Submit</button>
+              }
+
+              @if (auth.isCustomer() && a.status === 'APPROVED') {
+                <button class="btn btn-success btn-sm rounded-lg shadow-sm hover-lift" (click)="handleVerdict('accept', a)">
+                  <span class="material-symbols-outlined text-xs mr-1">check</span> Accept & Pay
+                </button>
+                <button class="btn btn-danger btn-sm rounded-lg shadow-sm hover-lift" (click)="handleVerdict('reject', a)">
+                  <span class="material-symbols-outlined text-xs mr-1">close</span> Decline
+                </button>
+              }
+
+              @if (auth.isCustomer() && a.status === 'CUSTOMER_ACCEPTED') {
+                <button class="btn btn-primary btn-sm rounded-lg shadow-sm hover-lift" (click)="openPayments(a.id)">
+                  <span class="material-symbols-outlined text-xs mr-1">credit_card</span> Pay Now
+                </button>
+              }
+
+              @if (auth.isCustomer() && a.status === 'REJECTED') {
+                <button class="w-8 h-8 rounded-lg flex items-center justify-center bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-colors" (click)="openReason(a)" title="View Reason">
+                  <span class="material-symbols-outlined text-sm">info</span>
+                </button>
+              }
+
+              @if (auth.isAdmin() && a.status === 'SUBMITTED') {
+                <button class="btn btn-primary btn-sm rounded-lg" (click)="openAssign(a)">Assign</button>
+              }
+
+              <button class="w-8 h-8 rounded-lg flex items-center justify-center bg-stone-100 text-stone-600 hover:bg-stone-200 transition-colors" (click)="openDocs(a)" title="Documents">
+                <span class="material-symbols-outlined text-sm">inventory_2</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    @if (!svc.items().length) {
+      <div class="py-20 flex flex-col items-center justify-center">
+        <span class="material-symbols-outlined text-5xl text-stone-200 mb-4">folder_off</span>
+        <div class="text-stone-400 font-medium">No application history found.</div>
+      </div>
+    }
+  </div>
+</div>
+}
+
+<!-- Wizards & Modals -->
+@if (showWizard()) {
+  <app-application-wizard 
+    [products]="products()" 
+    [businesses]="myBusinesses()" 
+    [editingApp]="editingApp()"
+    (closed)="showWizard.set(false)"
+    (saved)="onWizardClose()">
+  </app-application-wizard>
+}
+
+@if (showAssign()) {
+<div class="modal-overlay" (click)="showAssign.set(false)">
+  <div class="modal" style="max-width:420px" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">Assign Underwriter</span>
+      <button class="modal-close" (click)="showAssign.set(false)">×</button>
+    </div>
+    <div class="p-4">
+      <p class="text-sm text-stone-500 mb-4">Assign UW for #{{ selectedApp()?.id }}</p>
+      <select title="Underwriter" class="form-control" [(ngModel)]="selectedUW">
+        <option value="">Select...</option>
+        @for (u of underwriters(); track u.id) {
+          <option [value]="u.underwriterId || u.id">{{ u.firstName }} {{ u.lastName }}</option>
+        }
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="showAssign.set(false)">Cancel</button>
+      <button class="btn btn-primary" (click)="assign()">Assign</button>
+    </div>
+  </div>
+</div>
+}
+
+@if (showDocs()) {
+<div class="modal-overlay" (click)="closeDocs()">
+  <div class="modal" style="max-width:640px; width: 100%" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">Documents — #{{ selectedApp()?.id }}</span>
+      <button class="modal-close" (click)="closeDocs()">×</button>
+    </div>
+    <div class="p-4">
+      <app-document-list [applicationId]="selectedApp()?.id" 
+        [canUpload]="auth.isCustomer()" 
+        [uploadTypes]="[]">
+      </app-document-list>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="closeDocs()">Close</button>
+    </div>
+  </div>
+</div>
+}
+
+<!-- Rejection Reason Modal -->
+@if (showReason()) {
+<div class="modal-overlay" (click)="showReason.set(false)">
+  <div class="modal" style="max-width:480px" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div style="display:flex; align-items:center; gap:8px">
+        <span class="material-symbols-outlined text-red-500">cancel</span>
+        <span class="modal-title">Application Rejected</span>
+      </div>
+      <button class="modal-close" (click)="showReason.set(false)">×</button>
+    </div>
+    <div class="p-5">
+      <div class="text-xs text-stone-400 uppercase tracking-widest font-bold mb-2">Rejection Reason</div>
+      <div class="bg-red-50 border border-red-100 rounded-lg p-4 text-red-800 text-sm leading-relaxed">
+        {{ getDecision(selectedApp()?.id || 0)?.comments || 'No specific reason provided by the underwriter.' }}
+      </div>
+      
+      <div class="mt-6 pt-6 border-t border-stone-100 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-400">
+          <span class="material-symbols-outlined">person</span>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-stone-800">{{ getDecision(selectedApp()?.id || 0)?.underwriterName || 'Underwriter' }}</div>
+          <div class="text-[10px] text-stone-400">Policy Underwriter</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary w-full" (click)="showReason.set(false)">I Understand</button>
+    </div>
+  </div>
+</div>
+}

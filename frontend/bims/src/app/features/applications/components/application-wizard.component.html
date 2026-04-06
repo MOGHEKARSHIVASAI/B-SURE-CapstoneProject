@@ -1,0 +1,119 @@
+<div class="modal-overlay" (click)="closed.emit()">
+  <div class="modal app-wizard-modal" (click)="$event.stopPropagation()">
+    
+    <div class="modal-header flex-col items-stretch gap-4">
+      <div class="flex justify-between items-center">
+        <span class="modal-title">{{ editingApp ? 'Edit' : 'New' }} Application</span>
+        <button class="modal-close" (click)="closed.emit()">×</button>
+      </div>
+
+      <!-- Stepper Icons -->
+      <div class="wizard-steps">
+        <div class="wizard-step" [class.wizard-step-active]="formStep() === 1" [class.wizard-step-done]="formStep() > 1">
+          <div class="wizard-step-num">@if(formStep()>1){<span class="material-symbols-outlined text-xs">check</span>} @else{1}</div>
+          <span class="wizard-step-label">Details</span>
+        </div>
+        <div class="wizard-step-line" [class.wizard-step-line-done]="formStep() > 1"></div>
+        <div class="wizard-step" [class.wizard-step-active]="formStep() === 2" [class.wizard-step-done]="formStep() > 2">
+          <div class="wizard-step-num">@if(formStep()>2){<span class="material-symbols-outlined text-xs">check</span>} @else{2}</div>
+          <span class="wizard-step-label">Documents</span>
+        </div>
+        <div class="wizard-step-line" [class.wizard-step-line-done]="formStep() > 2"></div>
+        <div class="wizard-step" [class.wizard-step-active]="formStep() === 3">
+          <div class="wizard-step-num">3</div>
+          <span class="wizard-step-label">Review</span>
+        </div>
+      </div>
+    </div>
+
+    @if (svc.error()) { <div class="alert alert-error mx-6">{{ svc.error() }}</div> }
+
+    <div class="wizard-body">
+      <!-- STEP 1 -->
+      @if (formStep() === 1) {
+        @if (businesses.length >= 1) {
+          <div class="form-group">
+            <label class="form-label">Business</label>
+            <select class="form-control" [(ngModel)]="form.businessId">
+              @for (b of businesses; track b.id) { <option [ngValue]="b.id">{{ b.companyName }}</option> }
+            </select>
+          </div>
+        }
+
+        <div class="form-group">
+          <label class="form-label">Insurance Product</label>
+          <select class="form-control" [(ngModel)]="form.productId">
+            <option [ngValue]="null">Select a product...</option>
+            @for (p of products; track p.id) { <option [ngValue]="p.id">{{ p.productName }} — {{ p.category }}</option> }
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Coverage (₹)</label>
+            <input class="form-control" type="number" [(ngModel)]="form.coverageAmount">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Start Date</label>
+            <input class="form-control" type="date" [(ngModel)]="form.coverageStartDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">End Date</label>
+            <input class="form-control" type="date" [(ngModel)]="form.coverageEndDate">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Risk Notes (optional)</label>
+          <textarea class="form-control" [(ngModel)]="form.riskNotes"></textarea>
+        </div>
+
+        <div class="alert alert-info text-sm flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">calculate</span>
+          Annual Premium: <strong>₹{{ calcPremium() | number }}</strong>
+        </div>
+      }
+
+      <!-- STEP 2 -->
+      @if (formStep() === 2) {
+        <app-document-list [applicationId]="savedId()" [canUpload]="true" [uploadTypes]="uploadTypes" (countChanged)="docCount.set($event)"></app-document-list>
+      }
+
+      <!-- STEP 3 -->
+      @if (formStep() === 3) {
+        <div class="wizard-review-card">
+          <div class="uw-detail-grid">
+            <div class="uw-detail-item"><div class="uw-detail-label">Business</div><div class="uw-detail-value">{{ getBizName() }}</div></div>
+            <div class="uw-detail-item"><div class="uw-detail-label">Product</div><div class="uw-detail-value">{{ getProdName() }}</div></div>
+            <div class="uw-detail-item"><div class="uw-detail-label">Coverage</div><div class="uw-detail-value mono font-bold">₹{{ form.coverageAmount | number }}</div></div>
+            <div class="uw-detail-item"><div class="uw-detail-label">Premium</div><div class="uw-detail-value">₹{{ calcPremium() | number }}</div></div>
+          </div>
+          @if (docCount() === 0) { <div class="alert alert-error mt-4">Required: Upload documents in previous step.</div> }
+        </div>
+      }
+    </div>
+
+    <div class="modal-footer justify-between">
+      <button class="btn btn-outline" (click)="formStep() > 1 ? formStep.set(formStep()-1) : closed.emit()">
+        {{ formStep() > 1 ? 'Back' : 'Cancel' }}
+      </button>
+      
+      <div class="flex gap-2">
+        @if (formStep() === 1) {
+          <button class="btn btn-secondary" [disabled]="svc.loading()" (click)="saveDraft()">Save Draft</button>
+          <button class="btn btn-primary" [disabled]="svc.loading()" (click)="saveDraft(true)">
+            @if (svc.loading()) { <span style="display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,0.4);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite"></span> }
+            Next →
+          </button>
+        }
+        @if (formStep() === 2) {
+          <button class="btn btn-primary" (click)="formStep.set(3)">Next →</button>
+        }
+        @if (formStep() === 3) {
+          <button class="btn btn-primary px-8" [disabled]="docCount() === 0" (click)="submit()">Submit Application</button>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>

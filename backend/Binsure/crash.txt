@@ -1,0 +1,20 @@
+﻿2026-03-26T10:20:03.960+05:30 ERROR 7908 --- [Binsure] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8050 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8050 or configure this application to listen on another port.
+
+2026-03-26T10:21:07.657+05:30 DEBUG 41632 --- [Binsure] [http-nio-8050-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /api/chatbot/ask
+2026-03-26T10:21:07.729+05:30 DEBUG 41632 --- [Binsure] [http-nio-8050-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-03-26T10:21:08.017+05:30 DEBUG 41632 --- [Binsure] [http-nio-8050-exec-9] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-03-26T10:21:08.910+05:30 DEBUG 41632 --- [Binsure] [http-nio-8050-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /error
+2026-03-26T10:21:08.912+05:30 DEBUG 41632 --- [Binsure] [http-nio-8050-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-03-26T10:21:08.915+05:30 DEBUG 41632 --- [Binsure] [http-nio-8050-exec-9] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access

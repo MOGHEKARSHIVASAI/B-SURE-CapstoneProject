@@ -1,0 +1,182 @@
+<div class="page-header mb-5 rounded-2xl border border-cream-dark bg-white/80 px-6 py-5 shadow-sm">
+  <div>
+    <div class="page-title">Payments</div>
+    <div class="page-subtitle">Premium payment history</div>
+  </div>
+  @if (auth.isCustomer()) {
+  <button class="btn btn-primary rounded-xl px-4 py-2.5 shadow-md shadow-burgundy/20" (click)="openPay()">+ Make
+    Payment</button>
+  }
+</div>
+
+@if (loading()) { <div class="loading">
+  <div class="spinner"></div>Loading...
+</div> }
+@else {
+<div class="card rounded-2xl border border-cream-dark bg-white/85 p-0 shadow-sm">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Reference</th>
+          <th>Company</th>
+          <th>Application</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Paid At</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of payments(); track p.id) {
+        <tr>
+          <td class="mono text-sm">{{ p.paymentReference }}</td>
+          <td>
+            <div class="font-semibold text-stone-800">{{ p.companyName }}</div>
+          </td>
+          <td class="mono text-sm">#{{ p.applicationId }}</td>
+          <td class="mono font-semibold">₹{{ p.amount | number }}</td>
+          <td><span [class]="'badge ' + statusClass(p.status)">{{ p.status }}</span></td>
+          <td class="text-sm text-muted">{{ p.paidAt ? (p.paidAt | date:'short') : '—' }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    @if (!payments().length) { <div class="empty">
+      <div class="icon material-symbols-outlined text-4xl text-stone-400 mb-2">credit_card</div>
+      <div>No payments found.</div>
+    </div> }
+  </div>
+</div>
+}
+
+@if (showSuccess()) {
+<div class="modal-overlay bg-stone-900/60 backdrop-blur-md" (click)="showSuccess.set(false)">
+  <div class="modal max-w-sm rounded-2xl border border-cream-100 bg-white p-0 shadow-2xl animate-in fade-in zoom-in duration-300" (click)="$event.stopPropagation()">
+    <div class="p-8 text-center">
+      <div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-5 shadow-inner">
+        <span class="material-symbols-outlined text-4xl">verified</span>
+      </div>
+      <h3 class="text-xl font-bold text-stone-800 mb-2">Payment Confirmed</h3>
+      <p class="text-stone-500 mb-6 leading-relaxed">{{ successMessage() }}</p>
+      
+      <div class="space-y-3">
+        <div class="p-4 bg-stone-50 rounded-xl border border-stone-100 mb-6 flex items-center gap-3 text-left">
+          <div class="p-2 bg-green-500 text-white rounded-lg">
+            <span class="material-symbols-outlined text-sm">policy</span>
+          </div>
+          <div>
+            <span class="block text-xs font-bold text-stone-400 uppercase tracking-tighter">Status Update</span>
+            <span class="text-sm font-semibold text-green-700">Policy Issued Successfully</span>
+          </div>
+        </div>
+
+        <button class="w-full btn btn-primary rounded-xl py-3 shadow-lg shadow-burgundy/20 hover-lift" (click)="showSuccess.set(false)">
+          Great, Thank You!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+
+@if (showModal()) {
+<div class="modal-overlay bg-stone-900/60 backdrop-blur-md" (click)="showModal.set(false)">
+  <div class="modal max-w-md rounded-2xl border border-cream-100 bg-white p-0 shadow-2xl animate-in fade-in zoom-in duration-200" (click)="$event.stopPropagation()">
+    <!-- Modal Header -->
+    <div class="px-6 py-5 border-b border-stone-50 flex items-center justify-between bg-stone-50/50 rounded-t-2xl">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-burg-600 flex items-center justify-center text-white shadow-lg shadow-burgundy/20">
+          <span class="material-symbols-outlined">payments</span>
+        </div>
+        <div>
+          <span class="block text-lg font-bold text-stone-800">Complete Payment</span>
+          <span class="block text-[10px] uppercase tracking-widest text-stone-400 font-bold">Secure Premium Settlement</span>
+        </div>
+      </div>
+      <button class="w-8 h-8 rounded-full flex items-center justify-center text-stone-400 hover:bg-stone-200 transition-colors" (click)="showModal.set(false)">
+        <span class="material-symbols-outlined text-lg">close</span>
+      </button>
+    </div>
+
+    <div class="p-6">
+      @if (error()) { 
+        <div class="alert alert-error mb-4 flex items-center gap-2 py-3">
+          <span class="material-symbols-outlined text-sm">error</span>
+          <span>{{ error() }}</span>
+        </div> 
+      }
+
+      <div class="space-y-5">
+        <!-- Application Selection -->
+        <div class="form-group">
+          <label class="form-label flex items-center gap-1.5 mb-2">
+            <span class="material-symbols-outlined text-sm text-stone-400">description</span>
+            Policy Application
+          </label>
+          <div class="relative">
+            <select title="Application Selection" class="form-control pr-10" 
+                    [(ngModel)]="form.applicationId"
+                    (ngModelChange)="onAppSelect($event)"
+                    [disabled]="isAutoSelect()">
+              <option value="" disabled>Select an application</option>
+              @for (a of payableApps(); track a.id) {
+                <option [value]="a.id">Application #{{ a.id }} — {{ a.productName }}</option>
+              }
+            </select>
+            @if (isAutoSelect()) {
+              <div class="absolute right-3 top-1/2 -translate-y-1/2 text-burg-600">
+                <span class="material-symbols-outlined text-sm">lock</span>
+              </div>
+            }
+          </div>
+          @if (isAutoSelect()) {
+            <div class="mt-1.5 text-[0.65rem] text-burg-600 font-medium flex items-center gap-1">
+              <span class="material-symbols-outlined text-[10px]">info</span>
+              This payment is pre-configured for your approved application.
+            </div>
+          }
+        </div>
+
+        <!-- Amount -->
+        <div class="form-group">
+          <label class="form-label flex items-center gap-1.5 mb-2">
+            <span class="material-symbols-outlined text-sm text-stone-400">currency_rupee</span>
+            Premium Amount
+          </label>
+          <div class="relative">
+            <input title="Payment Amount" class="form-control pl-8 font-bold text-lg" 
+                   type="number" [(ngModel)]="form.amount" placeholder="0.00">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 font-bold">₹</span>
+          </div>
+        </div>
+
+        <!-- Remarks -->
+        <div class="form-group">
+          <label class="form-label flex items-center gap-1.5 mb-2">
+            <span class="material-symbols-outlined text-sm text-stone-400">notes</span>
+            Reference Remarks
+          </label>
+          <input title="Payment Remarks" class="form-control" 
+                 [(ngModel)]="form.remarks" placeholder="Add a note (optional)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="px-6 py-5 bg-stone-50/50 border-t border-stone-50 flex items-center gap-3 rounded-b-2xl">
+      <button class="flex-1 btn btn-secondary rounded-xl py-3 border-stone-200" 
+              (click)="showModal.set(false)">Discard</button>
+      <button class="flex-[2] btn btn-primary rounded-xl py-3 shadow-lg shadow-burgundy/20 hover-lift flex items-center justify-center gap-2" 
+              [disabled]="saving()" (click)="pay()">
+        @if (saving()) {
+          <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+          Processing...
+        } @else {
+          <span class="material-symbols-outlined text-sm">verified_user</span>
+          Authorize Payment
+        }
+      </button>
+    </div>
+  </div>
+</div>
+}

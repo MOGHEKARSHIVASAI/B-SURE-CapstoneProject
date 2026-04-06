@@ -1,0 +1,143 @@
+@if (loading()) {
+<div class="loading">
+  <div class="spinner"></div> Loading dashboard...
+</div>
+} @else if (error()) {
+<div class="alert alert-error">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ error() }}
+</div>
+} @else {
+<!-- ── HERO WELCOME HEADER ─────────────────────── -->
+<div class="mb-8 rounded-2xl overflow-hidden glass" style="box-shadow:var(--sh-lg); border: 1px solid var(--burg-200);">
+  <div class="flex items-center justify-between px-8 py-7 grad-premium">
+    <div class="relative z-10">
+      <div
+        style="font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:800;color:#FFFFFF;letter-spacing:-0.4px">
+        Good {{ greeting() }}, <span class="text-burg-200" style="color: #E0A0AE;">{{ auth.user()?.firstName }}</span>
+      </div>
+      <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-top:6px; font-weight: 500;">
+        Experience the future of insurance management.
+      </div>
+    </div>
+    <div class="flex items-center gap-3 px-4 py-2 rounded-xl text-xs font-bold pulse"
+      style="background:rgba(255,255,255,0.15);color:#FFFFFF;border:1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+      <span class="w-2.5 h-2.5 rounded-full inline-block" style="background:#4ADE80; box-shadow: 0 0 12px #4ADE80;"></span>
+      LIVE MONITORING
+    </div>
+  </div>
+  
+  <!-- Subtle decorative element -->
+  <div class="absolute top-0 right-0 w-64 h-64 bg-burg-400/20 blur-[100px] -mr-32 -mt-32 rounded-full"></div>
+</div>
+
+<!-- ── STAT CARDS ─────────────────────────────── -->
+<div class="stats-grid mb-8">
+  @for (s of stats(); track s.label) {
+  <div class="stat-card hover-lift">
+    <div class="flex items-center justify-between mb-3">
+      <div class="label">{{ s.label }}</div>
+      <span class="material-symbols-outlined text-stone-300" style="font-size: 1.2rem;">{{ s.icon }}</span>
+    </div>
+    <div class="value text-gradient">{{ s.value }}</div>
+    <div class="sub">{{ s.sub }}</div>
+  </div>
+  }
+</div>
+
+<!-- ── BOTTOM GRID ────────────────────────────── -->
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+
+  <!-- Quick Actions -->
+  <div class="lg:col-span-2 card-premium" style="padding:0;">
+    <div class="flex items-center justify-between px-6 py-5" style="border-bottom:1px solid var(--border)">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 grad-burgundy" style="box-shadow: var(--burg-sh)">
+          <span class="material-symbols-outlined text-base" style="color:#FFFFFF">bolt</span>
+        </div>
+        <span class="card-title" style="font-size: 1.1rem">Intelligent Actions</span>
+      </div>
+      <span class="text-xs font-bold text-burg-500 uppercase tracking-widest">Efficiency Mode</span>
+    </div>
+    <div class="px-6 py-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+      @for (a of quickActions(); track a.label) {
+      <a [routerLink]="a.link"
+        class="group flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-300 border-transparent border"
+        style="background:var(--surface-2); color:var(--text-1); text-decoration:none"
+        onmouseover="this.style.background='#FFFFFF';this.style.boxShadow='var(--sh)';this.style.borderColor='var(--burg-200)';this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.background='var(--surface-2)';this.style.boxShadow='none';this.style.borderColor='transparent';this.style.transform='translateY(0)'">
+        <span class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 material-symbols-outlined transition-colors group-hover:bg-burg-600 group-hover:text-white"
+          style="background:var(--burg-100);color:var(--burg-600);font-size:1.2rem">
+          {{ a.icon }}
+        </span>
+        <div class="flex-1">
+          <div class="font-bold text-sm">{{ a.label }}</div>
+          <div class="text-[0.7rem] text-stone-400 mt-0.5">Streamlined workflow</div>
+        </div>
+        <span class="material-symbols-outlined text-xs opacity-0 transition-opacity group-hover:opacity-100" style="color:var(--burg-400)">arrow_forward</span>
+      </a>
+      }
+    </div>
+  </div>
+
+  <!-- Account Overview -->
+  <div class="card-premium h-full" style="padding:0;">
+    <div class="flex items-center gap-3 px-6 py-5" style="border-bottom:1px solid var(--border)">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:var(--burg-100)">
+        <span class="material-symbols-outlined text-base" style="color:var(--burg-600)">shield_person</span>
+      </div>
+      <span class="card-title" style="font-size: 1.1rem">Portal Identity</span>
+    </div>
+
+    <!-- User identity strip -->
+    <div class="flex flex-col items-center gap-4 px-6 py-8"
+      style="background:linear-gradient(to bottom, var(--burg-50) 0%, #FFFFFF 100%);">
+      <div class="relative">
+        <div class="w-20 h-20 rounded-[24px] flex items-center justify-center font-bold text-2xl flex-shrink-0 transition-transform hover:scale-105 cursor-pointer"
+          style="background:linear-gradient(135deg,var(--burg-500),var(--burg-800));color:var(--cream-50);font-family:'Space Grotesk',sans-serif;box-shadow:var(--sh-lg)">
+          {{ auth.user()?.firstName?.charAt(0) }}{{ auth.user()?.lastName?.charAt(0) }}
+        </div>
+        <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 border-4 border-white rounded-full"></div>
+      </div>
+      <div class="text-center">
+        <div class="font-bold text-lg" style="color:var(--text-1); letter-spacing: -0.5px">
+          {{ auth.user()?.firstName }} {{ auth.user()?.lastName }}
+        </div>
+        <div class="text-xs font-medium px-3 py-1 bg-burg-100 text-burg-700 rounded-full mt-2 inline-block">
+          {{ auth.user()?.role }} Member
+        </div>
+      </div>
+    </div>
+
+    <div class="px-6 pb-6">
+      <div class="flex flex-col gap-4">
+        <div class="p-3 bg-stone-50 rounded-xl border border-stone-100">
+           <div class="flex items-center justify-between mb-1">
+             <span class="text-[0.65rem] font-bold uppercase tracking-wider text-stone-400">Account Health</span>
+             <span class="text-[0.65rem] font-bold text-green-600">Optimal</span>
+           </div>
+           <div class="h-1.5 w-full bg-stone-200 rounded-full overflow-hidden">
+             <div class="h-full bg-green-500 rounded-full" style="width: 92%"></div>
+           </div>
+        </div>
+        
+        <div class="flex items-center justify-between py-2 border-b border-stone-50">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-stone-400 text-sm">alternate_email</span>
+            <span class="text-xs text-stone-500">Email</span>
+          </div>
+          <span class="text-xs font-bold text-stone-800">{{ (auth.user()?.email || '').length > 20 ? (auth.user()?.email || '').substring(0, 18) + '...' : auth.user()?.email }}</span>
+        </div>
+
+        <div class="flex items-center justify-between py-2">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-stone-400 text-sm">verified_user</span>
+            <span class="text-xs text-stone-500">Verification</span>
+          </div>
+          <span class="badge badge-green text-[0.6rem]">Level 2 Verified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+}

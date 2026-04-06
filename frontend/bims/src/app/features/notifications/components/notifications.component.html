@@ -1,0 +1,60 @@
+<div class="page-header mb-5">
+  <div>
+    <div class="page-title">Notifications</div>
+    <div class="page-subtitle flex items-center gap-2">
+      @if (unread().length > 0) {
+      <span class="badge badge-ruby">{{ unread().length }} unread</span>
+      } @else {
+      All caught up
+      }
+    </div>
+  </div>
+  @if (unread().length > 0) {
+  <button class="btn btn-secondary" (click)="markAll()">
+    <span class="material-symbols-outlined text-base">done_all</span>
+    Mark all read
+  </button>
+  }
+</div>
+
+@if (loading()) {
+<div class="loading">
+  <div class="spinner"></div> Loading notifications...
+</div>
+} @else {
+<div class="card" style="padding:0;overflow:hidden">
+  @if (notifications().length === 0) {
+  <div class="empty">
+    <span class="icon material-symbols-outlined">notifications_off</span>
+    <div class="font-semibold text-sm" style="color:var(--text-2)">No notifications yet</div>
+    <div class="text-xs mt-1" style="color:var(--text-3)">Policy updates, claim alerts and approvals will appear here
+    </div>
+  </div>
+  } @else {
+  @for (n of notifications(); track n.id) {
+  <div [class]="'notif-item' + (!n.isRead ? ' unread' : '')" (click)="markRead(n)">
+    <div class="notif-icon">
+      <span class="material-symbols-outlined text-sm">
+        {{ n.type === 'POLICY' ? 'policy' :
+        n.type === 'CLAIM' ? 'assignment_late' :
+        n.type === 'PAYMENT'? 'credit_card' : 'notifications' }}
+      </span>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center justify-between gap-2">
+        <div class="notif-title truncate">{{ n.title }}</div>
+        @if (!n.isRead) {
+        <span class="badge badge-ruby flex-shrink-0" style="font-size:0.62rem;padding:1px 7px">NEW</span>
+        }
+      </div>
+      <div class="notif-msg">{{ n.message }}</div>
+      <div class="notif-time flex items-center gap-1 mt-1">
+        <span class="material-symbols-outlined" style="font-size:0.72rem">schedule</span>
+        {{ n.createdAt | date:'MMM d, yyyy · h:mm a' }}
+      </div>
+    </div>
+  </div>
+  }
+  }
+</div>
+}

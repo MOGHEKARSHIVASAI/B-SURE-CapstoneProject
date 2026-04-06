@@ -1,0 +1,61 @@
+﻿Initial chunk files   | Names                  |  Raw size | Estimated transfer size
+chunk-TPUKI4H7.js     | -                      | 171.13 kB |                49.94 kB
+styles-NQBOB6IP.css   | styles                 |  85.58 kB |                11.15 kB
+chunk-L6EVQP2R.js     | -                      |  78.47 kB |                19.70 kB
+polyfills-FFHMD2TL.js | polyfills              |  33.71 kB |                11.02 kB
+chunk-SYLSVO7F.js     | -                      |   3.34 kB |                 1.17 kB
+main-GO6YKDJP.js      | main                   |   2.58 kB |               824 bytes
+
+                      | Initial total          | 374.82 kB |                93.78 kB
+
+Lazy chunk files      | Names                  |  Raw size | Estimated transfer size
+chunk-XAVY6DQJ.js     | home-component         |  32.46 kB |                 7.18 kB
+chunk-3RENQMMC.js     | claims-component       |  28.79 kB |                 6.58 kB
+chunk-4AO6WCZF.js     | -                      |  25.78 kB |                 5.54 kB
+chunk-Z5U54CS6.js     | applications-component |  24.50 kB |                 6.09 kB
+chunk-GYMWDNQF.js     | underwriting-component |  19.55 kB |                 5.30 kB
+chunk-5J36XUSW.js     | layout-component       |  18.46 kB |                 4.92 kB
+chunk-6K6WDC2V.js     | policies-component     |  15.34 kB |                 3.99 kB
+chunk-Y6RSZZDH.js     | businesses-component   |  15.29 kB |                 3.83 kB
+chunk-HOSQUDRP.js     | -                      |  13.04 kB |                 3.79 kB
+chunk-FXKH3JMZ.js     | dashboard-component    |  11.60 kB |                 3.13 kB
+chunk-CNTRM3AC.js     | products-component     |   9.03 kB |                 2.60 kB
+chunk-PI3UUPWN.js     | users-component        |   9.03 kB |                 2.49 kB
+chunk-TACZEHRB.js     | register-component     |   8.54 kB |                 2.13 kB
+chunk-3VZJQJQB.js     | profile-component      |   8.32 kB |                 1.92 kB
+chunk-CBAHI3CF.js     | payments-component     |   7.26 kB |                 2.44 kB
+...and 12 more lazy chunks files. Use "--verbose" to show all the files.
+
+Output location: C:\Users\avina\Desktop\B-SURE FullStack\frontend\bims\dist\bims
+
+Application bundle generation complete. [6.756 seconds]
+
+node.exe : Γû▓ [WARNING] angu
+lar:styles/component:css;6e37
+397a85d3304ecd3ef0476ef32de4f
+c47f21b87ef7576f769977ec95749
+f9;C:/Users/avina/Desktop/B-S
+URE FullStack/frontend/bims/s
+rc/app/features/home/home.com
+ponent.ts exceeded maximum 
+budget. Budget 10.00 kB was 
+not met by 2.22 kB with a 
+total of 12.22 kB.
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (Γû▓ [WA  
+  RNING] a...al of 12.22 k   
+ B.:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+
+

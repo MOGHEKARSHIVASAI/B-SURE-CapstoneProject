@@ -1,0 +1,268 @@
+﻿Application bundle generation failed. [6.588 seconds]
+
+node.exe : X [ERROR] NG5002: 
+Opening tag "div" not 
+terminated. [plugin 
+angular-compiler]
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (X [ERRO  
+  R] NG500...gular-compile   
+ r]:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+
+    src/app/shared/components
+/layout.component.html:128:20
+:
+      128 Γöé ...          
+<div class="w-2 h-2 
+rounded-full mt-1 shrink-0" 
+[cla...
+          Γò╡              ~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "div". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:135:16
+:
+      135 Γöé                
+ </div>
+          Γò╡                
+ ~~~~~~
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing block. The block may 
+have been closed earlier. If 
+you meant to write the } 
+character, you should use 
+the "&#125;" HTML entity 
+instead. [plugin 
+angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:136:16
+:
+      136 Γöé                
+ }
+          Γò╡                
+ ^
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing block. The block may 
+have been closed earlier. If 
+you meant to write the } 
+character, you should use 
+the "&#125;" HTML entity 
+instead. [plugin 
+angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:137:14
+:
+      137 Γöé               
+} @else {
+          Γò╡               ^
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing block. The block may 
+have been closed earlier. If 
+you meant to write the } 
+character, you should use 
+the "&#125;" HTML entity 
+instead. [plugin 
+angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:151:10
+:
+      151 Γöé           }
+          Γò╡           ^
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "div". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:157:6:
+      157 Γöé       </div>
+          Γò╡       ~~~~~~
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "div". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:158:4:
+      158 Γöé     </div>
+          Γò╡     ~~~~~~
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "main". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:166:2:
+      166 Γöé   </main>
+          Γò╡   ~~~~~~~
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+X [ERROR] NG5002: Unexpected 
+closing tag "div". It may 
+happen when the tag has 
+already been closed by 
+another tag. For more info 
+see https://www.w3.org/TR/htm
+l5/syntax.html#closing-elemen
+ts-that-have-implied-end-tags
+ [plugin angular-compiler]
+
+    src/app/shared/components
+/layout.component.html:170:0:
+      170 Γöé </div>
+          Γò╡ ~~~~~~
+
+  Error occurs in the 
+template of component 
+LayoutComponent.
+
+    src/app/shared/components
+/layout.component.ts:13:15:
+      13 Γöé   templateUrl: 
+'./layout.component.html'
+         Γò╡                
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

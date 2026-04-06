@@ -1,0 +1,143 @@
+<div class="page-header mb-8 rounded-2xl glass border border-cream-200 px-8 py-6 shadow-sm">
+  <div>
+    <div class="page-title text-gradient">Insurance Marketplace</div>
+    <div class="page-subtitle">Tailored coverage for your business needs</div>
+  </div>
+  @if (auth.isAdmin()) {
+  <button class="btn btn-primary rounded-xl px-5 py-3 shadow-lg hover-lift" (click)="openModal()">
+    <span class="material-symbols-outlined text-sm mr-1">add_circle</span> New Product
+  </button>
+  }
+</div>
+
+@if (svc.error()) {
+<div class="alert alert-error mb-6">
+  <span class="material-symbols-outlined text-sm">error_outline</span> {{ svc.error() }}
+</div>
+}
+
+@if (svc.loading()) { 
+<div class="loading py-20">
+  <div class="spinner"></div>
+  <div class="mt-4 text-stone-400 font-medium">Curating your options...</div>
+</div> 
+}
+@else {
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+  @for (p of svc.items(); track p.id) {
+  <div class="card-premium h-full group flex flex-col">
+    <div class="p-6 flex flex-col h-full">
+      <!-- Header with Icon -->
+      <div class="flex items-start justify-between mb-5">
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110" 
+             [style.background]="getCategoryColor(p.category) + '15'" 
+             [style.color]="getCategoryColor(p.category)">
+          <span class="material-symbols-outlined text-2xl">{{ getCategoryIcon(p.category) }}</span>
+        </div>
+        <span [class]="'badge ' + (p.isActive ? 'badge-green' : 'badge-gray') + ' text-[0.6rem]'">
+          {{ p.isActive ? 'IN STOCK' : 'OUT OF STOCK' }}
+        </span>
+      </div>
+
+      <!-- Content -->
+      <div class="mb-4">
+        <div class="text-[0.65rem] font-bold text-stone-400 uppercase tracking-widest">{{ p.category }}</div>
+        <div class="mt-1 text-lg font-bold text-stone-800 leading-tight group-hover:text-burg-700 transition-colors">{{ p.productName }}</div>
+        <div class="mono text-[0.7rem] text-stone-400 mt-1">#{{ p.productCode }}</div>
+      </div>
+
+      <div class="text-sm text-stone-500 mb-6 flex-grow leading-relaxed line-clamp-3">
+        {{ p.description || 'Comprehensive coverage for modern enterprises looking for protection.' }}
+      </div>
+
+      <!-- Specs Grid -->
+      <div class="grid grid-cols-2 gap-4 py-4 border-t border-stone-50">
+        <div>
+          <span class="text-[0.65rem] font-bold text-stone-400 uppercase">Premium Rate</span>
+          <div class="text-sm font-bold text-burg-600">{{ (p.basePremiumRate * 100).toFixed(2) }}%</div>
+        </div>
+        <div>
+          <span class="text-[0.65rem] font-bold text-stone-400 uppercase">Starting From</span>
+          <div class="text-sm font-bold text-stone-800">₹{{ p.minCoverageAmount | number }}</div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="mt-4 pt-4 border-t border-stone-50">
+        @if (auth.isCustomer()) {
+        <button class="btn btn-primary w-full py-2.5 rounded-xl flex items-center justify-center gap-2 group/btn" [disabled]="!p.isActive" (click)="openApply(p)">
+          <span>Explore Policy</span>
+          <span class="material-symbols-outlined text-sm transition-transform group-hover/btn:translate-x-1">arrow_right_alt</span>
+        </button>
+        }
+        @if (auth.isAdmin()) {
+        <div class="flex gap-2">
+          <button class="btn btn-secondary flex-1 py-1.5 rounded-lg text-xs" (click)="editProduct(p)">Edit</button>
+          <button class="btn btn-danger flex-1 py-1.5 rounded-lg text-xs" (click)="deactivate(p.id)">Stop Sale</button>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>
+}
+
+@if (showModal()) {
+<div class="modal-overlay bg-black/40 backdrop-blur-sm" (click)="closeModal()">
+  <div class="modal rounded-2xl border border-cream-dark bg-white p-6 shadow-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <span class="modal-title">{{ editId() ? 'Edit Product' : 'New Product' }}</span>
+      <button class="modal-close" (click)="closeModal()">×</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Product Name</label>
+      <input title="Input" class="form-control" [(ngModel)]="form.productName" placeholder="Enter value">
+    </div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Code</label>
+        <input title="Input" class="form-control" [(ngModel)]="form.productCode" placeholder="Enter value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select title="Selection" class="form-control" [(ngModel)]="form.category">
+          <option value="">Select category...</option>
+          <option value="LIABILITY">LIABILITY</option>
+          <option value="PROPERTY">PROPERTY</option>
+          <option value="CYBER">CYBER</option>
+          <option value="HEALTH">HEALTH</option>
+          <option value="VEHICLE">VEHICLE</option>
+          <option value="MARINE">MARINE</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Base Premium Rate (e.g. 0.025)</label>
+        <input title="Input" class="form-control" type="number" step="0.001" [(ngModel)]="form.basePremiumRate"
+          placeholder="Enter value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Min Coverage</label>
+        <input title="Input" class="form-control" type="number" [(ngModel)]="form.minCoverageAmount"
+          placeholder="Enter value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Max Coverage</label>
+        <input title="Input" class="form-control" type="number" [(ngModel)]="form.maxCoverageAmount"
+          placeholder="Enter value">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea title="Input" class="form-control" [(ngModel)]="form.description"
+        placeholder="Enter details"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary rounded-xl" (click)="closeModal()">Cancel</button>
+      <button class="btn btn-primary rounded-xl" [disabled]="svc.loading()" (click)="save()">
+        {{ svc.loading() ? 'Saving...' : 'Save' }}
+      </button>
+    </div>
+  </div>
+</div>
+}

@@ -1,0 +1,130 @@
+<div class="min-h-screen flex flex-col lg:flex-row bg-[#FAF6F0]">
+  <!-- Left: Hero Side (Visible on Large Screens) -->
+  <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-[#1A120E]">
+    <!-- Background Image -->
+    <img src="/assets/auth-bg.png" alt="B-SURE Hero" class="absolute inset-0 w-full h-full object-cover opacity-50">
+    
+    <!-- Aesthetic Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-tr from-[#1E0309] via-transparent to-transparent opacity-60"></div>
+    
+    <!-- Content on top of image -->
+    <div class="relative z-10 flex flex-col justify-between p-12 text-white h-full w-full">
+      <a routerLink="/" class="inline-block transition-transform hover:scale-105 duration-300">
+        <img src="/assets/bsure-logo.png" alt="B-SURE" class="h-14 w-auto">
+      </a>
+      
+      <div class="max-w-md">
+        <h1 style="font-family:'Space Grotesk',sans-serif" class="text-4xl font-extrabold mb-6 leading-tight">
+          Securing your business, <br><span class="text-[#E0A0AE]">ensuring your future.</span>
+        </h1>
+        <p class="text-lg text-gray-300 font-light leading-relaxed mb-8">
+          Join thousands of businesses that trust B-SURE for comprehensive, AI-powered insurance coverage and seamless claims management.
+        </p>
+        <div class="flex items-center gap-4 text-sm font-medium">
+          <div class="flex -space-x-2">
+            <div class="w-8 h-8 rounded-full border-2 border-[#1A120E] bg-gray-500"></div>
+            <div class="w-8 h-8 rounded-full border-2 border-[#1A120E] bg-gray-400"></div>
+            <div class="w-8 h-8 rounded-full border-2 border-[#1A120E] bg-gray-600"></div>
+          </div>
+          <span class="text-gray-400">Trusted by 2,000+ businesses</span>
+        </div>
+      </div>
+      
+      <div class="text-xs text-gray-500 font-medium tracking-widest uppercase">
+        © 2026 B-SURE Insurance Solutions
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Form Side -->
+  <div class="flex-1 flex flex-col relative bg-[#FAF6F0]">
+    <!-- Back Button -->
+    <a routerLink="/" class="absolute top-8 left-8 lg:left-12 flex items-center gap-2 text-[#A8958A] hover:text-[#7A1C35] font-medium transition-colors text-sm group">
+      <span class="material-symbols-outlined text-base group-hover:-translate-x-1 transition-transform">arrow_back</span>
+      Back to Home
+    </a>
+
+    <!-- Login Form Central Wrap -->
+    <div class="flex-1 flex items-center justify-center p-6 lg:p-12">
+      <div class="w-full max-w-md space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        
+        <!-- Header -->
+        <div class="text-center lg:text-left">
+          <div class="lg:hidden flex justify-center mb-8">
+            <img src="/assets/bsure-logo.png" alt="B-SURE" class="h-10 w-auto">
+          </div>
+          <h2 style="font-family:'Space Grotesk',sans-serif" class="text-3xl font-extrabold text-[#1A120E] mb-2 tracking-tight">
+            Welcome back
+          </h2>
+          <p class="text-[#A8958A] text-base">Sign in to access your business dashboard</p>
+        </div>
+
+        <!-- Alert messages -->
+        @if (auth.error()) {
+        <div class="flex items-center gap-3 p-4 bg-[#FBF0F2] border border-[#F2D5DB] rounded-xl text-[#7A1C35] text-sm animate-in fade-in duration-300">
+          <span class="material-symbols-outlined text-base">error_outline</span>
+          {{ auth.error() }}
+        </div>
+        }
+        @if (auth.success()) {
+        <div class="flex items-center gap-3 p-4 bg-[#EDF5EF] border border-[rgba(74,124,90,0.25)] rounded-xl text-[#4A7C5A] text-sm animate-in fade-in duration-300">
+          <span class="material-symbols-outlined text-base">check_circle</span>
+          {{ auth.success() }}
+        </div>
+        }
+
+        <!-- Form fields -->
+        <div class="space-y-5 mt-8">
+          <div class="space-y-2 group">
+            <label class="block text-sm font-semibold text-[#6B5B53] tracking-wide ml-1">Email address</label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#C4B0A5] text-xl">mail</span>
+              <input type="email" [(ngModel)]="email" placeholder="you@company.com" id="login-email"
+                class="w-full pl-12 pr-4 py-3.5 bg-white border border-[#EAE0D8] rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#98234015] focus:border-[#7A1C35] transition-all text-[#1A120E] placeholder-[#C4B0A5] shadow-sm hover:border-[#D8CAC0]">
+            </div>
+          </div>
+
+          <div class="space-y-2 group">
+            <div class="flex justify-between items-center ml-1">
+              <label class="block text-sm font-semibold text-[#6B5B53] tracking-wide">Password</label>
+              <a href="#" class="text-xs font-bold text-[#7A1C35] hover:underline decoration-2 underline-offset-4">Forgot Password?</a>
+            </div>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-[#C4B0A5] text-xl">lock</span>
+              <input type="password" [(ngModel)]="password" placeholder="••••••••" (keyup.enter)="login()" id="login-password"
+                class="w-full pl-12 pr-4 py-3.5 bg-white border border-[#EAE0D8] rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#98234015] focus:border-[#7A1C35] transition-all text-[#1A120E] placeholder-[#C4B0A5] shadow-sm hover:border-[#D8CAC0]">
+            </div>
+          </div>
+        </div>
+
+        <button (click)="login()" [disabled]="auth.loading()"
+          class="w-full flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#7A1C35] to-[#3B0915] text-[#FAF6F0] rounded-2xl font-bold text-lg shadow-xl shadow-[#98234025] hover:shadow-2xl hover:shadow-[#98234035] hover:-translate-y-0.5 transition-all active:scale-[0.98] disabled:opacity-70 disabled:pointer-events-none mt-10">
+          
+          @if(auth.loading()) {
+            <span class="material-symbols-outlined animate-spin text-2xl">refresh</span>
+            Authenticating...
+          }
+          @else {
+            Sign In
+            <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          }
+        </button>
+
+        <!-- Footer / Register Toggle -->
+        <div class="pt-8 space-y-6">
+          <div class="flex items-center gap-4">
+            <div class="flex-1 h-px bg-[#EAE0D8]"></div>
+            <span class="text-xs font-bold text-[#C4B0A5] uppercase tracking-widest whitespace-nowrap">New to B-SURE?</span>
+            <div class="flex-1 h-px bg-[#EAE0D8]"></div>
+          </div>
+
+          <a routerLink="/register" 
+            class="flex items-center justify-center gap-3 w-full px-8 py-4 bg-white border-2 border-[#EAE0D8] text-[#1A120E] rounded-2xl font-bold text-base hover:bg-[#F3EDE5] hover:border-[#D8CAC0] transition-all active:scale-[0.98] group">
+            <span class="material-symbols-outlined text-xl text-[#7A1C35]">business</span>
+            Register Your Business
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

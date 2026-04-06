@@ -1,0 +1,64 @@
+<div class="chatbot-container" [class.open]="isOpen()">
+  <!-- Chat Toggle Button -->
+  <button class="chat-toggle" (click)="toggleChat()">
+    <span class="material-symbols-outlined">{{ isOpen() ? 'close' : 'chat' }}</span>
+  </button>
+
+  <!-- Chat Window -->
+  @if (isOpen()) {
+    <div class="chat-window">
+      <!-- Header -->
+      <div class="chat-header">
+        <div class="header-info">
+          <span class="material-symbols-outlined logo-icon">smart_toy</span>
+          <div>
+            <h4>B-SURE Assistant</h4>
+            <p>AI Policy Expert</p>
+          </div>
+        </div>
+        <button class="close-btn" (click)="toggleChat()">
+          <span class="material-symbols-outlined">minimize</span>
+        </button>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="chat-messages" #messagesContainer>
+        @if (messages().length === 0) {
+          <div class="empty-state">
+            <span class="material-symbols-outlined empty-icon">forum</span>
+            <p>Hi! I'm your B-SURE Assistant. Ask me anything about your policies, coverage, or our insurance platform.</p>
+          </div>
+        }
+
+        @for (msg of messages(); track msg) {
+          <div class="message-wrapper" [class.user]="msg.sender === 'user'">
+            <div class="message-bubble">{{ msg.text }}</div>
+          </div>
+        }
+        
+        @if (isLoading()) {
+          <div class="message-wrapper bot">
+            <div class="message-bubble typing">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Input Area -->
+      <div class="chat-input-area">
+        <input 
+          type="text" 
+          [(ngModel)]="userInput" 
+          (keydown.enter)="sendMessage()" 
+          placeholder="Type your question..."
+          [disabled]="isLoading()">
+        <button class="send-btn" (click)="sendMessage()" [disabled]="!userInput.trim() || isLoading()">
+          <span class="material-symbols-outlined">send</span>
+        </button>
+      </div>
+    </div>
+  }
+</div>
