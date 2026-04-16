@@ -113,14 +113,53 @@
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-vertex-ai-gemini-spring-boot-starter</artifactId>
         </dependency>
+
+        <!-- =====================================================
+             OpenTelemetry Manual Instrumentation for Arize Phoenix
+             ===================================================== -->
+
+        <!-- (1) Actuator: for health/metrics endpoints -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- (2) OTel API: core interfaces (Tracer, Span, Context) -->
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-api</artifactId>
+        </dependency>
+
+        <!-- (3) OTel SDK: in-process implementation -->
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-sdk</artifactId>
+        </dependency>
+
+        <!-- (4) OTLP HTTP Exporter: ships traces to Arize Cloud -->
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-otlp</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Spring AI BOM -->
             <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
                 <version>1.0.0-M6</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- OTel BOM: locks ALL OTel transitive deps to same version
+                 to avoid NoClassDefFoundError / InstrumentationUtil mismatch -->
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-bom</artifactId>
+                <version>1.36.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -172,6 +211,14 @@
             <url>https://repo.spring.io/milestone</url>
             <snapshots>
                 <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <name>Sonatype Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>

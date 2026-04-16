@@ -10,7 +10,7 @@ import { AuthService } from '../../../core/services/auth.service';
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  auth = inject(AuthService);
+  auth:AuthService = inject(AuthService);
 
   email = '';
   password = '';

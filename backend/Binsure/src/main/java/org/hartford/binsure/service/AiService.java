@@ -11,6 +11,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.ai.model.Media;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.util.MimeTypeUtils;
+
+import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanKind;
+import io.opentelemetry.api.trace.StatusCode;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Scope;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -24,8 +32,17 @@ public class AiService {
     @Autowired(required = false)
     private VertexAiGeminiChatModel chatModel;
 
+    @Autowired(required = false)
+    private OpenTelemetry openTelemetry;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final Path root = Paths.get("uploads");
+
+    private static final String OPENINFERENCE_SPAN_KIND     = "openinference.span.kind";
+    private static final String LLM_INPUT_MESSAGES          = "llm.input_messages.0.message.content";
+    private static final String LLM_OUTPUT_MESSAGES         = "llm.output_messages.0.message.content";
+    private static final String LLM_MODEL_NAME              = "llm.model_name";
+    private static final String ENTITY_ID_ATTR              = "entity.id";
 
     public void analyzeClaim(Claim claim) {
         if (chatModel == null) return;
@@ -65,8 +82,37 @@ public class AiService {
             UserMessage userMessage = mediaList.isEmpty() 
                 ? new UserMessage(promptText) 
                 : new UserMessage(promptText, mediaList);
-                
-            String response = chatModel.call(new Prompt(userMessage)).getResult().getOutput().getText();
+
+            String response;
+            if (openTelemetry != null) {
+                // Instrument with OTel for Arize
+                Tracer tracer = openTelemetry.getTracer("binsure-ai-service", "1.0.0");
+                Span span = tracer.spanBuilder("ai.analyze_claim.llm.call")
+                        .setSpanKind(SpanKind.CLIENT)
+                        .startSpan();
+
+                try (Scope scope = span.makeCurrent()) {
+                    span.setAttribute(OPENINFERENCE_SPAN_KIND, "LLM");
+                    span.setAttribute(LLM_MODEL_NAME, "gemini-2.5-flash");
+                    span.setAttribute(ENTITY_ID_ATTR, String.valueOf(claim.getId()));
+                    span.setAttribute(LLM_INPUT_MESSAGES, promptText);
+
+                    response = chatModel.call(new Prompt(userMessage)).getResult().getOutput().getText();
+                    
+                    span.setAttribute(LLM_OUTPUT_MESSAGES, response);
+                    span.setStatus(StatusCode.OK);
+                } catch (Exception e) {
+                    span.setStatus(StatusCode.ERROR, e.getMessage());
+                    span.recordException(e);
+                    throw e;
+                } finally {
+                    span.end();
+                }
+            } else {
+                // Fallback if not configured
+                response = chatModel.call(new Prompt(userMessage)).getResult().getOutput().getText();
+            }
+
             // Robust cleaning for JSON
             if (response.contains("{")) {
                 response = response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1);
@@ -107,7 +153,35 @@ public class AiService {
         );
 
         try {
-            String response = chatModel.call(new Prompt(new UserMessage(promptText))).getResult().getOutput().getText();
+            String response;
+            if (openTelemetry != null) {
+                // Instrument with OTel for Arize
+                Tracer tracer = openTelemetry.getTracer("binsure-ai-service", "1.0.0");
+                Span span = tracer.spanBuilder("ai.assess_risk.llm.call")
+                        .setSpanKind(SpanKind.CLIENT)
+                        .startSpan();
+
+                try (Scope scope = span.makeCurrent()) {
+                    span.setAttribute(OPENINFERENCE_SPAN_KIND, "LLM");
+                    span.setAttribute(LLM_MODEL_NAME, "gemini-2.5-flash");
+                    span.setAttribute(ENTITY_ID_ATTR, String.valueOf(application.getId()));
+                    span.setAttribute(LLM_INPUT_MESSAGES, promptText);
+
+                    response = chatModel.call(new Prompt(new UserMessage(promptText))).getResult().getOutput().getText();
+                    
+                    span.setAttribute(LLM_OUTPUT_MESSAGES, response);
+                    span.setStatus(StatusCode.OK);
+                } catch (Exception e) {
+                    span.setStatus(StatusCode.ERROR, e.getMessage());
+                    span.recordException(e);
+                    throw e;
+                } finally {
+                    span.end();
+                }
+            } else {
+                response = chatModel.call(new Prompt(new UserMessage(promptText))).getResult().getOutput().getText();
+            }
+
             if (response.contains("{")) {
                 response = response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1);
             }

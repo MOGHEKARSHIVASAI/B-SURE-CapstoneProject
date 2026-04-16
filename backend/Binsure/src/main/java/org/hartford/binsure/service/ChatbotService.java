@@ -21,6 +21,14 @@ import org.springframework.ai.vertexai.gemini.VertexAiGeminiChatModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// OpenTelemetry – direct SDK (manual instrumentation for Arize Phoenix)
+import io.opentelemetry.api.OpenTelemetry;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanKind;
+import io.opentelemetry.api.trace.StatusCode;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Scope;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +55,18 @@ public class ChatbotService {
 
     @Autowired
     private SecurityUtils securityUtils;
+
+    @Autowired
+    private OpenTelemetry openTelemetry;
+
+    // OpenInference semantic convention attributes for Arize
+    private static final String OPENINFERENCE_SPAN_KIND     = "openinference.span.kind";
+    private static final String LLM_INPUT_MESSAGES          = "llm.input_messages.0.message.content";
+    private static final String LLM_OUTPUT_MESSAGES         = "llm.output_messages.0.message.content";
+    private static final String LLM_MODEL_NAME              = "llm.model_name";
+    private static final String USER_ID_ATTR                = "user.id";
+    private static final String USER_ROLE_ATTR              = "user.role";
+    private static final String SESSION_ID_ATTR             = "session.id";
 
     private static final String SYSTEM_PROMPT = """
             You are 'B-SURE Assistant', a highly professional, helpful, and concise AI assistant for the B-SURE business insurance platform.
@@ -82,64 +102,90 @@ public class ChatbotService {
         Long userId = securityUtils.getCurrentUserId();
         String userName = securityUtils.getCurrentUser().getFirstName() + " " + securityUtils.getCurrentUser().getLastName();
         String userRole = securityUtils.getCurrentUser().getRole().name();
-        
-        // 1. Fetch Business Portfolio
-        List<Business> businesses = businessRepository.findByUser_Id(userId);
-        String businessContext = businesses.isEmpty() ? "No registered businesses." : 
-                businesses.stream()
-                        .map(b -> String.format("- %s (Industry: %s)", b.getCompanyName(), b.getIndustryType()))
-                        .collect(Collectors.joining("\n"));
 
-        // 2. Fetch Policies
-        List<Policy> policies = policyRepository.findByBusiness_User_Id(userId);
-        String policiesContext = policies.isEmpty() ? "No active policies." : 
-                policies.stream()
-                        .map(p -> String.format("- %s: Policy #%s | Status: %s | Premium: INR %s", p.getProductName(), p.getPolicyNumber(), p.getStatus(), p.getAnnualPremium()))
-                        .collect(Collectors.joining("\n"));
+        // ── Arize Phoenix: create manual OTel LLM span ─────────────────────────
+        Tracer tracer = openTelemetry.getTracer("binsure-chatbot", "1.0.0");
+        Span span = tracer.spanBuilder("chatbot.llm.call")
+                .setSpanKind(SpanKind.CLIENT)
+                .startSpan();
 
-        // 3. Fetch Applications
-        List<PolicyApplication> applications = applicationRepository.findByBusiness_User_Id(userId);
-        String applicationsContext = applications.isEmpty() ? "No pending applications." : 
-                applications.stream()
-                        .map(a -> String.format("- Application for %s | Status: %s | Date: %s", a.getProductName(), a.getStatus(), a.getCreatedAt()))
-                        .collect(Collectors.joining("\n"));
+        try (Scope scope = span.makeCurrent()) {
 
-        // 4. Fetch Claims
-        List<Claim> claims = claimRepository.findByBusiness_User_Id(userId);
-        String claimsContext = claims.isEmpty() ? "No recent claims." : 
-                claims.stream()
-                        .map(c -> String.format("- Claim #%s | Amount: INR %s | Status: %s | Date: %s", c.getClaimNumber(), c.getClaimedAmount(), c.getStatus(), c.getClaimDate()))
-                        .collect(Collectors.joining("\n"));
+            // OpenInference attributes (required for Arize LLM tracing)
+            span.setAttribute(OPENINFERENCE_SPAN_KIND, "LLM");
+            span.setAttribute(LLM_MODEL_NAME, "gemini-2.5-flash");
+            span.setAttribute(USER_ID_ATTR,   String.valueOf(userId));
+            span.setAttribute(USER_ROLE_ATTR, userRole);
+            span.setAttribute(SESSION_ID_ATTR, String.valueOf(request.getMessage().hashCode()));
 
-        // 5. Fetch Available Products
-        List<InsuranceProduct> products = productRepository.findByIsActiveTrue();
-        String productsContext = products.isEmpty() ? "No products available at this time." : 
-                products.stream()
-                        .map(p -> String.format("- %s (%s): %s", p.getProductName(), p.getProductCode(), p.getDescription()))
-                        .collect(Collectors.joining("\n"));
+            // Record the user prompt as the LLM input
+            span.setAttribute(LLM_INPUT_MESSAGES, request.getMessage());
 
-        SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(SYSTEM_PROMPT);
-        Message systemMessage = systemPromptTemplate.createMessage(java.util.Map.of(
-                "userName", userName,
-                "userRole", userRole,
-                "businessContext", businessContext,
-                "policiesContext", policiesContext,
-                "applicationsContext", applicationsContext,
-                "claimsContext", claimsContext,
-                "productsContext", productsContext
-        ));
+            // 1. Fetch Business Portfolio
+            List<Business> businesses = businessRepository.findByUser_Id(userId);
+            String businessContext = businesses.isEmpty() ? "No registered businesses." :
+                    businesses.stream()
+                            .map(b -> String.format("- %s (Industry: %s)", b.getCompanyName(), b.getIndustryType()))
+                            .collect(Collectors.joining("\n"));
 
-        UserMessage userMessage = new UserMessage(request.getMessage());
+            // 2. Fetch Policies
+            List<Policy> policies = policyRepository.findByBusiness_User_Id(userId);
+            String policiesContext = policies.isEmpty() ? "No active policies." :
+                    policies.stream()
+                            .map(p -> String.format("- %s: Policy #%s | Status: %s | Premium: INR %s", p.getProductName(), p.getPolicyNumber(), p.getStatus(), p.getAnnualPremium()))
+                            .collect(Collectors.joining("\n"));
 
-        Prompt prompt = new Prompt(List.of(systemMessage, userMessage));
+            // 3. Fetch Applications
+            List<PolicyApplication> applications = applicationRepository.findByBusiness_User_Id(userId);
+            String applicationsContext = applications.isEmpty() ? "No pending applications." :
+                    applications.stream()
+                            .map(a -> String.format("- Application for %s | Status: %s | Date: %s", a.getProductName(), a.getStatus(), a.getCreatedAt()))
+                            .collect(Collectors.joining("\n"));
 
-        try {
+            // 4. Fetch Claims
+            List<Claim> claims = claimRepository.findByBusiness_User_Id(userId);
+            String claimsContext = claims.isEmpty() ? "No recent claims." :
+                    claims.stream()
+                            .map(c -> String.format("- Claim #%s | Amount: INR %s | Status: %s | Date: %s", c.getClaimNumber(), c.getClaimedAmount(), c.getStatus(), c.getClaimDate()))
+                            .collect(Collectors.joining("\n"));
+
+            // 5. Fetch Available Products
+            List<InsuranceProduct> products = productRepository.findByIsActiveTrue();
+            String productsContext = products.isEmpty() ? "No products available at this time." :
+                    products.stream()
+                            .map(p -> String.format("- %s (%s): %s", p.getProductName(), p.getProductCode(), p.getDescription()))
+                            .collect(Collectors.joining("\n"));
+
+            SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(SYSTEM_PROMPT);
+            Message systemMessage = systemPromptTemplate.createMessage(java.util.Map.of(
+                    "userName",           userName,
+                    "userRole",           userRole,
+                    "businessContext",    businessContext,
+                    "policiesContext",    policiesContext,
+                    "applicationsContext",applicationsContext,
+                    "claimsContext",       claimsContext,
+                    "productsContext",    productsContext
+            ));
+
+            UserMessage userMessage = new UserMessage(request.getMessage());
+            Prompt prompt = new Prompt(List.of(systemMessage, userMessage));
+
             String aiResponse = chatModel.call(prompt).getResult().getOutput().getText();
+
+            // Record the LLM response as the output
+            span.setAttribute(LLM_OUTPUT_MESSAGES, aiResponse);
+            span.setStatus(StatusCode.OK);
+
             return new ChatResponse(aiResponse);
+
         } catch (Exception e) {
+            span.setStatus(StatusCode.ERROR, e.getMessage());
+            span.recordException(e);
             System.err.println("Chatbot API Error: " + e.getMessage());
             e.printStackTrace();
             return new ChatResponse("Google Cloud Authentication Failed: " + e.getMessage());
+        } finally {
+            span.end(); // always end the span
         }
     }
 }
